@@ -1,0 +1,62 @@
+{
+  "title": "エンジニアの交渉力アーキテクチャ",
+  "description": "技術者が持つ論理的思考力とエンジニアリング能力を、ビジネス交渉の場で最大限に活用するための実践的手法を提供する。エンジニアの思考パターンや業務フローに即した独自のアプローチを提示。",
+  "author": "ITDO Inc.",
+  "version": "1.0.0",
+  "structure": {
+    "chapters": [
+      {
+        "id": "1",
+        "title": "コードは雄弁に語る - 技術的根拠による説得術",
+        "description": "プロトタイプ駆動交渉、データドリブンな提案手法、オープンソース活用戦略について解説",
+        "file": "negotiation-chapter-1.md"
+      },
+      {
+        "id": "2",
+        "title": "ステークホルダー・インターフェース設計",
+        "description": "経営層、プロダクトチーム、エンジニア間、非技術職との効果的なコミュニケーション方法",
+        "file": "negotiation-chapter-2.md"
+      },
+      {
+        "id": "3",
+        "title": "アジャイル交渉術 - 反復的合意形成",
+        "description": "インクリメンタルな価値提供、スプリント単位の期待値管理、レトロスペクティブ思考の応用",
+        "file": "negotiation-chapter-3.md"
+      },
+      {
+        "id": "4",
+        "title": "技術的レバレッジの最大化",
+        "description": "アーキテクチャ決定の交渉術、セキュリティを武器にする方法、パフォーマンスチューニングの経済学",
+        "file": "negotiation-chapter-4.md"
+      },
+      {
+        "id": "5",
+        "title": "エモーショナル・デバッグ",
+        "description": "認知バイアスの検出と修正、ストレステストとリカバリー、マインドフルネス駆動開発",
+        "file": "negotiation-chapter-5.md"
+      },
+      {
+        "id": "6",
+        "title": "交渉パイプラインの構築",
+        "description": "準備フェーズの最適化、実行フェーズのモニタリング、デプロイ後の継続的改善",
+        "file": "negotiation-chapter-6.md"
+      }
+    ],
+    "introduction": {
+      "title": "なぜエンジニアこそ交渉力が必要か",
+      "file": "negotiation-introduction.md"
+    },
+    "conclusion": {
+      "title": "継続的インテグレーション",
+      "file": "negotiation-conclusion.md"
+    },
+    "appendices": [
+      {
+        "id": "toolkit",
+        "title": "実践ツールキット",
+        "description": "交渉準備テンプレート（YAML形式）、交渉ログフォーマット（Markdown形式）、チェックリスト集、推薦図書・リソース",
+        "file": "negotiation-appendix.md"
+      }
+    ]
+  }
+}

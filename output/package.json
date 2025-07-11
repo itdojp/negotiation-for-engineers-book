@@ -1,0 +1,30 @@
+{
+  "name": "エンジニアの交渉力アーキテクチャ",
+  "version": "1.0.0",
+  "description": "技術者が持つ論理的思考力とエンジニアリング能力を、ビジネス交渉の場で最大限に活用するための実践的手法を提供する。エンジニアの思考パターンや業務フローに即した独自のアプローチを提示。",
+  "main": "index.md",
+  "scripts": {
+    "start": "jekyll serve --livereload",
+    "build": "jekyll build",
+    "test": "npm run lint && npm run check-links",
+    "lint": "markdownlint src/**/*.md",
+    "check-links": "markdown-link-check src/**/*.md",
+    "deploy": "gh-pages -d _site"
+  },
+  "keywords": [
+    "book",
+    "documentation",
+    "ja"
+  ],
+  "author": "ITDO Inc.",
+  "license": "MIT",
+  "devDependencies": {
+    "markdownlint-cli": "^0.37.0",
+    "markdown-link-check": "^3.11.2",
+    "gh-pages": "^6.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/itdojp/negotiation-for-engineers.git"
+  }
+}

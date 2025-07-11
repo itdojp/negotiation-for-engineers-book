@@ -1,0 +1,81 @@
+title: "エンジニアの交渉力アーキテクチャ"
+description: "技術者が持つ論理的思考力とエンジニアリング能力を、ビジネス交渉の場で最大限に活用するための実践的手法を提供する。エンジニアの思考パターンや業務フローに即した独自のアプローチを提示。"
+author: "ITDO Inc."
+version: "1.0.0"
+lang: "ja"
+
+# Jekyll設定
+markdown: kramdown
+highlighter: rouge
+theme: minima
+
+# プラグイン
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+  - jekyll-seo-tag
+
+# 除外ファイル
+exclude:
+  - node_modules/
+  - package.json
+  - package-lock.json
+  - scripts/
+  - tests/
+  - negotiation-*.md
+  - README.md
+  - book-config.json
+
+# 日本語対応
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+  
+# GitHub Pages設定
+repository: "itdojp/negotiation-for-engineers"
+
+# デフォルト設定
+defaults:
+  - scope:
+      path: ""
+      type: "pages"
+    values:
+      layout: "book"
+  - scope:
+      path: "src"
+    values:
+      layout: "book"
+
+# サイト構造
+site:
+  structure:
+    chapters:
+      - id: 1
+        title: "コードは雄弁に語る - 技術的根拠による説得術"
+        path: "/src/chapter-1/"
+      - id: 2
+        title: "ステークホルダー・インターフェース設計"
+        path: "/src/chapter-2/"
+      - id: 3
+        title: "アジャイル交渉術 - 反復的合意形成"
+        path: "/src/chapter-3/"
+      - id: 4
+        title: "技術的レバレッジの最大化"
+        path: "/src/chapter-4/"
+      - id: 5
+        title: "エモーショナル・デバッグ"
+        path: "/src/chapter-5/"
+      - id: 6
+        title: "交渉パイプラインの構築"
+        path: "/src/chapter-6/"
+    introduction:
+      title: "はじめに：なぜエンジニアこそ交渉力が必要か"
+      path: "/src/introduction/"
+    conclusion:
+      title: "おわりに：継続的インテグレーション"
+      path: "/src/conclusion/"
+    appendices:
+      - id: "toolkit"
+        title: "実践ツールキット"
+        path: "/src/appendices/toolkit.html"
+
