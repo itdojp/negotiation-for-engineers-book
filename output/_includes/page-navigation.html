@@ -1,40 +1,63 @@
 <!-- Page Navigation (Previous/Next) -->
-{% assign current_index = nil %}
-{% assign all_pages = site.pages | where_exp: "page", "page.url contains '/src/'" | sort: 'order' %}
+{% assign current_url = page.url %}
+{% assign previous_page = nil %}
+{% assign next_page = nil %}
 
-<!-- Find current page index -->
-{% for p in all_pages %}
-    {% if p.url == page.url %}
-        {% assign current_index = forloop.index0 %}
-        {% break %}
-    {% endif %}
-{% endfor %}
-
-<!-- Calculate previous and next indices -->
-{% if current_index %}
-    {% assign prev_index = current_index | minus: 1 %}
-    {% assign next_index = current_index | plus: 1 %}
-    
-    {% if prev_index >= 0 %}
-        {% assign previous_page = all_pages[prev_index] %}
-    {% endif %}
-    
-    {% if next_index < all_pages.size %}
-        {% assign next_page = all_pages[next_index] %}
-    {% endif %}
+<!-- Define page order manually -->
+{% if current_url contains '/introduction/' %}
+    {% assign next_page_url = '/src/chapter-1/index.html' %}
+    {% assign next_page_title = '第1章 コードは雄弁に語る - 技術的根拠による説得術' %}
+{% elsif current_url contains '/chapter-1/' %}
+    {% assign previous_page_url = '/src/introduction/index.html' %}
+    {% assign previous_page_title = 'はじめに：なぜエンジニアこそ交渉力が必要か' %}
+    {% assign next_page_url = '/src/chapter-2/index.html' %}
+    {% assign next_page_title = '第2章 ステークホルダー・インターフェース設計' %}
+{% elsif current_url contains '/chapter-2/' %}
+    {% assign previous_page_url = '/src/chapter-1/index.html' %}
+    {% assign previous_page_title = '第1章 コードは雄弁に語る - 技術的根拠による説得術' %}
+    {% assign next_page_url = '/src/chapter-3/index.html' %}
+    {% assign next_page_title = '第3章 アジャイル交渉術 - 反復的合意形成' %}
+{% elsif current_url contains '/chapter-3/' %}
+    {% assign previous_page_url = '/src/chapter-2/index.html' %}
+    {% assign previous_page_title = '第2章 ステークホルダー・インターフェース設計' %}
+    {% assign next_page_url = '/src/chapter-4/index.html' %}
+    {% assign next_page_title = '第4章 技術的レバレッジの最大化' %}
+{% elsif current_url contains '/chapter-4/' %}
+    {% assign previous_page_url = '/src/chapter-3/index.html' %}
+    {% assign previous_page_title = '第3章 アジャイル交渉術 - 反復的合意形成' %}
+    {% assign next_page_url = '/src/chapter-5/index.html' %}
+    {% assign next_page_title = '第5章 エモーショナル・デバッグ' %}
+{% elsif current_url contains '/chapter-5/' %}
+    {% assign previous_page_url = '/src/chapter-4/index.html' %}
+    {% assign previous_page_title = '第4章 技術的レバレッジの最大化' %}
+    {% assign next_page_url = '/src/chapter-6/index.html' %}
+    {% assign next_page_title = '第6章 交渉パイプラインの構築' %}
+{% elsif current_url contains '/chapter-6/' %}
+    {% assign previous_page_url = '/src/chapter-5/index.html' %}
+    {% assign previous_page_title = '第5章 エモーショナル・デバッグ' %}
+    {% assign next_page_url = '/src/conclusion/index.html' %}
+    {% assign next_page_title = 'おわりに：継続的インテグレーション' %}
+{% elsif current_url contains '/conclusion/' %}
+    {% assign previous_page_url = '/src/chapter-6/index.html' %}
+    {% assign previous_page_title = '第6章 交渉パイプラインの構築' %}
+    {% assign next_page_url = '/src/appendices/toolkit.html' %}
+    {% assign next_page_title = '付録 実践ツールキット' %}
+{% elsif current_url contains '/appendices/toolkit' %}
+    {% assign previous_page_url = '/src/conclusion/index.html' %}
+    {% assign previous_page_title = 'おわりに：継続的インテグレーション' %}
 {% endif %}
 
 <div class="page-nav">
     <!-- Previous Page -->
     <div class="page-nav-item page-nav-prev">
-        {% if previous_page %}
-        <a href="{{ previous_page.url | relative_url }}" class="page-nav-link">
+        {% if previous_page_url %}
+        <a href="{{ previous_page_url | relative_url }}" class="page-nav-link">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <polyline points="15 18 9 12 15 6"></polyline>
             </svg>
             <div class="page-nav-content">
                 <span class="page-nav-label">前のページ</span>
-                <span class="page-nav-title">{{ previous_page.title }}</span>
+                <span class="page-nav-title">{{ previous_page_title }}</span>
             </div>
         </a>
         {% endif %}
@@ -42,11 +65,11 @@
 
     <!-- Next Page -->
     <div class="page-nav-item page-nav-next">
-        {% if next_page %}
-        <a href="{{ next_page.url | relative_url }}" class="page-nav-link">
+        {% if next_page_url %}
+        <a href="{{ next_page_url | relative_url }}" class="page-nav-link">
             <div class="page-nav-content">
                 <span class="page-nav-label">次のページ</span>
-                <span class="page-nav-title">{{ next_page.title }}</span>
+                <span class="page-nav-title">{{ next_page_title }}</span>
             </div>
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <polyline points="9 18 15 12 9 6"></polyline>
