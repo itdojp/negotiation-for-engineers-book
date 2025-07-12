@@ -110,8 +110,8 @@ def demonstrate_integration():
     print(f"自動化プロセス処理時間：{auto_total_time:.1f}秒")
     
     # 効果の定量化
-    efficiency_improvement = (manual_total_time / auto_total_time) * 100
-    print(f"\n効率改善率：{efficiency_improvement:.0f}倍の高速化")
+    efficiency_improvement = (manual_total_time / auto_total_time)
+    print(f"\n効率改善率：{efficiency_improvement:.1f}倍の高速化")
     print(f"月間処理件数1000件の場合、年間{(manual_total_time - auto_total_time) * 1000 * 12 / 3600:.1f}時間の削減")
 ```
 
