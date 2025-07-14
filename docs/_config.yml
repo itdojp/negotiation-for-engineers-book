@@ -50,33 +50,33 @@ defaults:
 structure:
   introduction:
     - title: "はじめに：なぜエンジニアこそ交渉力が必要か"
-      path: "/src/introduction/index.html"
+      path: "/src/introduction/"
   
   chapters:
     - id: 1
       title: "コードは雄弁に語る - 技術的根拠による説得術"
-      path: "/src/chapter-1/index.html"
+      path: "/src/chapter-1/"
     - id: 2
       title: "ステークホルダー・インターフェース設計"
-      path: "/src/chapter-2/index.html"
+      path: "/src/chapter-2/"
     - id: 3
       title: "アジャイル交渉術 - 反復的合意形成"
-      path: "/src/chapter-3/index.html"
+      path: "/src/chapter-3/"
     - id: 4
       title: "技術的レバレッジの最大化"
-      path: "/src/chapter-4/index.html"
+      path: "/src/chapter-4/"
     - id: 5
       title: "エモーショナル・デバッグ"
-      path: "/src/chapter-5/index.html"
+      path: "/src/chapter-5/"
     - id: 6
       title: "交渉パイプラインの構築"
-      path: "/src/chapter-6/index.html"
+      path: "/src/chapter-6/"
   
   conclusion:
     - title: "おわりに：継続的インテグレーション"
-      path: "/src/conclusion/index.html"
+      path: "/src/conclusion/"
   
   appendices:
     - title: "実践ツールキット"
-      path: "/src/appendices/toolkit.html"
+      path: "/src/appendices/toolkit"
 
