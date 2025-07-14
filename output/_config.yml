@@ -32,7 +32,7 @@ kramdown:
   syntax_highlighter: rouge
   
 # GitHub Pages設定
-repository: "itdojp/negotiation-for-engineers"
+repository: "itdojp/negotiation-for-engineers-book"
 
 # デフォルト設定
 defaults:
