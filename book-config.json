@@ -10,6 +10,13 @@
     "url": "https://github.com/itdojp/negotiation-for-engineers-book.git",
     "branch": "main"
   },
+  "build": {
+    "outputDirectory": "docs", 
+    "framework": "book-formatter",
+    "enableNavigation": true,
+    "enableSyntaxHighlighting": true,
+    "enableMobileOptimization": true
+  },
   "navigation": {
     "order": [
       "introduction/index",
