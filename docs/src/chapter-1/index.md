@@ -8,6 +8,78 @@ layout: book
 
 「百聞は一見に如かず」という言葉がある。エンジニアにとって、その「一見」は動くコードである。本章では、技術的な根拠を最も効果的に伝える手法を学ぶ。プロトタイプ、データ、オープンソースという3つの強力な武器を使いこなすことで、あなたの提案は格段に説得力を増す。
 
+```mermaid
+graph TB
+    subgraph "技術的根拠による説得術フレームワーク"
+        subgraph "3つの武器"
+            Weapon1[🔧 プロトタイプ駆動交渉<br/><br/>【核心価値】<br/>・動くものが最強の説得材料<br/>・認知負荷の軽減<br/>・リスクの可視化<br/>・期待値の調整<br/><br/>【手法】<br/>・PoC戦略的活用<br/>・最小実装で最大効果<br/>・反証プロトタイプ<br/>・プログレッシブエンハンスメント]
+            
+            Weapon2[📊 データドリブン提案<br/><br/>【核心価値】<br/>・客観性による信頼構築<br/>・感情論から脱却<br/>・定量的価値証明<br/>・リスク評価の明確化<br/><br/>【手法】<br/>・メトリクス選択と可視化<br/>・ビジネスKPI変換<br/>・ベンチマーク活用<br/>・ROI算出とリスク分析]
+            
+            Weapon3[🌐 オープンソース活用<br/><br/>【核心価値】<br/>・外部権威による信頼性<br/>・実績とコミュニティ<br/>・技術的妥当性証明<br/>・コスト削減効果<br/><br/>【手法】<br/>・成功事例ライブラリ<br/>・技術的権威の借用<br/>・コミュニティ活用<br/>・リスクの透明化]
+        end
+        
+        subgraph "適用フェーズ"
+            Phase1[📋 準備フェーズ<br/>・ステークホルダー分析<br/>・技術的制約整理<br/>・説得戦略設計<br/>・必要な武器の選択]
+            
+            Phase2[🎯 実行フェーズ<br/>・プレゼンテーション<br/>・ライブデモ<br/>・質疑応答対応<br/>・リアルタイム調整]
+            
+            Phase3[🔄 フォローフェーズ<br/>・追加情報提供<br/>・懸念事項解消<br/>・段階的合意形成<br/>・継続的改善]
+        end
+        
+        subgraph "対象オーディエンス別戦略"
+            Exec[👔 経営層<br/>・ビジネス価値重視<br/>・ROI明確化<br/>・リスク最小化<br/>・戦略的位置づけ]
+            
+            PM[📱 プロダクトマネージャー<br/>・ユーザー価値重視<br/>・機能とコストバランス<br/>・開発効率性<br/>・競合優位性]
+            
+            Engineer[⚙️ エンジニア<br/>・技術的妥当性<br/>・実装可能性<br/>・保守性・拡張性<br/>・開発者体験]
+            
+            NonTech[👥 非技術職<br/>・直感的理解<br/>・業務改善効果<br/>・使いやすさ<br/>・学習コスト]
+        end
+        
+        subgraph "成功パターン"
+            Success1[📈 段階的価値提供<br/>・小さな成功の積み重ね<br/>・リスクの分散<br/>・継続的な信頼構築<br/>・柔軟な軌道修正]
+            
+            Success2[🎪 ストーリーテリング<br/>・問題提起<br/>・解決過程の説明<br/>・成果の可視化<br/>・未来への展望]
+            
+            Success3[🤝 Win-Win創出<br/>・相手の利益も考慮<br/>・代替案の準備<br/>・妥協点の模索<br/>・長期関係性構築]
+        end
+        
+        Weapon1 --> Phase1
+        Weapon2 --> Phase1
+        Weapon3 --> Phase1
+        
+        Phase1 --> Phase2 --> Phase3
+        
+        Phase2 --> Exec
+        Phase2 --> PM
+        Phase2 --> Engineer
+        Phase2 --> NonTech
+        
+        Phase3 --> Success1
+        Phase3 --> Success2
+        Phase3 --> Success3
+        
+        subgraph "実践ツールキット"
+            Tool1[🔍 プロトタイプ設計<br/>・スコープ設定<br/>・技術選択<br/>・デモシナリオ<br/>・効果測定]
+            
+            Tool2[📏 データ収集<br/>・ベースライン測定<br/>・ベンチマーク調査<br/>・競合分析<br/>・ROI計算]
+            
+            Tool3[📚 リサーチ<br/>・オープンソース調査<br/>・成功事例収集<br/>・技術動向分析<br/>・リスク評価]
+        end
+        
+        Weapon1 --> Tool1
+        Weapon2 --> Tool2
+        Weapon3 --> Tool3
+    end
+    
+    style Weapon1 fill:#e8f5e8
+    style Weapon2 fill:#fff3e0
+    style Weapon3 fill:#e3f2fd
+    style Success1 fill:#f3e5f5
+    style Tool1 fill:#ffe0b2
+```
+
 ## 1.1 プロトタイプ駆動交渉
 
 ### 動くものこそ最強の説得材料
@@ -185,6 +257,64 @@ class HybridSupport:
 | システム稼働率 | 機会損失 | 1%ダウンタイム = 月100万円損失 |
 | コードカバレッジ | 品質コスト | 10%向上 = バグ修正コスト20%削減 |
 | デプロイ頻度 | 市場投入速度 | 週1→日1 = 新機能リリース5倍速 |
+
+```mermaid
+graph LR
+    subgraph "データドリブン説得の構造"
+        subgraph "技術指標 (What We Measure)"
+            Tech1[⚡ パフォーマンス<br/>・レスポンスタイム<br/>・スループット<br/>・リソース使用率<br/>・エラー率]
+            Tech2[🔧 品質指標<br/>・コードカバレッジ<br/>・バグ密度<br/>・技術的負債<br/>・保守性指標]
+            Tech3[🚀 開発効率<br/>・デプロイ頻度<br/>・リードタイム<br/>・変更失敗率<br/>・復旧時間]
+            Tech4[🛡️ 運用指標<br/>・システム稼働率<br/>・セキュリティ指標<br/>・監視カバレッジ<br/>・インシデント数]
+        end
+        
+        subgraph "変換プロセス (How We Convert)"
+            Convert1[🔄 定量化<br/>・統計的分析<br/>・トレンド分析<br/>・相関分析<br/>・因果関係の特定]
+            Convert2[💰 価値変換<br/>・コスト計算<br/>・機会損失算出<br/>・ROI分析<br/>・リスク評価]
+            Convert3[📊 可視化<br/>・ダッシュボード<br/>・グラフ・チャート<br/>・比較表<br/>・シナリオ分析]
+        end
+        
+        subgraph "ビジネス価値 (What Stakeholders Care About)"
+            Business1[💵 収益影響<br/>・売上向上<br/>・コンバージョン率<br/>・顧客生涯価値<br/>・市場シェア]
+            Business2[💳 コスト効果<br/>・運用コスト削減<br/>・人件費最適化<br/>・インフラ費削減<br/>・品質コスト改善]
+            Business3[⏰ 時間価値<br/>・市場投入速度<br/>・開発サイクル短縮<br/>・意思決定迅速化<br/>・競合優位性]
+            Business4[🎯 リスク軽減<br/>・セキュリティリスク<br/>・可用性リスク<br/>・コンプライアンス<br/>・事業継続性]
+        end
+        
+        Tech1 --> Convert1 --> Business1
+        Tech2 --> Convert2 --> Business2
+        Tech3 --> Convert3 --> Business3
+        Tech4 --> Convert1 --> Business4
+        
+        subgraph "説得力強化要素"
+            Power1[📈 ベンチマーク<br/>・業界標準との比較<br/>・競合他社データ<br/>・ベストプラクティス<br/>・改善余地の特定]
+            Power2[🔮 予測モデル<br/>・将来シナリオ<br/>・成長予測<br/>・リスクシナリオ<br/>・投資回収期間]
+            Power3[✅ 実証データ<br/>・A/Bテスト結果<br/>・パイロット成果<br/>・外部事例<br/>・学術研究]
+        end
+        
+        Convert2 --> Power1
+        Convert3 --> Power2
+        Business1 --> Power3
+        
+        subgraph "成功事例パターン"
+            Success1[📊 パフォーマンス改善<br/>例：レスポンス時間50%短縮<br/>→ コンバージョン率15%向上<br/>→ 年間売上2,000万円増<br/>→ 投資回収期間6ヶ月]
+            
+            Success2[🔧 技術的負債解消<br/>例：レガシーコード改善<br/>→ バグ修正時間70%削減<br/>→ 開発生産性30%向上<br/>→ 年間人件費1,500万円節約]
+            
+            Success3[🚀 CI/CD導入<br/>例：デプロイ頻度10倍向上<br/>→ 新機能リリース加速<br/>→ 市場投入速度3倍<br/>→ 競合優位性確保]
+        end
+        
+        Power3 --> Success1
+        Power1 --> Success2
+        Power2 --> Success3
+    end
+    
+    style Tech1 fill:#e8f5e8
+    style Business1 fill:#fff3e0
+    style Convert1 fill:#e3f2fd
+    style Power1 fill:#f3e5f5
+    style Success1 fill:#ffe0b2
+```
 
 **実装例：パフォーマンス改善の価値計算**
 
