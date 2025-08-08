@@ -1,19 +1,25 @@
 title: "エンジニアの交渉力アーキテクチャ"
 description: "技術者が持つ論理的思考力とエンジニアリング能力を、ビジネス交渉の場で最大限に活用するための実践的手法を提供する。エンジニアの思考パターンや業務フローに即した独自のアプローチを提示。"
-author: "ITDO Inc."
+author: "株式会社アイティードゥ"
 version: "1.0.0"
 lang: "ja"
+
+# GitHub Pages設定
+url: "https://itdojp.github.io"
+baseurl: "/negotiation-for-engineers-book"
 
 # Jekyll設定
 markdown: kramdown
 highlighter: rouge
-theme: minima
+permalink: pretty
 
 # プラグイン
 plugins:
   - jekyll-feed
   - jekyll-sitemap
   - jekyll-seo-tag
+  - jekyll-relative-links
+  - jekyll-optional-front-matter
 
 # 除外ファイル
 exclude:
@@ -31,8 +37,8 @@ kramdown:
   input: GFM
   syntax_highlighter: rouge
   
-# GitHub Pages設定
-repository: "itdojp/negotiation-for-engineers-book"
+# リポジトリ情報
+repository: "https://github.com/itdojp/negotiation-for-engineers-book"
 
 # デフォルト設定
 defaults:
