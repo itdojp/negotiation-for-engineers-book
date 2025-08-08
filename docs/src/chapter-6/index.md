@@ -2,6 +2,7 @@
 title: "交渉パイプラインの構築"
 chapter: 6
 layout: book
+order: 8
 ---
 
 # 第6章：交渉パイプラインの構築

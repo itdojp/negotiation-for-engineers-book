@@ -2,6 +2,7 @@
 title: "技術的レバレッジの最大化"
 chapter: 4
 layout: book
+order: 6
 ---
 
 # 第4章：技術的レバレッジの最大化

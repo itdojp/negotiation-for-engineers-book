@@ -2,6 +2,7 @@
 title: "エモーショナル・デバッグ"
 chapter: 5
 layout: book
+order: 7
 ---
 
 # 第5章：エモーショナル・デバッグ

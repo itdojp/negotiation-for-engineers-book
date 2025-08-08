@@ -2,6 +2,7 @@
 title: "アジャイル交渉術 - 反復的合意形成"
 chapter: 3
 layout: book
+order: 5
 ---
 
 # 第3章：アジャイル交渉術 - 反復的合意形成
