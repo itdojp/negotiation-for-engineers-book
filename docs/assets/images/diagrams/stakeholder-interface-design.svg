@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="900" height="700" viewBox="0 0 900 700" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      .title { font-family: 'Noto Sans JP', sans-serif; font-size: 20px; font-weight: bold; fill: #2c3e50; }
+      .stakeholder-title { font-family: 'Noto Sans JP', sans-serif; font-size: 14px; font-weight: bold; fill: #fff; }
+      .component-title { font-family: 'Noto Sans JP', sans-serif; font-size: 12px; font-weight: bold; fill: #2c3e50; }
+      .text-content { font-family: 'Noto Sans JP', sans-serif; font-size: 11px; fill: #2c3e50; }
+      .small-text { font-family: 'Noto Sans JP', sans-serif; font-size: 10px; fill: #7f8c8d; }
+      .executive-box { fill: #e74c3c; stroke: #c0392b; stroke-width: 2; }
+      .product-box { fill: #3498db; stroke: #2980b9; stroke-width: 2; }
+      .engineer-box { fill: #2ecc71; stroke: #27ae60; stroke-width: 2; }
+      .business-box { fill: #f39c12; stroke: #e67e22; stroke-width: 2; }
+      .component { fill: #fff; stroke: #95a5a6; stroke-width: 1; }
+      .interface-line { stroke: #9b59b6; stroke-width: 3; stroke-dasharray: 8,4; fill: none; }
+      .communication-arrow { stroke: #34495e; stroke-width: 2; fill: none; marker-end: url(#arrowhead); }
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#34495e"/>
+    </marker>
+  </defs>
+
+  <!-- Title -->
+  <text x="450" y="30" class="title" text-anchor="middle">ステークホルダー・インターフェース設計</text>
+
+  <!-- Executive Layer -->
+  <g id="executive">
+    <rect x="50" y="70" width="200" height="140" class="executive-box" rx="10"/>
+    <text x="150" y="95" class="stakeholder-title" text-anchor="middle">経営層</text>
+    <text x="150" y="115" class="stakeholder-title" text-anchor="middle">(Executive)</text>
+    
+    <rect x="65" y="125" width="170" height="75" class="component" rx="3"/>
+    <text x="150" y="145" class="component-title" text-anchor="middle">戦略・投資観点</text>
+    <text x="75" y="165" class="text-content">• ROI・コスト効果</text>
+    <text x="75" y="180" class="text-content">• 競争優位性</text>
+    <text x="75" y="195" class="small-text">言語: ビジネス価値、数値指標</text>
+  </g>
+
+  <!-- Product Team Layer -->
+  <g id="product">
+    <rect x="270" y="70" width="200" height="140" class="product-box" rx="10"/>
+    <text x="370" y="95" class="stakeholder-title" text-anchor="middle">プロダクトチーム</text>
+    <text x="370" y="115" class="stakeholder-title" text-anchor="middle">(Product)</text>
+    
+    <rect x="285" y="125" width="170" height="75" class="component" rx="3"/>
+    <text x="370" y="145" class="component-title" text-anchor="middle">機能・体験重視</text>
+    <text x="295" y="165" class="text-content">• ユーザー価値</text>
+    <text x="295" y="180" class="text-content">• 機能実現性</text>
+    <text x="295" y="195" class="small-text">言語: 要件、仕様、UX</text>
+  </g>
+
+  <!-- Engineering Team Layer -->
+  <g id="engineering">
+    <rect x="490" y="70" width="200" height="140" class="engineer-box" rx="10"/>
+    <text x="590" y="95" class="stakeholder-title" text-anchor="middle">エンジニアチーム</text>
+    <text x="590" y="115" class="stakeholder-title" text-anchor="middle">(Engineering)</text>
+    
+    <rect x="505" y="125" width="170" height="75" class="component" rx="3"/>
+    <text x="590" y="145" class="component-title" text-anchor="middle">技術実装重視</text>
+    <text x="515" y="165" class="text-content">• アーキテクチャ</text>
+    <text x="515" y="180" class="text-content">• 実装詳細</text>
+    <text x="515" y="195" class="small-text">言語: コード、設計、性能</text>
+  </g>
+
+  <!-- Business Team Layer -->
+  <g id="business">
+    <rect x="710" y="70" width="140" height="140" class="business-box" rx="10"/>
+    <text x="780" y="95" class="stakeholder-title" text-anchor="middle">ビジネス</text>
+    <text x="780" y="115" class="stakeholder-title" text-anchor="middle">非技術職</text>
+    
+    <rect x="725" y="125" width="110" height="75" class="component" rx="3"/>
+    <text x="780" y="145" class="component-title" text-anchor="middle">業務効率化</text>
+    <text x="735" y="165" class="text-content">• 作業負荷軽減</text>
+    <text x="735" y="180" class="text-content">• プロセス改善</text>
+    <text x="735" y="195" class="small-text">言語: 業務、手順</text>
+  </g>
+
+  <!-- Interface Lines -->
+  <line x1="250" y1="140" x2="270" y2="140" class="interface-line"/>
+  <line x1="470" y1="140" x2="490" y2="140" class="interface-line"/>
+  <line x1="690" y1="140" x2="710" y2="140" class="interface-line"/>
+
+  <!-- Communication Patterns -->
+  <g id="patterns">
+    <rect x="50" y="240" width="800" height="420" fill="#f8f9fa" stroke="#dee2e6" stroke-width="1" rx="5"/>
+    <text x="450" y="265" class="component-title" text-anchor="middle">ステークホルダー別コミュニケーション戦略</text>
+    
+    <!-- Executive Communication -->
+    <rect x="70" y="280" width="180" height="130" fill="#ffe6e6" stroke="#e74c3c" stroke-width="1" rx="3"/>
+    <text x="160" y="300" class="text-content" text-anchor="middle" font-weight="bold">経営層との対話術</text>
+    <text x="80" y="320" class="small-text" font-weight="bold">重要ポイント:</text>
+    <text x="80" y="335" class="small-text">• 技術的詳細は最小限</text>
+    <text x="80" y="350" class="small-text">• ビジネス影響を数値化</text>
+    <text x="80" y="365" class="small-text">• リスクと軽減策を明示</text>
+    <text x="80" y="385" class="small-text" font-weight="bold">使用する指標:</text>
+    <text x="80" y="400" class="small-text">ROI, TCO, 市場投入時間短縮</text>
+
+    <!-- Product Team Communication -->
+    <rect x="270" y="280" width="180" height="130" fill="#e6f3ff" stroke="#3498db" stroke-width="1" rx="3"/>
+    <text x="360" y="300" class="text-content" text-anchor="middle" font-weight="bold">プロダクトチーム連携</text>
+    <text x="280" y="320" class="small-text" font-weight="bold">共通言語:</text>
+    <text x="280" y="335" class="small-text">• ユーザーストーリー</text>
+    <text x="280" y="350" class="small-text">• 受け入れ基準</text>
+    <text x="280" y="365" class="small-text">• MVP定義</text>
+    <text x="280" y="385" class="small-text" font-weight="bold">協働方法:</text>
+    <text x="280" y="400" class="small-text">プロトタイプ、ワイヤーフレーム</text>
+
+    <!-- Engineering Communication -->
+    <rect x="470" y="280" width="180" height="130" fill="#e6ffe6" stroke="#2ecc71" stroke-width="1" rx="3"/>
+    <text x="560" y="300" class="text-content" text-anchor="middle" font-weight="bold">エンジニア間交渉</text>
+    <text x="480" y="320" class="small-text" font-weight="bold">技術的議論:</text>
+    <text x="480" y="335" class="small-text">• アーキテクチャ決定記録(ADR)</text>
+    <text x="480" y="350" class="small-text">• コードレビュー</text>
+    <text x="480" y="365" class="small-text">• 設計文書</text>
+    <text x="480" y="385" class="small-text" font-weight="bold">合意形成:</text>
+    <text x="480" y="400" class="small-text">RFC、スパイク、PoC</text>
+
+    <!-- Business Communication -->
+    <rect x="670" y="280" width="160" height="130" fill="#fff3cd" stroke="#f39c12" stroke-width="1" rx="3"/>
+    <text x="750" y="300" class="text-content" text-anchor="middle" font-weight="bold">非技術職との対話</text>
+    <text x="680" y="320" class="small-text" font-weight="bold">翻訳戦略:</text>
+    <text x="680" y="335" class="small-text">• 業務フロー図</text>
+    <text x="680" y="350" class="small-text">• Before/After比較</text>
+    <text x="680" y="365" class="small-text">• 具体的効果例</text>
+    <text x="680" y="385" class="small-text" font-weight="bold">理解促進:</text>
+    <text x="680" y="400" class="small-text">デモ、ハンズオン</text>
+
+    <!-- Communication Matrix -->
+    <text x="450" y="440" class="component-title" text-anchor="middle">コミュニケーション・マトリックス</text>
+    
+    <rect x="70" y="460" width="760" height="170" fill="#fff" stroke="#95a5a6" stroke-width="1" rx="3"/>
+    
+    <!-- Matrix Headers -->
+    <text x="120" y="480" class="small-text" font-weight="bold">対象</text>
+    <text x="200" y="480" class="small-text" font-weight="bold">関心事</text>
+    <text x="320" y="480" class="small-text" font-weight="bold">使用言語</text>
+    <text x="480" y="480" class="small-text" font-weight="bold">提示形式</text>
+    <text x="640" y="480" class="small-text" font-weight="bold">判断基準</text>
+    <text x="760" y="480" class="small-text" font-weight="bold">成功指標</text>
+    
+    <!-- Executive Row -->
+    <text x="120" y="500" class="small-text">経営層</text>
+    <text x="200" y="500" class="small-text">戦略・収益</text>
+    <text x="320" y="500" class="small-text">ROI, KPI</text>
+    <text x="480" y="500" class="small-text">エグゼクティブサマリー</text>
+    <text x="640" y="500" class="small-text">投資効果</text>
+    <text x="760" y="500" class="small-text">予算承認</text>
+    
+    <!-- Product Row -->
+    <text x="120" y="520" class="small-text">プロダクト</text>
+    <text x="200" y="520" class="small-text">機能・UX</text>
+    <text x="320" y="520" class="small-text">要件・仕様</text>
+    <text x="480" y="520" class="small-text">ワイヤーフレーム</text>
+    <text x="640" y="520" class="small-text">ユーザー価値</text>
+    <text x="760" y="520" class="small-text">機能承認</text>
+    
+    <!-- Engineering Row -->
+    <text x="120" y="540" class="small-text">エンジニア</text>
+    <text x="200" y="540" class="small-text">技術・品質</text>
+    <text x="320" y="540" class="small-text">コード・設計</text>
+    <text x="480" y="540" class="small-text">アーキテクチャ図</text>
+    <text x="640" y="540" class="small-text">実装可能性</text>
+    <text x="760" y="540" class="small-text">技術承認</text>
+    
+    <!-- Business Row -->
+    <text x="120" y="560" class="small-text">ビジネス職</text>
+    <text x="200" y="560" class="small-text">業務効率</text>
+    <text x="320" y="560" class="small-text">業務フロー</text>
+    <text x="480" y="560" class="small-text">プロセス図</text>
+    <text x="640" y="560" class="small-text">作業軽減</text>
+    <text x="760" y="560" class="small-text">運用承認</text>
+
+    <!-- Interface Design Principles -->
+    <text x="450" y="590" class="component-title" text-anchor="middle">効果的インターフェース設計の原則</text>
+    <text x="80" y="610" class="text-content">1. 適応的コミュニケーション: 相手の専門性と関心事に応じた情報粒度の調整</text>
+    <text x="80" y="625" class="text-content">2. 双方向フィードバック: 理解度確認と継続的な調整メカニズムの構築</text>
+    <text x="80" y="640" class="text-content">3. 価値変換機能: 技術的メリットを各ステークホルダーの価値体系に翻訳</text>
+    <text x="80" y="655" class="text-content">4. 透明性の確保: 制約・リスク・前提条件の明確な共有</text>
+  </g>
+
+  <!-- Bidirectional Communication Arrows -->
+  <path d="M 150 240 L 150 280" class="communication-arrow"/>
+  <path d="M 370 240 L 370 280" class="communication-arrow"/>
+  <path d="M 590 240 L 590 280" class="communication-arrow"/>
+  <path d="M 780 240 L 780 280" class="communication-arrow"/>
+</svg>
