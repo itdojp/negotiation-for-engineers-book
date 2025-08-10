@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="900" height="700" viewBox="0 0 900 700" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      .title { font-family: 'Noto Sans JP', sans-serif; font-size: 20px; font-weight: bold; fill: #2c3e50; }
+      .layer-title { font-family: 'Noto Sans JP', sans-serif; font-size: 14px; font-weight: bold; fill: #fff; }
+      .component-title { font-family: 'Noto Sans JP', sans-serif; font-size: 12px; font-weight: bold; fill: #2c3e50; }
+      .text-content { font-family: 'Noto Sans JP', sans-serif; font-size: 11px; fill: #2c3e50; }
+      .small-text { font-family: 'Noto Sans JP', sans-serif; font-size: 10px; fill: #7f8c8d; }
+      .evidence-box { fill: #3498db; stroke: #2980b9; stroke-width: 2; }
+      .demo-box { fill: #2ecc71; stroke: #27ae60; stroke-width: 2; }
+      .data-box { fill: #e74c3c; stroke: #c0392b; stroke-width: 2; }
+      .solution-box { fill: #f39c12; stroke: #e67e22; stroke-width: 2; }
+      .component { fill: #fff; stroke: #95a5a6; stroke-width: 1; }
+      .flow-arrow { stroke: #34495e; stroke-width: 2; fill: none; marker-end: url(#arrowhead); }
+      .persuasion-line { stroke: #9b59b6; stroke-width: 2; stroke-dasharray: 5,3; fill: none; }
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#34495e"/>
+    </marker>
+  </defs>
+
+  <!-- Title -->
+  <text x="450" y="30" class="title" text-anchor="middle">技術的根拠による説得フレームワーク</text>
+
+  <!-- Evidence Layer -->
+  <g id="evidence">
+    <rect x="50" y="70" width="200" height="140" class="evidence-box" rx="10"/>
+    <text x="150" y="95" class="layer-title" text-anchor="middle">技術的根拠</text>
+    
+    <rect x="65" y="105" width="170" height="95" class="component" rx="3"/>
+    <text x="150" y="125" class="component-title" text-anchor="middle">論理的基盤構築</text>
+    <text x="75" y="145" class="text-content">• アーキテクチャ図による可視化</text>
+    <text x="75" y="160" class="text-content">• 技術仕様書の明確化</text>
+    <text x="75" y="175" class="text-content">• ベストプラクティス事例</text>
+    <text x="75" y="190" class="small-text">信頼性: 客観的事実に基づく主張</text>
+  </g>
+
+  <!-- Demonstration Layer -->
+  <g id="demonstration">
+    <rect x="270" y="70" width="200" height="140" class="demo-box" rx="10"/>
+    <text x="370" y="95" class="layer-title" text-anchor="middle">実証・デモンストレーション</text>
+    
+    <rect x="285" y="105" width="170" height="95" class="component" rx="3"/>
+    <text x="370" y="125" class="component-title" text-anchor="middle">動作する証拠</text>
+    <text x="295" y="145" class="text-content">• プロトタイプ実装</text>
+    <text x="295" y="160" class="text-content">• PoC（概念実証）</text>
+    <text x="295" y="175" class="text-content">• ライブコーディング</text>
+    <text x="295" y="190" class="small-text">体験価値: 実際に動作する説得力</text>
+  </g>
+
+  <!-- Data Analysis Layer -->
+  <g id="data">
+    <rect x="490" y="70" width="200" height="140" class="data-box" rx="10"/>
+    <text x="590" y="95" class="layer-title" text-anchor="middle">データ分析</text>
+    
+    <rect x="505" y="105" width="170" height="95" class="component" rx="3"/>
+    <text x="590" y="125" class="component-title" text-anchor="middle">定量的評価</text>
+    <text x="515" y="145" class="text-content">• パフォーマンス測定</text>
+    <text x="515" y="160" class="text-content">• コスト効果分析</text>
+    <text x="515" y="175" class="text-content">• ROI計算</text>
+    <text x="515" y="190" class="small-text">数値的説得: データドリブンな判断</text>
+  </g>
+
+  <!-- Solution Proposal Layer -->
+  <g id="solution">
+    <rect x="710" y="70" width="140" height="140" class="solution-box" rx="10"/>
+    <text x="780" y="95" class="layer-title" text-anchor="middle">解決策提示</text>
+    
+    <rect x="725" y="105" width="110" height="95" class="component" rx="3"/>
+    <text x="780" y="125" class="component-title" text-anchor="middle">実装可能な</text>
+    <text x="780" y="145" class="component-title" text-anchor="middle">アクション</text>
+    <text x="735" y="165" class="text-content">• 段階的実装</text>
+    <text x="735" y="180" class="text-content">• リスク軽減</text>
+    <text x="735" y="195" class="small-text">実行性重視</text>
+  </g>
+
+  <!-- Flow Arrows -->
+  <path d="M 250 140 L 270 140" class="flow-arrow"/>
+  <path d="M 470 140 L 490 140" class="flow-arrow"/>
+  <path d="M 690 140 L 710 140" class="flow-arrow"/>
+
+  <!-- Persuasion Process -->
+  <g id="process">
+    <rect x="50" y="240" width="800" height="420" fill="#f8f9fa" stroke="#dee2e6" stroke-width="1" rx="5"/>
+    <text x="450" y="265" class="component-title" text-anchor="middle">エンジニア式説得プロセス</text>
+    
+    <!-- Phase 1: Problem Definition -->
+    <rect x="70" y="280" width="180" height="100" fill="#e6f3ff" stroke="#3498db" stroke-width="1" rx="3"/>
+    <text x="160" y="300" class="text-content" text-anchor="middle" font-weight="bold">1. 問題定義フェーズ</text>
+    <text x="80" y="320" class="small-text">課題の技術的分析:</text>
+    <text x="80" y="335" class="small-text">• 現状システムの限界特定</text>
+    <text x="80" y="350" class="small-text">• ボトルネック分析</text>
+    <text x="80" y="365" class="small-text">• 技術的負債の定量化</text>
+
+    <!-- Phase 2: Solution Architecture -->
+    <rect x="270" y="280" width="180" height="100" fill="#e6ffe6" stroke="#2ecc71" stroke-width="1" rx="3"/>
+    <text x="360" y="300" class="text-content" text-anchor="middle" font-weight="bold">2. ソリューション設計</text>
+    <text x="280" y="320" class="small-text">技術的アプローチ:</text>
+    <text x="280" y="335" class="small-text">• アーキテクチャパターン選定</text>
+    <text x="280" y="350" class="small-text">• トレードオフ分析</text>
+    <text x="280" y="365" class="small-text">• スケーラビリティ検証</text>
+
+    <!-- Phase 3: Implementation Strategy -->
+    <rect x="470" y="280" width="180" height="100" fill="#ffe6e6" stroke="#e74c3c" stroke-width="1" rx="3"/>
+    <text x="560" y="300" class="text-content" text-anchor="middle" font-weight="bold">3. 実装戦略立案</text>
+    <text x="480" y="320" class="small-text">段階的実装計画:</text>
+    <text x="480" y="335" class="small-text">• MVP定義</text>
+    <text x="480" y="350" class="small-text">• マイルストーン設定</text>
+    <text x="480" y="365" class="small-text">• リスク評価・軽減策</text>
+
+    <!-- Phase 4: Stakeholder Communication -->
+    <rect x="670" y="280" width="160" height="100" fill="#fff3cd" stroke="#f39c12" stroke-width="1" rx="3"/>
+    <text x="750" y="300" class="text-content" text-anchor="middle" font-weight="bold">4. ステークホルダー</text>
+    <text x="750" y="320" class="text-content" text-anchor="middle" font-weight="bold">コミュニケーション</text>
+    <text x="680" y="340" class="small-text">• 技術的価値の翻訳</text>
+    <text x="680" y="355" class="small-text">• ビジネス影響の定量化</text>
+    <text x="680" y="370" class="small-text">• 意思決定支援情報提供</text>
+
+    <!-- Technical Persuasion Techniques -->
+    <text x="450" y="410" class="component-title" text-anchor="middle">技術的説得テクニック</text>
+    
+    <!-- Code as Evidence -->
+    <rect x="70" y="430" width="200" height="110" fill="#f3e6ff" stroke="#9b59b6" stroke-width="1" rx="3"/>
+    <text x="170" y="450" class="text-content" text-anchor="middle" font-weight="bold">コードによる証明</text>
+    <text x="80" y="470" class="small-text">• 動作するサンプルコード</text>
+    <text x="80" y="485" class="small-text">• パフォーマンステスト結果</text>
+    <text x="80" y="500" class="small-text">• セキュリティ検証レポート</text>
+    <text x="80" y="515" class="small-text">• オープンソース活用事例</text>
+    <text x="80" y="530" class="small-text">効果: 実装可能性の証明</text>
+
+    <!-- Data-Driven Arguments -->
+    <rect x="290" y="430" width="200" height="110" fill="#e6f3ff" stroke="#3498db" stroke-width="1" rx="3"/>
+    <text x="390" y="450" class="text-content" text-anchor="middle" font-weight="bold">データドリブン論証</text>
+    <text x="300" y="470" class="small-text">• ベンチマーク結果比較</text>
+    <text x="300" y="485" class="small-text">• リソース使用量分析</text>
+    <text x="300" y="500" class="small-text">• エラー率・可用性指標</text>
+    <text x="300" y="515" class="small-text">• 開発生産性向上データ</text>
+    <text x="300" y="530" class="small-text">効果: 客観的判断材料提供</text>
+
+    <!-- Visual Architecture -->
+    <rect x="510" y="430" width="200" height="110" fill="#ffe6e6" stroke="#e74c3c" stroke-width="1" rx="3"/>
+    <text x="610" y="450" class="text-content" text-anchor="middle" font-weight="bold">視覚的アーキテクチャ</text>
+    <text x="520" y="470" class="small-text">• システム構成図</text>
+    <text x="520" y="485" class="small-text">• データフロー図</text>
+    <text x="520" y="500" class="small-text">• シーケンス図</text>
+    <text x="520" y="515" class="small-text">• インフラ構成図</text>
+    <text x="520" y="530" class="small-text">効果: 複雑性の可視化</text>
+
+    <!-- Business Value Translation -->
+    <rect x="730" y="430" width="100" height="110" fill="#e6ffe6" stroke="#2ecc71" stroke-width="1" rx="3"/>
+    <text x="780" y="450" class="text-content" text-anchor="middle" font-weight="bold">ビジネス価値</text>
+    <text x="780" y="470" class="text-content" text-anchor="middle" font-weight="bold">変換</text>
+    <text x="740" y="490" class="small-text">• コスト削減効果</text>
+    <text x="740" y="505" class="small-text">• 開発速度向上</text>
+    <text x="740" y="520" class="small-text">• 品質向上効果</text>
+    <text x="740" y="535" class="small-text">技術→価値変換</text>
+
+    <!-- Success Factors -->
+    <text x="450" y="570" class="component-title" text-anchor="middle">説得成功の要因</text>
+    <text x="80" y="590" class="text-content">1. 信頼性: 技術的正確性と実装可能性の担保</text>
+    <text x="80" y="605" class="text-content">2. 明確性: 複雑な技術概念の分かりやすい説明</text>
+    <text x="80" y="620" class="text-content">3. 実証性: 動作するコードやデモによる証明</text>
+    <text x="80" y="635" class="text-content">4. 価値訴求: 技術的メリットのビジネス価値への翻訳</text>
+    <text x="80" y="650" class="text-content">5. リスク管理: 潜在的問題の事前識別と対策提示</text>
+  </g>
+
+  <!-- Connection Lines -->
+  <line x1="160" y1="380" x2="160" y2="430" class="persuasion-line"/>
+  <line x1="360" y1="380" x2="390" y2="430" class="persuasion-line"/>
+  <line x1="560" y1="380" x2="610" y2="430" class="persuasion-line"/>
+  <line x1="750" y1="380" x2="780" y2="430" class="persuasion-line"/>
+</svg>
