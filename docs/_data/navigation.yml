@@ -1,0 +1,19 @@
+introduction:
+- title: はじめに
+  path: /src/introduction/
+chapters:
+- title: コードは雄弁に語る - 技術的根拠による説得術
+  path: /src/chapter-1/
+- title: ステークホルダー・インターフェース設計
+  path: /src/chapter-2/
+- title: アジャイル交渉術 - 反復的合意形成
+  path: /src/chapter-3/
+- title: 技術的レバレッジの最大化
+  path: /src/chapter-4/
+- title: エモーショナル・デバッグ
+  path: /src/chapter-5/
+- title: 交渉パイプラインの構築
+  path: /src/chapter-6/
+appendices:
+- title: 付録
+  path: /src/appendices/
