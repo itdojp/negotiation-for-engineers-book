@@ -1,3 +1,4 @@
+# updated by automation to avoid 404 on appendices root without index.md
 introduction:
 - title: はじめに
   path: /src/introduction/
@@ -14,6 +15,7 @@ chapters:
   path: /src/chapter-5/
 - title: 交渉パイプラインの構築
   path: /src/chapter-6/
+
 appendices:
-- title: 付録
-  path: /src/appendices/
+- title: 付録：実践ツールキット
+  path: /src/appendices/toolkit/
