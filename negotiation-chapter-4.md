@@ -23,7 +23,7 @@
 
 多くの組織で過小評価されているのが、技術的負債の複利効果である。短期的な技術選択の妥協は、時間の経過と共に指数関数的にコストを増大させる。
 
-- **開発速度の逓減**: 技術的負債の増大により、新機能開発速度が年率20-40%低下
+- **開発速度の逓減**: 技術的負債の増大により、新機能開発速度が年率20〜40%低下
 - **品質コストの増大**: バグ修正、セキュリティ対応、パフォーマンス改善の頻度とコストが増加
 - **人材コストの増大**: 優秀なエンジニアは技術的負債の多い環境を避ける傾向があり、採用・定着コストが上昇
 
@@ -464,7 +464,7 @@ class ExtensibilityNegotiator {
                 description: '各機能を独立して改善・拡張',
                 enabledBy: 'マイクロサービスアーキテクチャ',
                 businessValue: '市場変化への迅速な対応',
-                implementationEffort: 'サービス単位で1-2週間',
+                implementationEffort: 'サービス単位で1〜2週間',
                 exampleUseCases: [
                     'A/Bテストの並行実施',
                     '地域別カスタマイズ',
@@ -1000,7 +1000,7 @@ class SecurityRiskQuantifier:
                 'insurance_premium_increase': 2_000_000
             },
             'total_impact': 150_000_000,
-            'recovery_time': '6-12ヶ月',
+            'recovery_time': '6〜12ヶ月',
             'probability': self._calculate_breach_probability()
         }
         scenarios.append(data_breach)
@@ -1821,7 +1821,7 @@ class InfrastructureOptimizationAnalyzer:
                 'current_state': '固定インスタンス数での運用',
                 'recommendation': 'オートスケーリングの導入',
                 'benefits': {
-                    'cost_reduction': '30-50%（非ピーク時）',
+                    'cost_reduction': '30〜50%（非ピーク時）',
                     'performance': 'ピーク時の安定性向上',
                     'efficiency': '需要に応じた自動調整'
                 },
@@ -1836,12 +1836,12 @@ class InfrastructureOptimizationAnalyzer:
                 'optimization_strategies': [
                     {
                         'strategy': 'CDN活用拡大',
-                        'savings': '60-80%のデータ転送削減',
+                        'savings': '60〜80%のデータ転送削減',
                         'additional_benefits': 'レスポンス時間改善'
                     },
                     {
                         'strategy': '圧縮アルゴリズム最適化',
-                        'savings': '30-40%のデータサイズ削減',
+                        'savings': '30〜40%のデータサイズ削減',
                         'implementation': 'Brotli圧縮の導入'
                     }
                 ]

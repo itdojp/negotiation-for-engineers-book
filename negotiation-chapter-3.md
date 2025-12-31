@@ -1146,7 +1146,7 @@ class TrustAccountManager:
             }
         ]
         
-        # 短期目標（1-4週間）
+        # 短期目標（1〜4週間）
         recovery_plan['short_term_goals'] = [
             {
                 'goal': '約束した改善の実現',
@@ -1160,7 +1160,7 @@ class TrustAccountManager:
             }
         ]
         
-        # 長期戦略（1-3ヶ月）
+        # 長期戦略（1〜3ヶ月）
         recovery_plan['long_term_strategy'] = [
             {
                 'strategy': '定期的な進捗共有の強化',
@@ -1792,7 +1792,7 @@ class AgileChangeManager {
             ],
             implementation: {
                 approach: 'プロダクトバックログのトップに配置',
-                timeframe: '2-4週間後',
+                timeframe: '2〜4週間後',
                 preparation: '次回スプリント計画で詳細見積もり'
             },
             recommendationScore: this.calculateNextSprintScore(request, impact)

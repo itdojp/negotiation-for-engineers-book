@@ -38,7 +38,7 @@
       <text x="200" y="125" class="component-title" text-anchor="middle">目標設定・準備</text>
       <text x="125" y="145" class="text-content">• 交渉目標の定義</text>
       <text x="125" y="160" class="text-content">• ステークホルダー分析</text>
-      <text x="125" y="175" class="small-text">期間: 1-2週間</text>
+      <text x="125" y="175" class="small-text">期間: 1〜2週間</text>
     </g>
 
     <!-- Sprint Execution -->
@@ -50,7 +50,7 @@
       <text x="450" y="125" class="component-title" text-anchor="middle">段階的価値提供</text>
       <text x="375" y="145" class="text-content">• MVP提案実行</text>
       <text x="375" y="160" class="text-content">• フィードバック収集</text>
-      <text x="375" y="175" class="small-text">期間: 2-4週間</text>
+      <text x="375" y="175" class="small-text">期間: 2〜4週間</text>
     </g>
 
     <!-- Sprint Review -->
@@ -62,7 +62,7 @@
       <text x="700" y="125" class="component-title" text-anchor="middle">成果検証・評価</text>
       <text x="625" y="145" class="text-content">• 合意内容の確認</text>
       <text x="625" y="160" class="text-content">• ステークホルダー満足度</text>
-      <text x="625" y="175" class="small-text">期間: 0.5-1週間</text>
+      <text x="625" y="175" class="small-text">期間: 0.5〜1週間</text>
     </g>
 
     <!-- Sprint Retrospective -->
