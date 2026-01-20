@@ -11,6 +11,7 @@ order: 10
 ## 交渉準備テンプレート（YAML形式）
 
 テンプレート内の `batna` などの用語は、[交渉の基礎語彙（最小モデル）](../foundations/) と [用語集](../glossary/) を参照してください。
+典型的な交渉シナリオ（NG→OK）の例は、[付録：ケース集（NG→OK）](scenarios/) を参照してください。
 
 ```yaml
 # negotiation_preparation_advanced.yaml
