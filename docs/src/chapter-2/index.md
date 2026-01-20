@@ -95,7 +95,7 @@ class TechnicalRiskTranslator {
 
 予防的措置への投資額: ¥${Math.round(this.calculateTotalMitigationCost(sortedRisks)).toLocaleString('ja-JP')}
 リスク軽減による期待価値: ¥${Math.round(this.calculateRiskReductionValue(sortedRisks)).toLocaleString('ja-JP')}
-投資効率（ROI）: ${Math.round(this.calculateRiskMitigationROI(sortedRisks)).toLocaleString('ja-JP')}%
+投資効率（ROI）: ${this.calculateRiskMitigationROI(sortedRisks).toFixed(1)}%
         `;
     }
 }
