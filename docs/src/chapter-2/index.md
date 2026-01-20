@@ -89,13 +89,13 @@ class TechnicalRiskTranslator {
 ## エグゼクティブサマリー
 
 現在、${this.countCriticalRisks(sortedRisks)}件の重大なビジネスリスクが技術的要因により存在しています。
-これらのリスクが顕在化した場合の想定損失は合計¥${this.calculateTotalExposure(sortedRisks):,.0f}です。
+これらのリスクが顕在化した場合の想定損失は合計¥${Math.round(this.calculateTotalExposure(sortedRisks)).toLocaleString('ja-JP')}です。
 
 ## 投資対効果分析
 
-予防的措置への投資額: ¥${this.calculateTotalMitigationCost(sortedRisks):,.0f}
-リスク軽減による期待価値: ¥${this.calculateRiskReductionValue(sortedRisks):,.0f}
-投資効率（ROI）: ${this.calculateRiskMitigationROI(sortedRisks):,.0f}%
+予防的措置への投資額: ¥${Math.round(this.calculateTotalMitigationCost(sortedRisks)).toLocaleString('ja-JP')}
+リスク軽減による期待価値: ¥${Math.round(this.calculateRiskReductionValue(sortedRisks)).toLocaleString('ja-JP')}
+投資効率（ROI）: ${this.calculateRiskMitigationROI(sortedRisks).toFixed(1)}%
         `;
     }
 }
