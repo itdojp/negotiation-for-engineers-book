@@ -88,8 +88,6 @@ def resolve_target(link: Link, docs_root: Path) -> tuple[str, Path] | None:
     if not target or should_skip_target(target):
         return None
 
-    had_trailing_slash = target.endswith("/")
-
     if target.startswith("/"):
         resolved = docs_root / target.lstrip("/")
     else:
@@ -133,4 +131,5 @@ def main() -> int:
     return 0
 
 
-raise SystemExit(main())
+if __name__ == "__main__":
+    sys.exit(main())
