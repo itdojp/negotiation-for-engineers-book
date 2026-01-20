@@ -21,10 +21,10 @@ chapters:
   path: /src/chapter-6/
 
 appendices:
-- title: 付録：ケース集（NG→OK）
-  path: /src/appendices/scenarios/
 - title: 付録：実践ツールキット
   path: /src/appendices/toolkit/
+- title: 付録：ケース集（NG→OK）
+  path: /src/appendices/scenarios/
 - title: 付録：AIでの壁打ち・練習（ガードレール付き）
   path: /src/appendices/ai-practice/
 
