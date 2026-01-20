@@ -1,7 +1,7 @@
 ---
 title: "用語集"
 layout: book
-order: 4
+order: 2.6
 ---
 
 # 用語集
