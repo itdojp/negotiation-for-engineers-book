@@ -2,6 +2,10 @@
 introduction:
 - title: はじめに：なぜエンジニアこそ交渉力が必要か
   path: /src/introduction/
+- title: 交渉の基礎語彙（最小モデル）
+  path: /src/foundations/
+- title: 用語集
+  path: /src/glossary/
 chapters:
 - title: 第1章：コードは雄弁に語る - 技術的根拠による説得術
   path: /src/chapter-1/
