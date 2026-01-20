@@ -1,0 +1,18 @@
+name: Markdown Internal Link Check
+
+on:
+  pull_request:
+  push:
+    branches: ["main"]
+  workflow_dispatch: {}
+
+jobs:
+  internal-link-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Check internal links (docs/**/*.md)
+        run: python3 .github/scripts/check_internal_links.py
+
