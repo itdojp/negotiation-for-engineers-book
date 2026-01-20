@@ -72,10 +72,12 @@ permalink: /
 
 ## 付録
 
-- [付録：ケース集（NG→OK）](src/appendices/scenarios/)
-  - 典型シナリオ別の「対話例」「NG→OK」「設計ポイント」「フォローアップ」を収録
 - [付録：実践ツールキット](src/appendices/toolkit/)
   - 交渉準備テンプレート（YAML形式）、交渉ログフォーマット（Markdown形式）、チェックリスト集、推薦図書・リソース
+- [付録：ケース集（NG→OK）](src/appendices/scenarios/)
+  - 典型シナリオ別の「対話例」「NG→OK」「設計ポイント」「フォローアップ」を収録
+- [付録：AIでの壁打ち・練習（ガードレール付き）](src/appendices/ai-practice/)
+  - 準備・練習・振り返りを効率化するためのプロンプト例と情報管理の注意点
 
 ---
 
