@@ -1,21 +1,25 @@
 # updated by automation to avoid 404 on appendices root without index.md
 introduction:
-- title: はじめに
+- title: はじめに：なぜエンジニアこそ交渉力が必要か
   path: /src/introduction/
 chapters:
-- title: コードは雄弁に語る - 技術的根拠による説得術
+- title: 第1章：コードは雄弁に語る - 技術的根拠による説得術
   path: /src/chapter-1/
-- title: ステークホルダー・インターフェース設計
+- title: 第2章：ステークホルダー・インターフェース設計
   path: /src/chapter-2/
-- title: アジャイル交渉術 - 反復的合意形成
+- title: 第3章：アジャイル交渉術 - 反復的合意形成
   path: /src/chapter-3/
-- title: 技術的レバレッジの最大化
+- title: 第4章：技術的レバレッジの最大化
   path: /src/chapter-4/
-- title: エモーショナル・デバッグ
+- title: 第5章：エモーショナル・デバッグ
   path: /src/chapter-5/
-- title: 交渉パイプラインの構築
+- title: 第6章：交渉パイプラインの構築
   path: /src/chapter-6/
 
 appendices:
 - title: 付録：実践ツールキット
   path: /src/appendices/toolkit/
+
+afterword:
+- title: おわりに：継続的インテグレーション
+  path: /src/conclusion/
