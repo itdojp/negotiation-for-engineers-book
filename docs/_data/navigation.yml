@@ -1,33 +1,33 @@
 # updated by automation to avoid 404 on appendices root without index.md
 introduction:
 - title: はじめに：なぜエンジニアこそ交渉力が必要か
-  path: /src/introduction/
+  path: /introduction/
 - title: 交渉の基礎語彙（最小モデル）
-  path: /src/foundations/
+  path: /foundations/
 - title: 用語集
-  path: /src/glossary/
+  path: /glossary/
 chapters:
 - title: 第1章：コードは雄弁に語る - 技術的根拠による説得術
-  path: /src/chapter-1/
+  path: /chapter-1/
 - title: 第2章：ステークホルダー・インターフェース設計
-  path: /src/chapter-2/
+  path: /chapter-2/
 - title: 第3章：アジャイル交渉術 - 反復的合意形成
-  path: /src/chapter-3/
+  path: /chapter-3/
 - title: 第4章：技術的レバレッジの最大化
-  path: /src/chapter-4/
+  path: /chapter-4/
 - title: 第5章：エモーショナル・デバッグ
-  path: /src/chapter-5/
+  path: /chapter-5/
 - title: 第6章：交渉パイプラインの構築
-  path: /src/chapter-6/
+  path: /chapter-6/
 
 appendices:
 - title: 付録：実践ツールキット
-  path: /src/appendices/toolkit/
+  path: /appendices/toolkit/
 - title: 付録：ケース集（NG→OK）
-  path: /src/appendices/scenarios/
+  path: /appendices/scenarios/
 - title: 付録：AIでの壁打ち・練習（ガードレール付き）
-  path: /src/appendices/ai-practice/
+  path: /appendices/ai-practice/
 
 afterword:
 - title: おわりに：継続的インテグレーション
-  path: /src/conclusion/
+  path: /conclusion/
