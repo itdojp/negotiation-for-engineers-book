@@ -11,7 +11,7 @@
     "branch": "main"
   },
   "build": {
-    "outputDirectory": "docs", 
+    "outputDirectory": "docs",
     "framework": "book-formatter",
     "enableNavigation": true,
     "enableSyntaxHighlighting": true,
@@ -104,5 +104,22 @@
       "説得力",
       "ステークホルダー管理"
     ]
+  },
+  "ux": {
+    "profile": "B",
+    "modules": {
+      "quickStart": false,
+      "readingGuide": false,
+      "checklistPack": true,
+      "troubleshootingFlow": true,
+      "conceptMap": false,
+      "figureIndex": true,
+      "legalNotice": false,
+      "glossary": false
+    }
+  },
+  "shared": {
+    "version": "3.2.0",
+    "lastSync": "2026-02-02T23:54:47.640Z"
   }
 }
