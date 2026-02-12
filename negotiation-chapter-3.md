@@ -2444,7 +2444,7 @@ class ContinuousImprovementSystem:
 
 理論を実践に結びつけるため、実際の仕様変更交渉の詳細なケーススタディを検証する。
 
-```python
+````python
 class SpecificationChangeNegotiationCase:
     def __init__(self):
         self.case_context = self._load_case_context()
@@ -2520,7 +2520,7 @@ class SpecificationChangeNegotiationCase:
 - **懸念**: 品質低下、チームの疲弊、既存機能への影響
 
 #### 緊急チームミーティング（Day 1）
-```
+```text
 アジェンダ：
 1. 要求内容の正確な理解
 2. 初期インパクト評価  
@@ -2639,7 +2639,7 @@ CEO: 「レコメンド機能は必須。これがないと競合に顧客を奪
 - 透明性のあるコミュニケーションが信頼を生む
 - 約束を守ることで次回の交渉が容易に
         """
-```
+````
 
 ---
 

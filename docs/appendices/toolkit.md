@@ -115,7 +115,7 @@ negotiation:
 
 ## 交渉ログフォーマット（Markdown形式）
 
-```markdown
+````markdown
 # 交渉ログ：[プロジェクト名]
 
 ## メタデータ
@@ -163,7 +163,7 @@ negotiation:
 > 「まず小さく始めて、成功を実証してから拡大する」
 
 **ステークホルダー反応マップ**:
-```
+```text
 CTO: 😊 積極的支持
 CFO: 🤔 → 😐 懐疑的から中立へ
 COO: 😐 → 😊 中立から支持へ
@@ -278,7 +278,7 @@ COO: 😐 → 😊 中立から支持へ
 - [ROI計算書](./analysis/roi-calculation.xlsx)
 - [リスク分析](./risk/risk-assessment.md)
 - [前回の交渉ログ](./logs/NEG-2024-06-10-001.md)
-```
+````
 
 ## チェックリスト集
 

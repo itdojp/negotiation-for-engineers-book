@@ -1700,7 +1700,7 @@ class NonFunctionalRequirementsNegotiator:
 
 コードレビューは、技術的な議論の場であると同時に、より良い解決策を見つけるための協働の機会である。建設的なフィードバックを通じて、チーム全体の技術力を向上させる。
 
-```python
+````python
 class ConstructiveCodeReviewer:
     def __init__(self):
         self.review_categories = [
@@ -1830,7 +1830,7 @@ for order in orders:  # O(m)
 全体的に良く実装されています。上記の提案は、さらに品質を高めるためのものです。
 議論が必要な点があれば、お気軽にコメントください。
         """
-```
+````
 
 ## 2.4 非技術職とのブリッジング
 
