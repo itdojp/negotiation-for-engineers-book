@@ -208,7 +208,7 @@ class ArchitecturalFlexibilityValuation:
 
 スケーラビリティは、将来の成長に対する保険である。この保険の価値を定量化し、投資の妥当性を示す。
 
-```python
+````python
 class ScalabilityInvestmentAnalyzer:
     def analyze_scalability_investment(self, current_system, proposed_system):
         """スケーラビリティ投資の分析"""
@@ -339,7 +339,7 @@ class ScalabilityInvestmentAnalyzer:
 ### 投資効果
 
 #### 1. 直接的なコスト削減
-```
+```text
 現行アプローチでの3年間コスト: 8,500万円
 提案アプローチでの3年間コスト: 5,200万円（初期投資含む）
 ――――――――――――――――――――――――
@@ -392,7 +392,7 @@ class ScalabilityInvestmentAnalyzer:
 本投資は、技術的な改善を超えて、ビジネスの成長基盤を構築するものです。
 初期投資1,500万円に対し、3年間で5,700万円以上の価値を創出します。
         """
-```
+````
 
 #### 将来の拡張性を交渉材料にする
 
@@ -1778,7 +1778,7 @@ class PerformanceEconomicsAnalyzer:
 
 パフォーマンス改善は、しばしばインフラコストの削減も同時に実現する。この二重の利益を明確に示す。
 
-```python
+````python
 class InfrastructureOptimizationAnalyzer:
     def analyze_infrastructure_optimization(self, current_infra, optimization_plan):
         """インフラ最適化の分析"""
@@ -2050,7 +2050,7 @@ spot_fleet_config = {
 インフラコストを{(total_savings / total_current_cost * 100):.0f}%削減できます。
 これは、技術的卓越性と財務的責任の両立を実現する投資です。
         """
-```
+````
 
 ### 技術的優位性の金額換算
 
@@ -2257,7 +2257,7 @@ class TechnicalAdvantageValuation:
 
 理論を実践に結びつけるため、技術的負債解消プロジェクトの詳細な投資提案例を示す。
 
-```python
+````python
 class TechnicalDebtInvestmentCase:
     def __init__(self, system_analysis):
         self.system = system_analysis
@@ -2303,7 +2303,7 @@ class TechnicalDebtInvestmentCase:
 #### 開発生産性の低下
 - 新機能開発: 想定の3倍の時間
 - 年間損失: 2.4億円
-  ```
+  ```text
   計算根拠:
   - 開発者30名 × 生産性低下50% × 年収800万円 = 1.2億円
   - 機会損失（遅延による収益逸失）= 1.2億円
@@ -2335,7 +2335,7 @@ class TechnicalDebtInvestmentCase:
 - テスト自動化基盤
 - 監視・可観測性の確立
 
-#### 投資内容
+### 投資内容
 - ツール・インフラ: 1,000万円
 - 専門家支援: 2,000万円
 - 内部工数: 10人月
@@ -2375,9 +2375,9 @@ migration_plan = {
         'benefit': 'リアルタイム分析可能'
     }
 }
-```
+````
 
-#### 投資内容
+### 投資内容
 - アーキテクト支援: 3,000万円
 - 開発リソース: 30人月
 - インフラ追加: 500万円/月
