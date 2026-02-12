@@ -340,10 +340,6 @@ class TechnicalDebtInvestmentCase:
 - 収益向上: 3.5億円
 - 投資回収期間: 5.6ヶ月
 - 3年間ROI: 548%
-        """
-        
-        return proposal
-```
 
 ---
 
