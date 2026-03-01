@@ -10,9 +10,9 @@ order: 10
 
 ## 交渉準備テンプレート（YAML形式）
 
-テンプレート内の `batna` などの用語は、[交渉の基礎語彙（最小モデル）](../foundations/) と [用語集](../glossary/) を参照してください。
-典型的な交渉シナリオ（NG→OK）の例は、[付録：ケース集（NG→OK）](scenarios/) を参照してください。
-生成AIを使って準備・練習を効率化する場合は、[付録：AIでの壁打ち・練習（ガードレール付き）](ai-practice/) を参照してください。
+テンプレート内の `batna` などの用語は、[交渉の基礎語彙（最小モデル）](../../foundations/) と [用語集](../../glossary/) を参照してください。
+典型的な交渉シナリオ（NG→OK）の例は、[付録：ケース集（NG→OK）](../scenarios/) を参照してください。
+生成AIを使って準備・練習を効率化する場合は、[付録：AIでの壁打ち・練習（ガードレール付き）](../ai-practice/) を参照してください。
 
 ```yaml
 # negotiation_preparation_advanced.yaml
@@ -274,11 +274,20 @@ COO: 😐 → 😊 中立から支持へ
 - 成功指標の達成に向けた詳細計画が必要
 
 ## 関連ドキュメント
-- [提案資料](./proposals/cloud-migration-phase1.pdf)
-- [ROI計算書](./analysis/roi-calculation.xlsx)
-- [リスク分析](./risk/risk-assessment.md)
-- [前回の交渉ログ](./logs/NEG-2024-06-10-001.md)
+- [提案資料（サンプル）](../proposals/cloud-migration-phase1/)
+- [ROI計算（サンプル）](../analysis/roi-calculation/)
+- [リスク分析（サンプル）](../risk/risk-assessment/)
+- [前回の交渉ログ（サンプル）](../logs/NEG-2024-06-10-001/)
 ````
+
+### 関連ドキュメント（サンプル）
+
+以下はツールキット内のサンプル資料です（クリックして参照できます）。
+
+- [提案資料（サンプル）](../proposals/cloud-migration-phase1/)
+- [ROI計算（サンプル）](../analysis/roi-calculation/)
+- [リスク分析（サンプル）](../risk/risk-assessment/)
+- [前回の交渉ログ（サンプル）](../logs/NEG-2024-06-10-001/)
 
 ## チェックリスト集
 
