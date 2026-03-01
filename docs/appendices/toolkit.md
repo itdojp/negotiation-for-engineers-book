@@ -274,11 +274,20 @@ COO: 😐 → 😊 中立から支持へ
 - 成功指標の達成に向けた詳細計画が必要
 
 ## 関連ドキュメント
-- [提案資料（サンプル）](./proposals/cloud-migration-phase1/)
-- [ROI計算（サンプル）](./analysis/roi-calculation/)
-- [リスク分析（サンプル）](./risk/risk-assessment/)
-- [前回の交渉ログ（サンプル）](./logs/NEG-2024-06-10-001/)
+- [提案資料（サンプル）](../proposals/cloud-migration-phase1/)
+- [ROI計算（サンプル）](../analysis/roi-calculation/)
+- [リスク分析（サンプル）](../risk/risk-assessment/)
+- [前回の交渉ログ（サンプル）](../logs/NEG-2024-06-10-001/)
 ````
+
+### 関連ドキュメント（サンプル）
+
+以下はツールキット内のサンプル資料です（クリックして参照できます）。
+
+- [提案資料（サンプル）](../proposals/cloud-migration-phase1/)
+- [ROI計算（サンプル）](../analysis/roi-calculation/)
+- [リスク分析（サンプル）](../risk/risk-assessment/)
+- [前回の交渉ログ（サンプル）](../logs/NEG-2024-06-10-001/)
 
 ## チェックリスト集
 
