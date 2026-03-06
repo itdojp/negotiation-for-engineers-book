@@ -93,7 +93,7 @@ interface ReleasePhase {
     dependencies: Dependency[];
 }
 
-class PhasedReleaseePlanner {
+class PhasedReleasePlanner {
     planIncrementalReleases(mvpScope: MVPScope, constraints: ProjectConstraints): ReleasePlan {
         // 機能の依存関係を分析
         const dependencyGraph = this.analyzeDependencies(mvpScope.features);
