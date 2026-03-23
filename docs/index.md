@@ -39,20 +39,20 @@ permalink: /
 
 - **予算とROIで合意を取りたい**
   - [第4章：技術的レバレッジの最大化](chapter-4/)
-  - [ROI計算（サンプル）](appendices/analysis/roi-calculation.md)
-  - [提案資料（サンプル）](appendices/proposals/cloud-migration-phase1.md)
+  - [ROI計算（サンプル）](appendices/analysis/roi-calculation/)
+  - [提案資料（サンプル）](appendices/proposals/cloud-migration-phase1/)
 - **リスク説明で止まっている**
   - [第4章：技術的レバレッジの最大化](chapter-4/)
-  - [リスク分析（サンプル）](appendices/risk/risk-assessment.md)
-  - [ケース集（NG→OK）](appendices/scenarios.md)
+  - [リスク分析（サンプル）](appendices/risk/risk-assessment/)
+  - [ケース集（NG→OK）](appendices/scenarios/)
 - **関係者の温度差をそろえたい**
   - [第2章：ステークホルダー・インターフェース設計](chapter-2/)
   - [第3章：アジャイル交渉術 - 反復的合意形成](chapter-3/)
-  - [交渉ログ（サンプル）](appendices/logs/NEG-2024-06-10-001.md)
+  - [交渉ログ（サンプル）](appendices/logs/NEG-2024-06-10-001/)
 - **一度失敗した提案を立て直したい**
   - [第5章：エモーショナル・デバッグ](chapter-5/)
   - [第6章：交渉パイプラインの構築](chapter-6/)
-  - [交渉ログ（サンプル）](appendices/logs/NEG-2024-06-10-001.md)
+  - [交渉ログ（サンプル：再チャレンジ時の振り返り視点で読む）](appendices/logs/NEG-2024-06-10-001/)
 
 ## 想定読者
 - 技術的な提案や懸念を、関係者と合意形成しながら前に進める必要があるエンジニア
