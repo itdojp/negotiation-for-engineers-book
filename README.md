@@ -2,9 +2,9 @@
 
 技術者が持つ論理的思考力とエンジニアリング能力を、ビジネス交渉の場で最大限に活用するための実践ガイドです。
 
-- 公開ページ（GitHub Pages）: https://itdojp.github.io/negotiation-for-engineers-book/
+- 公開ページ（GitHub Pages）: [negotiation-for-engineers-book](https://itdojp.github.io/negotiation-for-engineers-book/)
 - 目次（リポジトリ内）: `docs/index.md`
-- シリーズ: https://github.com/itdojp/it-engineer-knowledge-architecture
+- シリーズ: [it-engineer-knowledge-architecture](https://github.com/itdojp/it-engineer-knowledge-architecture)
 
 ## 本書の特徴（抜粋）
 
@@ -14,7 +14,7 @@
 
 ## フィードバック（誤り指摘・改善提案）
 
-誤字脱字、内容の誤り、改善提案は Issues / Pull Request で受け付けます。
+誤字脱字、内容の誤り、改善提案は Issues / PR で受け付けます。
 
 ## ライセンス
 
