@@ -76,8 +76,8 @@ permalink: /
 
 - リポジトリ: [itdojp/negotiation-for-engineers-book](https://github.com/itdojp/negotiation-for-engineers-book)
 - 公開ページ: [negotiation-for-engineers-book](https://itdojp.github.io/negotiation-for-engineers-book/)
-- 誤記報告や改善提案は GitHub Issues、まとまった修正提案は Pull Request を利用してください。
-- 更新差分を追う場合は、GitHub のコミット履歴と Pull Request を参照してください。
+- 誤記報告や改善提案は GitHub Issues、まとまった修正提案は GitHub の PR を利用してください。
+- 更新差分を追う場合は、GitHub のコミット履歴と PR 一覧を参照してください。
 - 付録の [実践ツールキット](appendices/toolkit/) や [AIでの壁打ち・練習](appendices/ai-practice/) を実案件へ流用する場合は、機密情報、契約条件、個人情報をそのまま入力しないでください。
 - 顧客折衝や社内調整に適用する前に、組織の承認フロー、法務・広報ポリシー、説明責任の分界を確認してください。
 
