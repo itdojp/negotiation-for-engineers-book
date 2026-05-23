@@ -8,6 +8,17 @@ order: 10
 
 本付録では、日々の交渉実践に直接活用できるツールとリソースを提供する。これらは本書の内容を実務に落とし込むための具体的な道具である。必要に応じてカスタマイズし、自分なりのツールキットを構築していただきたい。
 
+## 交渉前レビューゲート
+
+テンプレートを埋める前に、交渉の目的と境界を短く確認する。
+詳細な語彙は [交渉の基礎語彙（最小モデル）](../foundations/) と [用語集](../glossary/) を参照し、
+生成AIで壁打ちする場合は [付録：AIでの壁打ち・練習](ai-practice/) のガードレールを先に適用する。
+
+- 目的は「勝つこと」ではなく、利害・制約・責任分界を明確にして合意条件を設計することか。
+- 相手が拒否、保留、別案提示を選べる時間と情報を残しているか。
+- 事実、推定、希望条件、未確定条件を分けているか。
+- 合意後に残す証跡、責任者、見直し条件、フォローアップ期限が決まっているか。
+
 ## 交渉準備テンプレート（YAML形式）
 
 テンプレート内の `batna` などの用語は、[交渉の基礎語彙（最小モデル）](../foundations/) と [用語集](../glossary/) を参照してください。
@@ -38,6 +49,26 @@ negotiation:
     urgency: "high"
     strategic_importance: "critical"
   
+  ethics_review:
+    autonomy_guardrails:
+      - "相手が拒否・保留・別案提示を選べる時間を確保する"
+      - "相手の権限外の即答を求めない"
+    transparency_notes:
+      facts: "観測済みのコスト、障害件数、期限など"
+      assumptions: "未確認の前提や推定値"
+      open_questions: ["法務確認", "運用責任者の承認"]
+    prohibited_moves:
+      - "隠れた圧力、欺瞞、未承認条件の提示"
+      - "機密情報・個人情報・契約条件の無断共有"
+
+  decision_record:
+    decision_owner: "CFO / CTO / プロダクト責任者など"
+    approval_scope: "Phase1予算、実施範囲、成功条件"
+    evidence_location: "Issue / Design Doc / 議事録 / 契約文書"
+    recheck_trigger:
+      - "予算・期限・責任分界が変わった場合"
+      - "相手の懸念や制約が新しく判明した場合"
+
   stakeholder_matrix:
     champions:
       - name: "田中CTO"
