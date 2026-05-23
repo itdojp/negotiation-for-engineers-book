@@ -65,6 +65,8 @@ negotiation:
     decision_owner: "CFO / CTO / プロダクト責任者など"
     approval_scope: "Phase1予算、実施範囲、成功条件"
     evidence_location: "Issue / Design Doc / 議事録 / 契約文書"
+    follow_up_due: "2024-11-20"
+    next_review_date: "2024-12-15"
     recheck_trigger:
       - "予算・期限・責任分界が変わった場合"
       - "相手の懸念や制約が新しく判明した場合"
