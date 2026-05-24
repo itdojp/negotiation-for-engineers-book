@@ -23,6 +23,12 @@ chapters:
 appendices:
 - title: 付録：実践ツールキット
   path: /appendices/toolkit/
+- title: 付録：提案資料サンプル
+  path: /appendices/proposals/cloud-migration-phase1/
+- title: 付録：ROI計算サンプル
+  path: /appendices/analysis/roi-calculation/
+- title: 付録：リスク分析サンプル
+  path: /appendices/risk/risk-assessment/
 - title: 付録：交渉ログ記入例
   path: /appendices/logs/NEG-2024-06-10-001/
 - title: 付録：ケース集（NG→OK）
