@@ -1,6 +1,6 @@
 title: "エンジニアの交渉力アーキテクチャ"
 description: "技術者が持つ論理的思考力とエンジニアリング能力を、ビジネス交渉の場で最大限に活用するための実践的手法を提供する。エンジニアの思考パターンや業務フローに即した独自のアプローチを提示。"
-author: "株式会社アイティードゥ"
+author: "ITDO Inc."
 version: "1.0.0"
 lang: "ja"
 
@@ -38,7 +38,9 @@ kramdown:
   syntax_highlighter: rouge
   
 # リポジトリ情報
-repository: "https://github.com/itdojp/negotiation-for-engineers-book"
+repository: "itdojp/negotiation-for-engineers-book"
+repository_branch: "main"
+repository_docs_path: "docs"
 
 # デフォルト設定
 defaults:
@@ -84,5 +86,5 @@ structure:
   
   appendices:
     - title: "実践ツールキット"
-      path: "/appendices/toolkit"
+      path: "/appendices/toolkit/"
 
