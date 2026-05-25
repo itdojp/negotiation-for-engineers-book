@@ -29,4 +29,3 @@ layout: book
 - 主要リスクの状態（Open/Monitoring/Closed）
 - 変更点（構成、運用手順、権限）
 - 次月のアクション（期限、担当、完了条件）
-

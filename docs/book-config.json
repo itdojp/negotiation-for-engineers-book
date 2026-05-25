@@ -4,58 +4,114 @@
   "author": "ITDO Inc.",
   "version": "1.0.0",
   "structure": {
-    "chapters": [
+    "introduction": [
       {
-        "id": "1",
-        "title": "コードは雄弁に語る - 技術的根拠による説得術",
-        "description": "プロトタイプ駆動交渉、データドリブンな提案手法、オープンソース活用戦略について解説",
-        "file": "negotiation-chapter-1.md"
+        "id": "introduction",
+        "title": "はじめに：なぜエンジニアこそ交渉力が必要か",
+        "path": "/introduction/",
+        "description": "本書の目的、想定読者、読み方"
       },
       {
-        "id": "2",
-        "title": "ステークホルダー・インターフェース設計",
-        "description": "経営層、プロダクトチーム、エンジニア間、非技術職との効果的なコミュニケーション方法",
-        "file": "negotiation-chapter-2.md"
+        "id": "foundations",
+        "title": "交渉の基礎語彙（最小モデル）",
+        "path": "/foundations/",
+        "description": "交渉に必要な基礎語彙"
       },
       {
-        "id": "3",
-        "title": "アジャイル交渉術 - 反復的合意形成",
-        "description": "インクリメンタルな価値提供、スプリント単位の期待値管理、レトロスペクティブ思考の応用",
-        "file": "negotiation-chapter-3.md"
-      },
-      {
-        "id": "4",
-        "title": "技術的レバレッジの最大化",
-        "description": "アーキテクチャ決定の交渉術、セキュリティを武器にする方法、パフォーマンスチューニングの経済学",
-        "file": "negotiation-chapter-4.md"
-      },
-      {
-        "id": "5",
-        "title": "エモーショナル・デバッグ",
-        "description": "認知バイアスの検出と修正、ストレステストとリカバリー、マインドフルネス駆動開発",
-        "file": "negotiation-chapter-5.md"
-      },
-      {
-        "id": "6",
-        "title": "交渉パイプラインの構築",
-        "description": "準備フェーズの最適化、実行フェーズのモニタリング、デプロイ後の継続的改善",
-        "file": "negotiation-chapter-6.md"
+        "id": "glossary",
+        "title": "用語集",
+        "path": "/glossary/",
+        "description": "本文で使用する交渉・技術用語"
       }
     ],
-    "introduction": {
-      "title": "なぜエンジニアこそ交渉力が必要か",
-      "file": "negotiation-introduction.md"
-    },
-    "conclusion": {
-      "title": "継続的インテグレーション",
-      "file": "negotiation-conclusion.md"
-    },
+    "chapters": [
+      {
+        "id": "chapter-1",
+        "title": "第1章：コードは雄弁に語る - 技術的根拠による説得術",
+        "path": "/chapter-1/",
+        "description": "プロトタイプ駆動交渉、データドリブンな提案手法、オープンソース活用戦略について解説"
+      },
+      {
+        "id": "chapter-2",
+        "title": "第2章：ステークホルダー・インターフェース設計",
+        "path": "/chapter-2/",
+        "description": "経営層、プロダクトチーム、エンジニア間、非技術職との効果的なコミュニケーション方法"
+      },
+      {
+        "id": "chapter-3",
+        "title": "第3章：アジャイル交渉術 - 反復的合意形成",
+        "path": "/chapter-3/",
+        "description": "インクリメンタルな価値提供、スプリント単位の期待値管理、レトロスペクティブ思考の応用"
+      },
+      {
+        "id": "chapter-4",
+        "title": "第4章：技術的レバレッジの最大化",
+        "path": "/chapter-4/",
+        "description": "アーキテクチャ決定の交渉術、セキュリティを武器にする方法、パフォーマンスチューニングの経済学"
+      },
+      {
+        "id": "chapter-5",
+        "title": "第5章：エモーショナル・デバッグ",
+        "path": "/chapter-5/",
+        "description": "認知バイアスの検出と修正、ストレステストとリカバリー、マインドフルネス駆動開発"
+      },
+      {
+        "id": "chapter-6",
+        "title": "第6章：交渉パイプラインの構築",
+        "path": "/chapter-6/",
+        "description": "準備フェーズの最適化、実行フェーズのモニタリング、デプロイ後の継続的改善"
+      }
+    ],
     "appendices": [
       {
         "id": "toolkit",
-        "title": "実践ツールキット",
-        "description": "交渉準備テンプレート（YAML形式）、交渉ログフォーマット（Markdown形式）、チェックリスト集、推薦図書・リソース",
-        "file": "negotiation-appendix.md"
+        "title": "付録：実践ツールキット",
+        "path": "/appendices/toolkit/",
+        "description": "交渉準備テンプレート、ログフォーマット、チェックリスト"
+      },
+      {
+        "id": "proposal-sample",
+        "title": "付録：提案資料サンプル",
+        "path": "/appendices/proposals/cloud-migration-phase1/",
+        "description": "クラウド移行提案資料サンプル"
+      },
+      {
+        "id": "roi-calculation",
+        "title": "付録：ROI計算サンプル",
+        "path": "/appendices/analysis/roi-calculation/",
+        "description": "ROI計算のサンプル"
+      },
+      {
+        "id": "risk-assessment",
+        "title": "付録：リスク分析サンプル",
+        "path": "/appendices/risk/risk-assessment/",
+        "description": "リスク分析のサンプル"
+      },
+      {
+        "id": "negotiation-log",
+        "title": "付録：交渉ログ記入例",
+        "path": "/appendices/logs/NEG-2024-06-10-001/",
+        "description": "交渉ログの記入例"
+      },
+      {
+        "id": "scenarios",
+        "title": "付録：ケース集（NG→OK）",
+        "path": "/appendices/scenarios/",
+        "description": "交渉ケースのNG例とOK例"
+      },
+      {
+        "id": "ai-practice",
+        "title": "付録：AIでの壁打ち・練習（ガードレール付き）",
+        "path": "/appendices/ai-practice/",
+        "description": "AIを使った交渉練習のガードレール"
+      }
+    ],
+    "afterword": [
+      {
+        "id": "conclusion",
+        "title": "おわりに：継続的インテグレーション",
+        "path": "/conclusion/",
+        "description": "継続的な実践と改善"
       }
     ]
   }

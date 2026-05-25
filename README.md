@@ -25,6 +25,11 @@
 
 誤字脱字、内容の誤り、改善提案は Issues / PR で受け付けます。
 
+## 品質ゲート
+
+- `npm run check:metadata`: `book-config.json` を基準に、package / Jekyll / トップページ / ナビゲーション / 公開ページ / 必須アセットの整合性を確認します。
+- `npm test`: メタデータ整合性、Markdown lint、内部リンク確認をまとめて実行します。
+
 ## ライセンス
 
 本書は Creative Commons BY-NC-SA 4.0 で提供されています。詳細は `LICENSE.md` を参照してください。
