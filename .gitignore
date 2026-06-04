@@ -13,3 +13,8 @@ _site/
 .jekyll-cache/
 .jekyll-metadata
 Gemfile.lock
+docs/_site/
+docs/.jekyll-cache/
+docs/.jekyll-metadata
+.bundle/
+vendor/bundle/
