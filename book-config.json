@@ -112,9 +112,9 @@
       },
       {
         "id": "roi-calculation",
-        "title": "付録：ROI計算サンプル",
+        "title": "付録：ROI 計算サンプル",
         "path": "/appendices/analysis/roi-calculation/",
-        "description": "ROI計算のサンプル"
+        "description": "ROI 計算のサンプル"
       },
       {
         "id": "risk-assessment",
@@ -136,9 +136,9 @@
       },
       {
         "id": "ai-practice",
-        "title": "付録：AIでの壁打ち・練習（ガードレール付き）",
+        "title": "付録：AI での壁打ち・練習（ガードレール付き）",
         "path": "/appendices/ai-practice/",
-        "description": "AIを使った交渉練習のガードレール"
+        "description": "AI を使った交渉練習のガードレール"
       }
     ],
     "afterword": [
@@ -151,7 +151,7 @@
     ]
   },
   "metadata": {
-    "genre": "ビジネス書 / IT技術者向け実用書",
+    "genre": "ビジネス書 / IT 技術者向け実用書",
     "expected_pages": 220,
     "price": "¥2,200（税別）",
     "target_audience": [

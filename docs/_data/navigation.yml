@@ -25,7 +25,7 @@ appendices:
   path: /appendices/toolkit/
 - title: 付録：提案資料サンプル
   path: /appendices/proposals/cloud-migration-phase1/
-- title: 付録：ROI計算サンプル
+- title: 付録：ROI 計算サンプル
   path: /appendices/analysis/roi-calculation/
 - title: 付録：リスク分析サンプル
   path: /appendices/risk/risk-assessment/
@@ -33,7 +33,7 @@ appendices:
   path: /appendices/logs/NEG-2024-06-10-001/
 - title: 付録：ケース集（NG→OK）
   path: /appendices/scenarios/
-- title: 付録：AIでの壁打ち・練習（ガードレール付き）
+- title: 付録：AI での壁打ち・練習（ガードレール付き）
   path: /appendices/ai-practice/
 
 afterword:
