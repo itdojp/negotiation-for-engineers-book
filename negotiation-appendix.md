@@ -411,7 +411,7 @@ COO: 😐 → 😊 中立から支持へ
 
 ### オンラインリソース
 
-1. **GitHub: negotiation-for-engineers**
+1. **GitHub: itdojp/negotiation-for-engineers-book**
    - 本書の補足資料
    - コミュニティディスカッション
    - 実践例の共有

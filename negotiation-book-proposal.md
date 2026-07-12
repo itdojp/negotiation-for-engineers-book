@@ -3,7 +3,7 @@
 ## 基本情報
 - **日本語タイトル**: エンジニアの交渉力アーキテクチャ ～技術力を説得力に変換する実践ガイド～
 - **英語タイトル**: The Negotiation Architecture for Engineers - Building Persuasive Power with Technical Excellence
-- **GitHub リポジトリ**: negotiation-for-engineers
+- **GitHub リポジトリ**: itdojp/negotiation-for-engineers-book
 - **ジャンル**: ビジネス書 / IT 技術者向け実用書
 - **想定ページ数**: 約220ページ
 - **予定価格**: 2,200円（税別）
@@ -377,8 +377,8 @@
 ## オープンソース戦略
 
 ### GitHub リポジトリ
-- **リポジトリ名**: `negotiation-for-engineers`
-- **URL**: github.com/[author]/negotiation-for-engineers
+- **リポジトリ名**: `itdojp/negotiation-for-engineers-book`
+- **URL**: https://github.com/itdojp/negotiation-for-engineers-book
 
 ### リポジトリ活用計画
 1. **執筆プロセスの透明化**
