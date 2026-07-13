@@ -23,6 +23,10 @@ chapters:
 appendices:
 - title: 付録：実践ツールキット
   path: /appendices/toolkit/
+- title: 付録：交渉トラブルシューティングフロー
+  path: /appendices/troubleshooting/
+- title: 付録：図版索引
+  path: /appendices/figures/
 - title: 付録：提案資料サンプル
   path: /appendices/proposals/cloud-migration-phase1/
 - title: 付録：ROI 計算サンプル

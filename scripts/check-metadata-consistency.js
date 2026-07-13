@@ -208,6 +208,160 @@ function firstHeading(markdownBody) {
   return '';
 }
 
+const UX_MODULE_KEYS = [
+  'quickStart',
+  'readingGuide',
+  'checklistPack',
+  'troubleshootingFlow',
+  'conceptMap',
+  'figureIndex',
+  'legalNotice',
+  'glossary',
+];
+
+const REQUIRED_UX_ROUTES = {
+  troubleshootingFlow: {
+    id: 'troubleshooting',
+    route: '/appendices/troubleshooting/',
+  },
+  figureIndex: {
+    id: 'figures',
+    route: '/appendices/figures/',
+  },
+};
+
+const EXPECTED_PUBLIC_FIGURES = [
+  {
+    source: 'docs/introduction/index.md',
+    occurrence: 1,
+    label: 'エンジニア交渉力アーキテクチャ',
+    route: '/introduction/#figure-negotiation-architecture',
+    indexLink: '../../introduction/#figure-negotiation-architecture',
+  },
+  {
+    source: 'docs/introduction/index.md',
+    occurrence: 2,
+    label: 'エンジニア交渉力成長ロードマップ',
+    route: '/introduction/#figure-growth-roadmap',
+    indexLink: '../../introduction/#figure-growth-roadmap',
+  },
+  {
+    source: 'docs/chapter-1/index.md',
+    occurrence: 1,
+    label: '技術的根拠による説得術フレームワーク',
+    route: '/chapter-1/#figure-technical-evidence-framework',
+    indexLink: '../../chapter-1/#figure-technical-evidence-framework',
+  },
+  {
+    source: 'docs/chapter-1/index.md',
+    occurrence: 2,
+    label: 'データドリブン説得の構造',
+    route: '/chapter-1/#figure-data-driven-persuasion',
+    indexLink: '../../chapter-1/#figure-data-driven-persuasion',
+  },
+];
+
+function collectMarkdownFiles(rootDir) {
+  const files = [];
+  function visit(dir) {
+    for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+      if (entry.name.startsWith('.') || entry.name === '_site' || entry.name === 'node_modules') continue;
+      const abs = path.join(dir, entry.name);
+      if (entry.isDirectory()) visit(abs);
+      else if (entry.isFile() && entry.name.endsWith('.md')) files.push(abs);
+    }
+  }
+  visit(rootDir);
+  return files;
+}
+
+function collectPublicMermaidInventory() {
+  const inventory = [];
+  for (const absPath of collectMarkdownFiles(path.join(repoRoot, 'docs'))) {
+    const relPath = path.relative(repoRoot, absPath);
+    const lines = fs.readFileSync(absPath, 'utf8').split(/\r?\n/);
+    let occurrence = 0;
+    lines.forEach((line, index) => {
+      if (/^\s*```mermaid\s*$/.test(line)) {
+        occurrence += 1;
+        inventory.push({ source: relPath, occurrence, line: index + 1 });
+      }
+    });
+  }
+  const publicOrder = new Map([
+    ['docs/introduction/index.md', 0],
+    ['docs/chapter-1/index.md', 1],
+  ]);
+  inventory.sort((a, b) => (publicOrder.get(a.source) ?? Number.MAX_SAFE_INTEGER) - (publicOrder.get(b.source) ?? Number.MAX_SAFE_INTEGER) || a.occurrence - b.occurrence || a.source.localeCompare(b.source));
+  return inventory;
+}
+
+function validateUxModules(config, docsBookConfig) {
+  const rootUx = config.ux || {};
+  const docsUx = docsBookConfig.ux || {};
+  assertEqual(rootUx.profile, 'B', 'book-config.json ux.profile');
+  assertEqual(docsUx.profile, rootUx.profile, 'docs/book-config.json ux.profile');
+  if (!rootUx.modules || typeof rootUx.modules !== 'object') addError('book-config.json ux.modules must be an object.');
+  if (!docsUx.modules || typeof docsUx.modules !== 'object') addError('docs/book-config.json ux.modules must be an object.');
+
+  for (const key of UX_MODULE_KEYS) {
+    assertEqual(docsUx.modules && docsUx.modules[key], rootUx.modules && rootUx.modules[key], `docs/book-config.json ux.modules.${key}`);
+    if (typeof (rootUx.modules && rootUx.modules[key]) !== 'boolean') addError(`book-config.json ux.modules.${key} must be boolean.`);
+  }
+
+  const entries = collectEntries(config);
+  for (const [moduleName, requirement] of Object.entries(REQUIRED_UX_ROUTES)) {
+    const entry = entries.find((candidate) => candidate.id === requirement.id);
+    const pageExists = docsCandidatesForPath(requirement.route, `UX route ${moduleName}`)
+      .some((candidate) => fs.existsSync(path.join(repoRoot, candidate)));
+    const enabled = rootUx.modules && rootUx.modules[moduleName] === true;
+    if (!enabled && (entry || pageExists)) {
+      addError(`UX route/page ${requirement.route} requires book-config.json ux.modules.${moduleName}=true.`);
+      continue;
+    }
+    if (!enabled) continue;
+    if (!entry) {
+      addError(`book-config.json ux.modules.${moduleName}=true requires structure entry ${requirement.id}.`);
+      continue;
+    }
+    assertEqual(entry.path, requirement.route, `book-config.json ${requirement.id} route`);
+    resolveDocsPage(requirement.route, `UX route ${moduleName}`);
+  }
+}
+
+function validateFigureInventory(config) {
+  assertEqual(config.ux && config.ux.modules && config.ux.modules.figureIndex, true, 'book-config.json ux.modules.figureIndex inventory contract');
+  const actual = collectPublicMermaidInventory();
+  assertEqual(actual.length, EXPECTED_PUBLIC_FIGURES.length, `public Mermaid figure count (found ${actual.map((item) => `${item.source}:${item.occurrence}`).join(', ') || 'none'})`);
+  for (let i = 0; i < EXPECTED_PUBLIC_FIGURES.length; i += 1) {
+    const expected = EXPECTED_PUBLIC_FIGURES[i];
+    const found = actual[i];
+    if (!found) continue;
+    assertEqual(found.source, expected.source, `public Mermaid figure ${i + 1} source`);
+    assertEqual(found.occurrence, expected.occurrence, `public Mermaid figure ${i + 1} occurrence`);
+  }
+
+  const indexPath = path.join(repoRoot, 'docs/appendices/figures/index.md');
+  if (!fs.existsSync(indexPath)) {
+    addError('docs/appendices/figures/index.md is required for the figure index.');
+    return;
+  }
+  const indexText = fs.readFileSync(indexPath, 'utf8');
+  const rows = indexText.split(/\r?\n/).filter((line) => /^\|\s*\d+\s*\|/.test(line));
+  assertEqual(rows.length, EXPECTED_PUBLIC_FIGURES.length, 'figure index entry count');
+  EXPECTED_PUBLIC_FIGURES.forEach((expected, index) => {
+    const row = rows[index] || '';
+    assertContains(row, expected.label, `figure index entry ${index + 1} label`);
+    assertContains(row, `](${expected.indexLink})`, `figure index entry ${index + 1} route`);
+    const anchor = expected.route.split('#')[1];
+    const publicSource = fs.readFileSync(path.join(repoRoot, expected.source), 'utf8');
+    const sourceMirrorPath = expected.source.replace(/^docs\//, 'src/');
+    const sourceMirror = fs.readFileSync(path.join(repoRoot, sourceMirrorPath), 'utf8');
+    assertContains(publicSource, `{#${anchor}}`, `public figure ${index + 1} anchor`);
+    assertContains(sourceMirror, `{#${anchor}}`, `source figure ${index + 1} anchor`);
+  });
+}
+
 function validateMetadata(config, docsBookConfig, pkg, lock, docsConfig, indexFrontMatter, readme) {
   const repoSlug = canonicalRepoSlug(config.repository && config.repository.url);
   if (!repoSlug) { addError('book-config.json repository.url must be a GitHub repository URL.'); return; }
@@ -219,6 +373,7 @@ function validateMetadata(config, docsBookConfig, pkg, lock, docsConfig, indexFr
   assertEqual(docsBookConfig.author, config.author, 'docs/book-config.json author');
   assertEqual(docsBookConfig.version, config.version, 'docs/book-config.json version');
   assertEqual(JSON.stringify(docsBookConfig.structure), JSON.stringify(config.structure), 'docs/book-config.json structure');
+  validateUxModules(config, docsBookConfig);
 
   assertEqual(pkg.name, repoName, 'package.json name');
   assertEqual(pkg.version, config.version, 'package.json version');
@@ -329,6 +484,7 @@ function main() {
   validateMetadata(config, docsBookConfig, pkg, lock, docsConfig, index.data, readme);
   validateEntries(entries);
   validateNavigation(config, nav);
+  validateFigureInventory(config);
   validateRequiredAssets();
 
   if (errors.length > 0) {

@@ -29,6 +29,8 @@
       "chapter-5/index",
       "chapter-6/index",
       "appendices/toolkit/index",
+      "appendices/troubleshooting",
+      "appendices/figures",
       "appendices/proposals/cloud-migration-phase1",
       "appendices/analysis/roi-calculation",
       "appendices/risk/risk-assessment",
@@ -105,6 +107,18 @@
         "description": "交渉準備テンプレート、ログフォーマット、チェックリスト"
       },
       {
+        "id": "troubleshooting",
+        "title": "付録：交渉トラブルシューティングフロー",
+        "path": "/appendices/troubleshooting/",
+        "description": "症状から確認・行動・停止判断・記録先を選ぶ実務フロー"
+      },
+      {
+        "id": "figures",
+        "title": "付録：図版索引",
+        "path": "/appendices/figures/",
+        "description": "本文に掲載した4点のMermaid図を掲載順に確認する索引"
+      },
+      {
         "id": "proposal-sample",
         "title": "付録：提案資料サンプル",
         "path": "/appendices/proposals/cloud-migration-phase1/",
@@ -175,9 +189,9 @@
       "quickStart": false,
       "readingGuide": true,
       "checklistPack": true,
-      "troubleshootingFlow": false,
+      "troubleshootingFlow": true,
       "conceptMap": false,
-      "figureIndex": false,
+      "figureIndex": true,
       "legalNotice": false,
       "glossary": true
     }
