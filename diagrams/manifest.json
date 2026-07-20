@@ -1,0 +1,62 @@
+[
+  {
+    "id": "negotiation-architecture",
+    "source": "diagrams/negotiation-architecture.mmd",
+    "output": "docs/assets/diagrams/negotiation-architecture.svg",
+    "title": "エンジニア交渉力アーキテクチャ",
+    "description": "技術選定、工数見積もり、予算獲得、合意形成を、技術力との相乗効果、組織への影響力、本書の各章へ接続する全体図。",
+    "location": {
+      "published": "docs/introduction/index.md",
+      "mirror": "src/introduction/index.md",
+      "anchor": "figure-negotiation-architecture",
+      "caption": "図1：エンジニア交渉力アーキテクチャ",
+      "alt": "エンジニア交渉力を4領域に整理したアーキテクチャ図",
+      "summary": "中心に「エンジニアの交渉力」を置き、技術的交渉場面、技術力との相乗効果、組織への影響力、本書の6章という4方向へ展開する。図が読めない場合は、交渉場面を特定して対応する章へ進む。"
+    }
+  },
+  {
+    "id": "growth-roadmap",
+    "source": "diagrams/growth-roadmap.mmd",
+    "output": "docs/assets/diagrams/growth-roadmap.svg",
+    "title": "エンジニア交渉力成長ロードマップ",
+    "description": "実装者、中堅、シニアの成長段階を、技術的信頼性、ビジネス理解、コミュニケーション、戦略的思考と実践ツールへ接続する図。",
+    "location": {
+      "published": "docs/introduction/index.md",
+      "mirror": "src/introduction/index.md",
+      "anchor": "figure-growth-roadmap",
+      "caption": "図2：エンジニア交渉力成長ロードマップ",
+      "alt": "実装者からシニアまでの交渉力成長ロードマップ図",
+      "summary": "実装者、中堅、シニアの順に視野を広げ、各段階で技術的信頼性、ビジネス理解、コミュニケーション、戦略的思考を身につけ、準備、可視化、提案、改善のツールを使う。"
+    }
+  },
+  {
+    "id": "technical-evidence-framework",
+    "source": "diagrams/technical-evidence-framework.mmd",
+    "output": "docs/assets/diagrams/technical-evidence-framework.svg",
+    "title": "技術的根拠による説得術フレームワーク",
+    "description": "プロトタイプ、データ、オープンソースの3つの根拠を、準備、実行、フォロー、対象者別の説明、成功パターンへ接続する図。",
+    "location": {
+      "published": "docs/chapter-1/index.md",
+      "mirror": "src/chapter-1/index.md",
+      "anchor": "figure-technical-evidence-framework",
+      "caption": "図3：技術的根拠による説得術フレームワーク",
+      "alt": "3つの技術的根拠を適用段階と対象者へ接続するフレームワーク図",
+      "summary": "プロトタイプ、データ、オープンソースの3つを根拠として準備し、実行、フォローを通じて経営層、プロダクトマネージャー、エンジニア、非技術職へ伝え、段階的価値提供、ストーリーテリング、Win-Winへ接続する。"
+    }
+  },
+  {
+    "id": "data-driven-persuasion",
+    "source": "diagrams/data-driven-persuasion.mmd",
+    "output": "docs/assets/diagrams/data-driven-persuasion.svg",
+    "title": "データドリブン説得の構造",
+    "description": "パフォーマンス、品質、開発効率、運用の技術指標を、定量化、価値変換、可視化を通じてビジネス価値と実証へ接続する図。",
+    "location": {
+      "published": "docs/chapter-1/index.md",
+      "mirror": "src/chapter-1/index.md",
+      "anchor": "figure-data-driven-persuasion",
+      "caption": "図4：データドリブン説得の構造",
+      "alt": "技術指標をビジネス価値へ変換するデータドリブン説得図",
+      "summary": "技術指標をそのまま示すのではなく、定量化、価値変換、可視化を経て、収益、コスト、時間、リスクというビジネス価値へ変換し、ベンチマーク、予測、実証データで補強する。"
+    }
+  }
+]

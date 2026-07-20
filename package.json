@@ -5,15 +5,19 @@
   "main": "index.md",
   "scripts": {
     "start": "jekyll serve --source docs --destination _site --livereload",
-    "build": "jekyll build --source docs --destination _site",
-    "test": "npm run check:metadata && npm run test:poc-disclosure && npm run check:poc-disclosure && npm run lint && npm run check-links",
+    "build": "npm run render:diagrams && jekyll build --source docs --destination _site",
+    "test": "npm run check:metadata && npm run test:poc-disclosure && npm run check:poc-disclosure && npm run test:static-diagrams && npm run check:static-diagrams && npm run check:diagrams && npm run lint && npm run check-links",
     "lint": "markdownlint 'docs/**/*.md'",
     "check-links": "python3 .github/scripts/check_internal_links.py",
     "deploy": "gh-pages -d _site",
     "check:security": "npm audit",
     "check:metadata": "node scripts/check-metadata-consistency.js",
     "test:poc-disclosure": "node scripts/check-poc-disclosure.js --self-test",
-    "check:poc-disclosure": "node scripts/check-poc-disclosure.js"
+    "check:poc-disclosure": "node scripts/check-poc-disclosure.js",
+    "render:diagrams": "node scripts/render-diagrams.js",
+    "check:diagrams": "node scripts/render-diagrams.js --check",
+    "test:static-diagrams": "node scripts/check-static-diagrams.js --self-test",
+    "check:static-diagrams": "node scripts/check-static-diagrams.js"
   },
   "keywords": [
     "book",
@@ -26,9 +30,11 @@
     "node": ">=20.18.1"
   },
   "devDependencies": {
+    "@mermaid-js/mermaid-cli": "11.16.0",
     "gh-pages": "^6.3.0",
     "markdown-link-check": "^3.14.2",
-    "markdownlint-cli": "^0.48.0"
+    "markdownlint-cli": "^0.48.0",
+    "puppeteer": "24.43.1"
   },
   "repository": {
     "type": "git",
@@ -43,5 +49,8 @@
     "markdown-it": "14.2.0",
     "linkify-it": "5.0.1",
     "undici": "7.28.0"
+  },
+  "allowScripts": {
+    "puppeteer@24.43.1": true
   }
 }
