@@ -307,7 +307,7 @@ class PrototypeRecommendationEngine {
         };
         
         // PoCでは承認済みsynthetic dataだけを記録する
-        // 実dataの収集は目的、同意、保持期間、access権限を別途承認する
+        // 実データの収集は目的、同意、保持期間、access権限を別途承認する
         this.userInteractions = [];
         this.performanceMetrics = {
             clickThroughRate: 0,
@@ -336,7 +336,7 @@ class PrototypeRecommendationEngine {
 1. **短期実装**: 複雑な機械学習モデルの開発に数ヶ月かけることなく、2週間程度でデモ可能
 2. **仮説の限定**: 推薦導線と評価方法を検証し、機械学習の効果とは分けて判断できる
 3. **境界の明示**: 現在実装、将来構想、未実装を一読で区別できる
-4. **安全な学習**: synthetic dataで始め、実dataの収集は目的と承認を別gateにできる
+4. **安全な学習**: synthetic dataで始め、実データの収集は目的と承認を別gateにできる
 
 **case acceptance criteria**
 
@@ -344,7 +344,7 @@ class PrototypeRecommendationEngine {
 - [ ] 「将来構想」には前提条件、owner、評価方法、再判断時点があり、実装を約束していない。
 - [ ] 「未実装」の能力を効果見積もり、比較優位、承認理由に含めていない。
 - [ ] 現状と提案を同じtask、data、測定期間、指標で比較し、提示順と不確実性を記録する。
-- [ ] 実dataを使う場合は、目的、masking、同意または権限、保持期間、access範囲を承認する。
+- [ ] 実データを使う場合は、目的、masking、同意または権限、保持期間、access範囲を承認する。
 - [ ] 判断者が保留、却下、別案提示を選べる状態を維持する。
 - [ ] 自律性、透明性、権限境界、記録の交渉倫理gateを満たす。
 

@@ -14,8 +14,12 @@ const paths = {
   workflow: '.github/workflows/book-qa.yml',
 };
 
-function read(relPath) {
-  return fs.readFileSync(path.join(root, relPath), 'utf8');
+function read(relPath, readFile = fs.readFileSync) {
+  try {
+    return readFile(path.join(root, relPath), 'utf8');
+  } catch (error) {
+    throw new Error(`failed to read required PoC disclosure input: ${relPath}: ${error.message}`, { cause: error });
+  }
 }
 
 function count(text, needle) {
@@ -61,7 +65,7 @@ function validate(state) {
       `${label} must exclude unimplemented capabilities from estimates and approval`);
     check(text.includes('現状と提案を同じtask、data、測定期間、指標で比較し、提示順と不確実性を記録する。'),
       `${label} must require comparable conditions and uncertainty records`);
-    check(text.includes('実dataを使う場合は、目的、masking、同意または権限、保持期間、access範囲を承認する。'),
+    check(text.includes('実データを使う場合は、目的、masking、同意または権限、保持期間、access範囲を承認する。'),
       `${label} must require authorization and masking for real data`);
     check(text.includes('判断者が保留、却下、別案提示を選べる状態を維持する。'),
       `${label} must preserve the decision maker's autonomy`);
@@ -157,7 +161,7 @@ function runSelfTest() {
     ['missing good example label', 'published', '**良い例（事実ベース）**', '**改善例**', 'good example label'],
     ['missing foundations backlink', 'published', '[交渉倫理gate](../foundations/#7-交渉倫理と相手の自律性)', '交渉倫理gate', 'must link the foundations ethics gate'],
     ['missing summary boundary', 'published', 'PoC/デモでは「現在実装」「将来構想」「未実装」を分け、実装境界と判断条件を隠さない。', 'PoC/デモを活用する。', 'summary must retain'],
-    ['missing real-data guardrail', 'published', '実dataを使う場合は、目的、masking、同意または権限、保持期間、access範囲を承認する。', '実dataを使える。', 'authorization and masking'],
+    ['missing real-data guardrail', 'published', '実データを使う場合は、目的、masking、同意または権限、保持期間、access範囲を承認する。', '実データを使える。', 'authorization and masking'],
     ['future concept acceptance weakened', 'published', '「将来構想」には前提条件、owner、評価方法、再判断時点があり、実装を約束していない。', '「将来構想」を説明する。', 'bind future concepts'],
     ['unimplemented capability exclusion weakened', 'published', '「未実装」の能力を効果見積もり、比較優位、承認理由に含めていない。', '「未実装」の能力も将来価値として説明する。', 'exclude unimplemented capabilities'],
     ['comparison acceptance weakened', 'published', '現状と提案を同じtask、data、測定期間、指標で比較し、提示順と不確実性を記録する。', '現状と提案を比較する。', 'comparable conditions'],
@@ -201,7 +205,17 @@ function runSelfTest() {
     throw new Error('self-test did not reject a drifted source-mirror ethics gate');
   }
 
-  console.log(`OK: PoC disclosure self-test (${cases.length + 4} negative cases)`);
+  let readFailure;
+  try {
+    read('fixtures/missing.md', () => { throw new Error('ENOENT'); });
+  } catch (error) {
+    readFailure = error;
+  }
+  if (!readFailure?.message.includes('fixtures/missing.md')) {
+    throw new Error('self-test did not preserve the required input path in a read failure');
+  }
+
+  console.log(`OK: PoC disclosure self-test (${cases.length + 5} negative cases)`);
 }
 
 function main() {
