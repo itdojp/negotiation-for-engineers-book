@@ -5,8 +5,8 @@
   "main": "index.md",
   "scripts": {
     "start": "jekyll serve --source docs --destination _site --livereload",
-    "build": "npm run render:diagrams && jekyll build --source docs --destination _site && node scripts/check-performance-roi-evidence.js --built-site _site",
-    "test": "npm run check:metadata && npm run test:poc-disclosure && npm run check:poc-disclosure && npm run test:performance-roi && npm run check:performance-roi && npm run test:static-diagrams && npm run check:static-diagrams && npm run check:diagrams && npm run lint && npm run check-links",
+    "build": "npm run render:diagrams && jekyll build --source docs --destination _site && node scripts/check-performance-roi-evidence.js --built-site _site && node scripts/check-source-notes-safety.js --built-site _site",
+    "test": "npm run check:metadata && npm run test:poc-disclosure && npm run check:poc-disclosure && npm run test:performance-roi && npm run check:performance-roi && npm run test:source-notes && npm run check:source-notes && npm run test:static-diagrams && npm run check:static-diagrams && npm run check:diagrams && npm run lint && npm run check-links",
     "lint": "markdownlint 'docs/**/*.md'",
     "check-links": "python3 .github/scripts/check_internal_links.py",
     "deploy": "gh-pages -d _site",
@@ -19,7 +19,9 @@
     "test:static-diagrams": "node scripts/check-static-diagrams.js --self-test",
     "check:static-diagrams": "node scripts/check-static-diagrams.js",
     "test:performance-roi": "node scripts/check-performance-roi-evidence.js --self-test",
-    "check:performance-roi": "node scripts/check-performance-roi-evidence.js"
+    "check:performance-roi": "node scripts/check-performance-roi-evidence.js",
+    "test:source-notes": "node scripts/check-source-notes-safety.js --self-test",
+    "check:source-notes": "node scripts/check-source-notes-safety.js"
   },
   "keywords": [
     "book",

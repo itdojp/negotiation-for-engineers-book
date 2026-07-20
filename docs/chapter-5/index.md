@@ -11,6 +11,8 @@ order: 7
 
 本章では、エンジニアの思考パターンを活かしながら感情的な課題を「デバッグ」する手法を学ぶ。システムのバグを取り除くように感情的な障害を特定し、修正する技術を身につける。
 
+> **本章の境界**: 本章のchecklistやcode例は、会話を一時停止し、事実と感情を分け、支援へ接続するための業務上の補助である。心身の状態を診断・治療するものではなく、self-helpは医療や専門家支援を置き換えない。症状が続く、対処が難しい、日常生活や就業へ支障がある場合は医療・産業保健・公的相談窓口へ相談する。自傷他害の差し迫った危険がある場合は、この章の手順を続けず、地域の緊急窓口や[厚生労働省「まもろうよ こころ」](https://www.mhlw.go.jp/mamorouyokokoro/)から直ちに支援へ接続する。
+
 ## この章でできるようになること
 
 - 交渉中に起きやすい認知バイアスを検出し、判断ミスを減らすための対処を設計できるようになる。
@@ -199,18 +201,19 @@ class PressureNegotiationHandler:
         
         return {
             'pre_negotiation': {
-                'technique': '4-7-8呼吸法',
+                'technique': '任意の短い呼吸pause',
                 'steps': [
-                    '4秒かけて鼻から吸う',
-                    '7秒間息を止める',
-                    '8秒かけて口から吐く',
-                    '4サイクル繰り返す'
+                    '楽な姿勢を取り、普段どおりに呼吸する',
+                    '息を止めず、吐く息を無理のない範囲で少しゆっくりにする',
+                    '1〜3回で会話へ戻るか、必要なら休憩を提案する'
                 ],
-                'timing': '交渉開始5分前',
-                'effect': '副交感神経の活性化'
+                'purpose': '反応する前に観察と選択の時間を置く',
+                'stop_if': '息苦しさ、めまい、不快感があれば中止する'
             }
         }
 ```
+
+これは治療法や生理効果を保証するprotocolではなく、任意のself-help pauseである。小規模な実験では、30人の成人が脅威課題中に毎分8回へ呼吸を遅くした条件で心臓副交感神経反応が検討されたが、exactな4-7-8手順、交渉成果、臨床的効果を示した研究ではない（[Sakakibara & Hayano, 1996](https://pubmed.ncbi.nlm.nih.gov/8677286/)）。呼吸を調整しにくい場合は実施せず、通常の休憩を選ぶ。
 
 ### 批判への建設的対応
 
@@ -295,7 +298,7 @@ class ResilienceBuilder:
 
 ### 交渉中の自己観察
 
-マインドフルネスは、今この瞬間に意識を向け、判断せずに観察する実践である。交渉において、この能力は強力な武器となる。
+本章ではマインドフルネスを、今この瞬間の感情・思考・身体感覚を急いで評価せずに観察する、任意のself-help手順として扱う。医療的な効果や交渉成果を保証するものではない。
 
 ```python
 class MindfulnessInNegotiation:
@@ -316,10 +319,10 @@ class MindfulnessInNegotiation:
         
         return {
             'pre_negotiation_centering': {
-                'duration': '3 minutes',
+                'duration': '任意の短時間',
                 'steps': [
-                    '3回の深呼吸で現在に戻る',
-                    '身体の緊張をスキャン',
+                    '普段どおりの呼吸を観察し、不快なら中止する',
+                    '身体の状態を確認し、必要なら休憩する',
                     '意図の設定（どう在りたいか）',
                     '開放的な心構えの確認'
                 ]
@@ -328,7 +331,7 @@ class MindfulnessInNegotiation:
                 'breath_check': {
                     'trigger': '話者交代時',
                     'action': '1回の意識的な呼吸',
-                    'benefit': '反応的でなく応答的に'
+                    'purpose': '反応する前の観察pointを置く'
                 }
             }
         }
@@ -369,61 +372,51 @@ class MetaCognitiveDevelopment:
         }
 ```
 
-### 長期的なメンタルヘルス戦略
+### 継続的なコンディション管理と相談境界
 
-交渉力の持続的な向上には、長期的なメンタルヘルスの維持が不可欠である。
+短い振り返りや業務負荷の調整は、働き方を見直す材料にはなるが、mental health conditionの自己診断や治療計画ではない。継続的な計画には、self-helpだけでなく、休む判断、業務上の支援、専門家へ相談するgateを含める。
 
 ```python
-class LongTermMentalHealthStrategy:
-    def create_sustainable_mental_health_plan(self):
-        """持続可能なメンタルヘルス計画"""
-        
-        comprehensive_plan = {
-            'daily_practices': self._design_daily_routine(),
-            'weekly_maintenance': self._plan_weekly_activities(),
-            'monthly_checkups': self._schedule_monthly_reviews(),
-            'quarterly_retreats': self._organize_quarterly_retreats(),
-            'annual_assessment': self._conduct_annual_assessment()
-        }
-        
-        return comprehensive_plan
-    
-    def build_resilience_ecosystem(self):
-        """レジリエンスエコシステムの構築"""
-        
+class SustainableWorkConditionPlan:
+    def create_plan(self):
+        """業務上の観察・調整・相談gate。診断や治療には使わない。"""
         return {
-            'personal_board_of_directors': {
-                'mentor': {
-                    'role': '経験からの知恵',
-                    'frequency': '月1回の定期面談',
-                    'topics': '困難な交渉の振り返り'
-                },
-                'peer_group': {
-                    'role': '相互サポート',
-                    'format': '交渉練習会',
-                    'frequency': '隔週'
-                }
+            'observe': [
+                '通常時と比べた集中、睡眠、食事、身体的不快感を記録する',
+                '仕事の出来事と心身の変化を分けて記録する'
+            ],
+            'work_adjustment': [
+                '会議の延期、休憩、同席者、業務量の調整を検討する',
+                '上長、人事、産業保健など利用可能な支援を確認する'
+            ],
+            'seek_help': {
+                'condition': '対処が難しい、症状が続く、日常生活や就業へ支障がある',
+                'action': '医療・産業保健・公的相談窓口へ相談する'
+            },
+            'urgent': {
+                'condition': '自傷他害の差し迫った危険がある',
+                'action': '地域の緊急窓口へ直ちに接続する'
             }
         }
 ```
 
-## チェックリスト：感情状態の自己診断
+WHOは、stress symptomが持続して日常機能や就業へ影響する場合や、対処が難しい場合にhealth-care provider等へ支援を求める境界を示している（[WHO, “Stress,” 2026-03-30](https://www.who.int/en/news-room/questions-and-answers/item/stress)）。また、self-careはhealth-care systemを置き換えない（[WHO, “Self-care for health and well-being”](https://www.who.int/health-topics/self-care)）。日本で働く人は、[厚生労働省「こころの耳」相談窓口](https://kokoro.mhlw.go.jp/soudan/)から電話・SNS・メール相談や医療機関検索へ進める。
 
-日々の実践に役立つ、具体的なチェックリストを提供する。
+## チェックリスト：業務上のコンディション確認
+
+このchecklistは、交渉を続けるか、休憩・延期・同席・相談を選ぶかを判断するための会話上のsignalである。点数化して病名、重症度、就業可否を自己診断しない。
 
 ```python
-class EmotionalStateDiagnostics:
+class WorkConditionCheck:
     def create_comprehensive_checklist(self):
-        """包括的な感情状態チェックリスト"""
+        """業務継続のためのsignal確認。医療判断には使わない。"""
         
         return {
             'pre_negotiation_checklist': {
                 'physical_state': [
-                    '□ 十分な睡眠（7時間以上）を取った',
-                    '□ 適切な食事を摂った（血糖値安定）',
-                    '□ カフェイン摂取は適量',
-                    '□ 身体的な緊張をチェックした',
-                    '□ 快適な服装を選んだ'
+                    '□ 通常時と比べて、会話を続けられる状態かを確認した',
+                    '□ 休憩、食事、水分など基本的な必要を確認した',
+                    '□ 体調不良や服薬等の医療判断をこの表だけで行っていない'
                 ],
                 'mental_state': [
                     '□ 交渉の目的が明確',
@@ -466,19 +459,60 @@ class EmotionalStateDiagnostics:
         }
 ```
 
+green / yellow / redは会議運営上のsignalであり、medical triageではない。signalが会議後も続く、対処が難しい、日常生活や就業へ影響する場合は、self-helpの反復ではなく専門家や公的窓口へ相談する。自傷他害の危険がある場合は緊急支援を優先する。
+
+## Source Notes：stress・self-help・専門家接続 {#source-notes-emotional-safety}
+
+### S-123-H01 呼吸を遅くする実験
+
+- **source**: [Sakakibara, M., & Hayano, J. (1996), “Effect of slowed respiration on cardiac parasympathetic response to threat,” *Psychosomatic Medicine*, 58(1), 32–37](https://pubmed.ncbi.nlm.nih.gov/8677286/)。
+- **対象版**: *Psychosomatic Medicine* 58巻1号の論文版（PMID `8677286`）。
+- **確認日**: 2026-07-20。
+- **対象と条件**: 成人30人、電気shock予期課題、毎分8回の自発的なslow breathing。
+- **支える主張**: 特定の実験条件で、呼吸を遅くしたときのcardiac parasympathetic responseが検討された。
+- **適用限界**: exactな4-7-8法、息止め、交渉成果、stress disorderの治療、すべての人への安全性・有効性を支持しない。本書は短いpause以外の効果を主張しない。
+- **本文対応**: 第5.2節の任意の呼吸pause。
+
+### S-123-H02 stressと専門家相談の境界
+
+- **source**: [WHO, “Stress,” Questions and answers, 2026-03-30](https://www.who.int/en/news-room/questions-and-answers/item/stress)。
+- **対象版**: 2026-03-30付のWHO Questions and answers公開Web版。
+- **確認日**: 2026-07-20。
+- **支える主張**: stressへの反応は個人差があり、症状が持続して日常機能や就業へ影響する場合や、対処が難しい場合はhealth-care provider等への相談が必要になる。
+- **適用限界**: 一般向け情報であり、個別の診断、治療、就業判定、緊急対応を代替しない。
+- **本文対応**: 本章の境界、継続的なコンディション管理、checklist後の相談gate。
+
+### S-123-H03 self-careの範囲
+
+- **source**: [WHO, “Self-care for health and well-being”](https://www.who.int/health-topics/self-care)。
+- **対象版**: 確認日時点のWHO health topic公開Web版。
+- **確認日**: 2026-07-20（WHO health topicの現行Web版）。
+- **支える主張**: self-careは本人のagencyを支える補完的選択肢である。
+- **適用限界**: health-care systemを置き換えず、安全で支援的な環境と必要時の専門家接続を前提とする。
+- **本文対応**: 呼吸pause、自己観察、継続的なコンディション管理。
+
+### S-123-H04 日本国内の相談導線
+
+- **source**: [厚生労働省「こころの耳」相談窓口](https://kokoro.mhlw.go.jp/soudan/) / [厚生労働省「まもろうよ こころ」](https://www.mhlw.go.jp/mamorouyokokoro/)。
+- **対象版**: 確認日時点の各公式公開Web版。
+- **確認日**: 2026-07-20。
+- **支える主張**: 働く人と家族向けの電話・SNS・メール相談、医療機関検索、危機時を含む公的相談先への導線が提供されている。
+- **適用限界**: 受付時間や提供条件は変わり得るため、固定の電話番号・時間を本書へ転記せず、利用時に公式ページを確認する。
+- **本文対応**: 本章冒頭の非医療境界、専門家相談gate、緊急支援gate。
+
 ---
 
 ## まとめ
 
 - 感情は排除対象ではなく、交渉状況を示すシグナルとして扱う。
 - 認知バイアスとストレス反応を可視化し、再現性のある「デバッグ手順」に落とす。
-- 小さな実践の積み重ねで、交渉時の冷静さと創造性を継続的に強化する。
+- self-helpは短いpauseと業務上の観察に限定し、持続・支障・危険のsignalがある場合は専門家や緊急支援へ接続する。
 
 本章では、エンジニアの感情的な課題を「デバッグ」する手法を学んだ。認知バイアスの検出と修正、ストレス下での対処法、そしてマインドフルネスの実践。これらはすべて、システムのデバッグと同じように、体系的にアプローチできる。
 
-重要なのは、感情を敵視するのではなく、貴重な情報源として活用することである。怒りは境界線の侵害を知らせ、不安は準備の必要性を示し、喜びは価値の一致を教えてくれる。これらのシグナルを適切に読み取り、建設的に活用することで、より効果的な交渉が可能になる。
+重要なのは、感情を敵視せず、事実と区別して会話の状態を観察することである。感情の意味は人や状況によって異なるため、単一の原因へ結びつけず、必要なら会話を止め、別の人や専門家の支援を得る。
 
-エモーショナル・インテリジェンスは、技術的スキルと同様に、練習によって向上する。日々の小さな実践の積み重ねが、大きな場面での冷静さと創造性につながる。完璧を求めるのではなく、継続的な改善を目指す。それこそが、真のエンジニアリング精神である。
+本章で扱った観察、pause、記録、相談gateは、交渉後に振り返り、業務手順として改善できる。ただし、健康状態の改善や交渉成果を約束するものではない。完璧を求めず、安全に続けられる範囲を見直す。
 
 次章では、これまで学んだすべての要素を統合し、交渉を一つの「パイプライン」として設計・実行する方法を学ぶ。準備から実行、そしてフォローアップまで、システマティックなアプローチで交渉の成功確率を最大化する。
 
