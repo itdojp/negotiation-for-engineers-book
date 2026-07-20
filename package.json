@@ -6,12 +6,14 @@
   "scripts": {
     "start": "jekyll serve --source docs --destination _site --livereload",
     "build": "jekyll build --source docs --destination _site",
-    "test": "npm run check:metadata && npm run lint && npm run check-links",
+    "test": "npm run check:metadata && npm run test:poc-disclosure && npm run check:poc-disclosure && npm run lint && npm run check-links",
     "lint": "markdownlint 'docs/**/*.md'",
     "check-links": "python3 .github/scripts/check_internal_links.py",
     "deploy": "gh-pages -d _site",
     "check:security": "npm audit",
-    "check:metadata": "node scripts/check-metadata-consistency.js"
+    "check:metadata": "node scripts/check-metadata-consistency.js",
+    "test:poc-disclosure": "node scripts/check-poc-disclosure.js --self-test",
+    "check:poc-disclosure": "node scripts/check-poc-disclosure.js"
   },
   "keywords": [
     "book",
