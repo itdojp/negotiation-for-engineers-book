@@ -430,7 +430,7 @@ COO: 😐 → 😊 中立から支持へ
 
 - BATNA / ZOPA / anchoring / psychological safety: [交渉の基礎語彙のSource Notes](../foundations/#source-notes-negotiation-foundations)
 - 呼吸pause / stress / self-help / 専門家接続: [第5章のSource Notes](../chapter-5/#source-notes-emotional-safety)
-- 性能 / conversion / ROI: [ROI計算付録のSource Notes](../appendices/analysis/roi-calculation/#source-notes-performance-roi)
+- 性能 / conversion / ROI: [ROI計算付録のSource Notes](../analysis/roi-calculation/#source-notes-performance-roi)
 
 ## 推薦図書・リソース
 

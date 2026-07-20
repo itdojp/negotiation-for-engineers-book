@@ -304,6 +304,11 @@ function validateContent(state) {
       'ROI計算付録のSource Notes',
     ]) check(text.includes(marker), `${label} is missing the claim-to-Source-Notes map: ${marker}`);
   }
+  if (state.mode === 'source') {
+    const roiSourceLink = '[ROI計算付録のSource Notes](../analysis/roi-calculation/#source-notes-performance-roi)';
+    check(state.toolkit.includes(roiSourceLink), 'published toolkit claim-to-Source-Notes map has an invalid ROI relative link');
+    check(state.toolkitMirror.includes(roiSourceLink), 'source-mirror toolkit claim-to-Source-Notes map has an invalid ROI relative link');
+  }
 
   const forbidden = [
     "'technique': '4-7-8呼吸法'",
@@ -396,6 +401,7 @@ function runSelfTest() {
     ['intro source removed', 'introductionDraft', 'https://doi.org/10.2307/2666999', 'https://example.invalid/', 'psychological-safety traceability'],
     ['toolkit claim map removed', 'toolkit', '推薦図書は理解を広げる資料であり、本文主張の根拠一覧ではない', '推薦図書が根拠一覧である', '根拠一覧ではない'],
     ['toolkit mirror health map removed', 'toolkitMirror', '第5章のSource Notes', '第5章', 'claim-to-Source-Notes map'],
+    ['toolkit mirror ROI link regressed', 'toolkitMirror', '../analysis/roi-calculation/#source-notes-performance-roi', '../appendices/analysis/roi-calculation/#source-notes-performance-roi', 'claim-to-Source-Notes map'],
   ];
   for (const [name, key, before, after, expected] of cases) {
     const mutated = clone(baseline);
