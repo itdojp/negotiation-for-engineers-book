@@ -36,6 +36,68 @@ const healthUrls = [
   'https://www.mhlw.go.jp/mamorouyokokoro/',
 ];
 
+const negotiationClaimSegments = [
+  {
+    label: 'BATNA claim',
+    start: 'BATNA自体は、理想条件、最低受容ライン、最悪ケースのいずれでもない',
+    end: '相手側の最低受容ラインは通常観測できない',
+    urls: negotiationUrls.slice(0, 2),
+  },
+  {
+    label: 'ZOPA claim',
+    start: '相手側の最低受容ラインは通常観測できない',
+    end: '不確実な数値を見積もる際',
+    urls: [negotiationUrls[2]],
+  },
+  {
+    label: 'anchoring claim',
+    start: '不確実な数値を見積もる際',
+    end: '譲歩は、その場の雰囲気で出すものではない',
+    urls: negotiationUrls.slice(3, 5),
+  },
+  {
+    label: 'psychological-safety claim',
+    start: 'Edmondson（1999）はチームの心理的安全性を',
+    end: '交渉の目的は、相手を操作することではなく',
+    urls: [negotiationUrls[5]],
+  },
+];
+
+const negotiationNoteLinks = [
+  ['S-123-N01', negotiationUrls.slice(0, 2)],
+  ['S-123-N02', [negotiationUrls[2]]],
+  ['S-123-N03', negotiationUrls.slice(3, 5)],
+  ['S-123-N04', [negotiationUrls[5]]],
+];
+
+const healthClaimSegments = [
+  {
+    label: 'urgent-support boundary',
+    start: '本章の境界',
+    end: 'エンジニア特有のバイアス',
+    urls: [healthUrls[4]],
+  },
+  {
+    label: 'slow-breathing claim',
+    start: 'これは治療法や生理効果を保証するprotocolではなく',
+    end: '技術的な提案が批判された時',
+    urls: [healthUrls[0]],
+  },
+  {
+    label: 'consultation and self-care boundary',
+    start: 'WHOは、stress symptomが持続して',
+    end: 'このchecklistは、交渉を続けるか',
+    urls: healthUrls.slice(1, 4),
+  },
+];
+
+const healthNoteLinks = [
+  ['S-123-H01', [healthUrls[0]]],
+  ['S-123-H02', [healthUrls[1]]],
+  ['S-123-H03', [healthUrls[2]]],
+  ['S-123-H04', healthUrls.slice(3, 5)],
+];
+
 function read(relPath, readFile = fs.readFileSync) {
   try {
     return readFile(path.join(root, relPath), 'utf8');
@@ -129,6 +191,29 @@ function validateNoteFields(text, ids, label, failures, mode) {
   }
 }
 
+function validateSegmentLinks(text, segments, label, failures) {
+  const check = (condition, message) => { if (!condition) failures.push(message); };
+  for (const segment of segments) {
+    const start = text.indexOf(segment.start);
+    const end = text.indexOf(segment.end, start + segment.start.length);
+    check(start >= 0 && end > start, `${label}: cannot locate ${segment.label} for claim-local source validation`);
+    const section = start >= 0 && end > start ? text.slice(start, end) : '';
+    for (const url of segment.urls) {
+      check(section.includes(url), `${label}: ${segment.label} is missing claim-local source link ${url}`);
+    }
+  }
+}
+
+function validateNoteLinks(text, mappings, label, failures) {
+  const check = (condition, message) => { if (!condition) failures.push(message); };
+  for (const [id, urls] of mappings) {
+    const section = sourceNoteSection(text, id);
+    for (const url of urls) {
+      check(section.includes(url), `${label}: ${id} must retain Source Notes link ${url}`);
+    }
+  }
+}
+
 function validateContent(state) {
   const failures = [];
   const check = (condition, message) => { if (!condition) failures.push(message); };
@@ -150,10 +235,8 @@ function validateContent(state) {
     ]) check(text.includes(marker), `${label} is missing definition boundary: ${marker}`);
     const noteContainer = state.mode === 'source' ? text : state.foundationsHtml;
     validateNoteFields(noteContainer, ['S-123-N01', 'S-123-N02', 'S-123-N03', 'S-123-N04'], label, failures, state.mode);
-    const linkContainer = state.mode === 'source' ? text : state.foundationsHtml;
-    for (const url of negotiationUrls) {
-      check(count(linkContainer, url) >= 2, `${label} must expose ${url} directly near the claim and in Source Notes`);
-    }
+    validateSegmentLinks(noteContainer, negotiationClaimSegments, label, failures);
+    validateNoteLinks(noteContainer, negotiationNoteLinks, label, failures);
   }
 
   const glossaryTexts = state.mode === 'source'
@@ -194,10 +277,8 @@ function validateContent(state) {
       `${label}: urgent support gate must appear in the chapter boundary and the work-condition plan`);
     const noteContainer = state.mode === 'source' ? text : state.chapter5Html;
     validateNoteFields(noteContainer, ['S-123-H01', 'S-123-H02', 'S-123-H03', 'S-123-H04'], label, failures, state.mode);
-    const linkContainer = state.mode === 'source' ? text : state.chapter5Html;
-    for (const url of healthUrls) {
-      check(count(linkContainer, url) >= 2, `${label} must expose ${url} directly near the claim and in Source Notes`);
-    }
+    validateSegmentLinks(noteContainer, healthClaimSegments, label, failures);
+    validateNoteLinks(noteContainer, healthNoteLinks, label, failures);
   }
 
   if (state.mode === 'source') {
@@ -297,6 +378,8 @@ function runSelfTest() {
     ['psychological safety scope removed', 'foundationsMirror', '心理的安全性は、常に快適であること', '心理的安全性とは全員が快適であることだけを指す', '心理的安全性'],
     ['negotiation source date removed', 'foundations', '**確認日**', '**参照**', '確認日'],
     ['negotiation target edition removed', 'foundationsMirror', '**対象版**', '**版情報**', '対象版'],
+    ['claim-local BATNA link removed', 'foundations', '3rd ed.（Penguin Books, 2011）](https://www.penguinrandomhouse.com/books/324551/getting-to-yes-by-roger-fisher-and-william-ury/)', '3rd ed.（Penguin Books, 2011）](https://example.invalid/batna-claim)', 'claim-local source link'],
+    ['BATNA Source Note link removed', 'foundationsMirror', 'ISBN 9780143118756](https://www.penguinrandomhouse.com/books/324551/getting-to-yes-by-roger-fisher-and-william-ury/)', 'ISBN 9780143118756](https://example.invalid/batna-note)', 'must retain Source Notes link'],
     ['glossary BATNA drift', 'glossary', '最低受容ラインや最悪ケースとは区別する', '最低受容ラインと同じ', '最低受容ラインや最悪ケース'],
     ['glossary mirror safety drift', 'glossaryMirror', '快適さ、無条件の同意、低い品質基準とは異なる', '全員が快適で同意する状態', '快適さ、無条件の同意'],
     ['health boundary removed', 'chapter5', 'self-helpは医療や専門家支援を置き換えない', 'self-helpで完結する', 'self-helpは医療'],
@@ -309,6 +392,7 @@ function runSelfTest() {
     ['urgent gate removed', 'chapter5Mirror', '自傷他害の差し迫った危険がある', '負荷がある', 'urgent support gate'],
     ['medical triage boundary removed', 'chapter5Draft', 'medical triageではない', 'medical triageである', 'medical triageではない'],
     ['health source limit removed', 'chapter5', 'exactな4-7-8法、息止め、交渉成果', '呼吸法の効果', 'exactな4-7-8法'],
+    ['claim-local breathing link removed', 'chapter5Mirror', '[Sakakibara & Hayano, 1996](https://pubmed.ncbi.nlm.nih.gov/8677286/)', '[Sakakibara & Hayano, 1996](https://example.invalid/breathing-claim)', 'claim-local source link'],
     ['intro source removed', 'introductionDraft', 'https://doi.org/10.2307/2666999', 'https://example.invalid/', 'psychological-safety traceability'],
     ['toolkit claim map removed', 'toolkit', '推薦図書は理解を広げる資料であり、本文主張の根拠一覧ではない', '推薦図書が根拠一覧である', '根拠一覧ではない'],
     ['toolkit mirror health map removed', 'toolkitMirror', '第5章のSource Notes', '第5章', 'claim-to-Source-Notes map'],
