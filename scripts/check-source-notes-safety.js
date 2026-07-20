@@ -286,7 +286,7 @@ function validateContent(state) {
       '対人的なリスクを取っても安全だという、チーム成員に共有された信念',
       '快適さ、無条件の同意、対立の不在、低い品質基準を意味せず',
       'https://doi.org/10.2307/2666999',
-      'docs/foundations/#source-notes-negotiation-foundations',
+      'docs/foundations/index.md#source-notes-negotiation-foundations',
     ]) check(state.introductionDraft.includes(marker), `detailed introduction is missing psychological-safety traceability: ${marker}`);
   }
 
@@ -399,6 +399,7 @@ function runSelfTest() {
     ['health source limit removed', 'chapter5', 'exactな4-7-8法、息止め、交渉成果', '呼吸法の効果', 'exactな4-7-8法'],
     ['claim-local breathing link removed', 'chapter5Mirror', '[Sakakibara & Hayano, 1996](https://pubmed.ncbi.nlm.nih.gov/8677286/)', '[Sakakibara & Hayano, 1996](https://example.invalid/breathing-claim)', 'claim-local source link'],
     ['intro source removed', 'introductionDraft', 'https://doi.org/10.2307/2666999', 'https://example.invalid/', 'psychological-safety traceability'],
+    ['intro Source Notes target regressed', 'introductionDraft', 'docs/foundations/index.md#source-notes-negotiation-foundations', 'docs/foundations/#source-notes-negotiation-foundations', 'psychological-safety traceability'],
     ['toolkit claim map removed', 'toolkit', '推薦図書は理解を広げる資料であり、本文主張の根拠一覧ではない', '推薦図書が根拠一覧である', '根拠一覧ではない'],
     ['toolkit mirror health map removed', 'toolkitMirror', '第5章のSource Notes', '第5章', 'claim-to-Source-Notes map'],
     ['toolkit mirror ROI link regressed', 'toolkitMirror', '../analysis/roi-calculation/#source-notes-performance-roi', '../appendices/analysis/roi-calculation/#source-notes-performance-roi', 'claim-to-Source-Notes map'],
