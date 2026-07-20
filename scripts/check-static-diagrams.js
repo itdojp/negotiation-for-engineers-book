@@ -125,7 +125,8 @@ function validate(state) {
 
   const scripts = state.packageJson.scripts || {};
   check(state.packageJson.devDependencies?.['@mermaid-js/mermaid-cli'] === '11.16.0', 'Mermaid CLI must remain pinned to exact version 11.16.0');
-  check(state.packageJson.allowScripts?.['puppeteer@25.3.0'] === true, 'the audited Puppeteer 25.3.0 install script must be explicitly approved');
+  check(state.packageJson.devDependencies?.puppeteer === '24.43.1', 'the Node 20-compatible Puppeteer renderer must remain pinned to exact version 24.43.1');
+  check(state.packageJson.allowScripts?.['puppeteer@24.43.1'] === true, 'the audited Puppeteer 24.43.1 install script must be explicitly approved');
   check(scripts['render:diagrams'] === 'node scripts/render-diagrams.js', 'package must expose the diagram renderer');
   check(scripts['check:diagrams'] === 'node scripts/render-diagrams.js --check', 'package must expose deterministic diagram verification');
   check(scripts['test:static-diagrams'] === 'node scripts/check-static-diagrams.js --self-test', 'package must expose static-diagram negative tests');
@@ -197,7 +198,8 @@ function runSelfTest() {
     ['stale figure-index wording', (s) => { s.files[figureIndexes[0]] = s.files[figureIndexes[0]].replaceAll('静的SVG図', 'Mermaid 図'); }, 'static SVGs'],
     ['missing focus style', (s) => { s.files[cssPath] = s.files[cssPath].replace('*:focus-visible', '*:hover'); }, 'keyboard focus'],
     ['unpinned Mermaid CLI', (s) => { s.packageJson.devDependencies['@mermaid-js/mermaid-cli'] = '^11.16.0'; }, 'exact version'],
-    ['unapproved Puppeteer script', (s) => { delete s.packageJson.allowScripts['puppeteer@25.3.0']; }, 'explicitly approved'],
+    ['incompatible Puppeteer version', (s) => { s.packageJson.devDependencies.puppeteer = '25.3.0'; }, 'Node 20-compatible'],
+    ['unapproved Puppeteer script', (s) => { delete s.packageJson.allowScripts['puppeteer@24.43.1']; }, 'explicitly approved'],
     ['missing build rendering', (s) => { s.packageJson.scripts.build = 'jekyll build --source docs --destination _site'; }, 'pre-render'],
     ['missing npm test wiring', (s) => { s.packageJson.scripts.test = s.packageJson.scripts.test.replace('npm run check:diagrams && ', ''); }, 'npm run check:diagrams'],
     ['missing Book QA wiring', (s) => { s.workflow = s.workflow.replace('run: npm test', 'run: npm run lint'); }, 'Book QA'],
