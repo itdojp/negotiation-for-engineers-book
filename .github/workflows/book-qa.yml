@@ -105,6 +105,9 @@ jobs:
           source: ./${{ steps.scan.outputs.dir }}
           destination: ./_site
 
+      - name: Check built performance and ROI evidence
+        run: node scripts/check-performance-roi-evidence.js --built-site _site
+
       - name: Smoke check built site (top + navigation + assets)
         shell: bash
         run: |

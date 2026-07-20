@@ -1567,216 +1567,114 @@ class RegulatoryLeverageStrategy:
 
 ### レスポンスタイムの事業価値
 
-ミリ秒の改善が、億単位の価値を生む。この関係性を明確に示し、パフォーマンス投資を正当化する。
+ミリ秒単位の改善が事業価値を生む可能性はあるが、改善量だけから金額を決めることはできない。対象page、利用者、funnel、baseline、粗利、観測期間を明示し、複数scenarioと検証計画を交渉材料にする。
 
 ```python
 class PerformanceEconomicsAnalyzer:
-    def __init__(self, business_metrics):
-        self.metrics = business_metrics
-        self.performance_baseline = self._measure_current_performance()
-        self.industry_benchmarks = self._load_industry_benchmarks()
-        
-    def analyze_performance_value(self, proposed_improvements):
-        """パフォーマンス改善の経済価値分析"""
-        
-        value_analysis = {
-            'user_experience_impact': self._analyze_ux_impact(proposed_improvements),
-            'conversion_impact': self._analyze_conversion_impact(proposed_improvements),
-            'seo_impact': self._analyze_seo_impact(proposed_improvements),
-            'operational_impact': self._analyze_operational_impact(proposed_improvements),
-            'competitive_impact': self._analyze_competitive_impact(proposed_improvements)
-        }
-        
-        return self._create_performance_investment_case(value_analysis)
-    
-    def _analyze_conversion_impact(self, improvements):
-        """コンバージョン率への影響分析"""
-        
-        # 基礎データ
-        current_response_time = self.performance_baseline['page_load_time']
-        target_response_time = current_response_time - improvements['reduction_ms']
-        
-        # 業界研究に基づく係数
-        # Amazon: 100ms遅延 = 1%売上減
-        # Google: 500ms遅延 = 20%トラフィック減
-        # Walmart: 1秒改善 = 2%コンバージョン増
-        
-        conversion_model = {
-            'current_metrics': {
-                'response_time': current_response_time,
-                'conversion_rate': self.metrics['current_conversion_rate'],
-                'average_order_value': self.metrics['average_order_value'],
-                'monthly_sessions': self.metrics['monthly_sessions']
-            },
-            'projected_metrics': {},
-            'methodology': {}
-        }
-        
-        # 改善による影響計算
-        improvement_ms = improvements['reduction_ms']
-        
-        # 段階的な影響モデル
-        if improvement_ms <= 100:
-            conversion_lift = improvement_ms * 0.01  # 1%/100ms
-        elif improvement_ms <= 500:
-            conversion_lift = 1.0 + (improvement_ms - 100) * 0.005  # 0.5%/100ms
-        else:
-            conversion_lift = 3.0 + (improvement_ms - 500) * 0.002  # 0.2%/100ms
-        
-        conversion_model['projected_metrics'] = {
-            'response_time': target_response_time,
-            'conversion_rate': self.metrics['current_conversion_rate'] * (1 + conversion_lift / 100),
-            'conversion_lift_percentage': conversion_lift,
-            'additional_conversions_monthly': self.metrics['monthly_sessions'] * conversion_lift / 100 * self.metrics['current_conversion_rate']
-        }
-        
-        # 財務インパクト
-        conversion_model['financial_impact'] = {
-            'monthly_revenue_increase': (
-                conversion_model['projected_metrics']['additional_conversions_monthly'] * 
-                self.metrics['average_order_value']
+    """性能と事業KPIを、外部の固定係数ではなく検証scenarioで接続する。"""
+
+    def __init__(
+        self,
+        monthly_sessions,
+        exposure_rate,
+        baseline_conversion,
+        gross_profit_per_conversion,
+        evaluation_months,
+        investment,
+    ):
+        self.monthly_sessions = monthly_sessions
+        self.exposure_rate = exposure_rate
+        self.baseline_conversion = baseline_conversion
+        self.gross_profit_per_conversion = gross_profit_per_conversion
+        self.evaluation_months = evaluation_months
+        self.investment = investment
+        self._validate_inputs()
+
+    def _validate_inputs(self):
+        for name, value in {
+            'monthly_sessions': self.monthly_sessions,
+            'gross_profit_per_conversion': self.gross_profit_per_conversion,
+            'evaluation_months': self.evaluation_months,
+            'investment': self.investment,
+        }.items():
+            if value <= 0:
+                raise ValueError(f'{name} must be greater than zero')
+        for name, value in {
+            'exposure_rate': self.exposure_rate,
+            'baseline_conversion': self.baseline_conversion,
+        }.items():
+            if not 0 <= value <= 1:
+                raise ValueError(f'{name} must be between zero and one')
+
+    def analyze(self, current_ms, target_ms, relative_uplift_scenarios):
+        if current_ms <= 0 or target_ms <= 0 or target_ms >= current_ms:
+            raise ValueError('target_ms must be positive and lower than current_ms')
+        if set(relative_uplift_scenarios) != {'pessimistic', 'middle', 'optimistic'}:
+            raise ValueError('three named scenarios are required')
+
+        scenarios = {}
+        for name, relative_uplift in relative_uplift_scenarios.items():
+            if relative_uplift < 0:
+                raise ValueError('relative uplift must not be negative in this example')
+
+            # 性能改善量からupliftを決めない。自組織の実験・段階導入で校正した値を受け取る。
+            additional_conversions = (
+                self.monthly_sessions
+                * self.exposure_rate
+                * self.baseline_conversion
+                * relative_uplift
+            )
+            monthly_gross_profit = additional_conversions * self.gross_profit_per_conversion
+            period_benefit = monthly_gross_profit * self.evaluation_months
+            net_benefit = period_benefit - self.investment
+
+            scenarios[name] = {
+                'relative_uplift': relative_uplift,
+                'additional_conversions_monthly': additional_conversions,
+                'period_gross_profit_benefit': period_benefit,
+                'net_benefit': net_benefit,
+                'simple_roi': net_benefit / self.investment,
+                'payback_months': (
+                    self.investment / monthly_gross_profit
+                    if monthly_gross_profit > 0
+                    else None
+                ),
+            }
+
+        return {
+            'performance_target': {'current_ms': current_ms, 'target_ms': target_ms},
+            'causal_boundary': (
+                '価格、campaign、在庫、流入元、UI、季節性を記録し、'
+                '可能なら事前登録したA/B testでupliftを校正する'
             ),
-            'annual_revenue_increase': (
-                conversion_model['projected_metrics']['additional_conversions_monthly'] * 
-                self.metrics['average_order_value'] * 12
+            'scenarios': scenarios,
+            'approval_gate': (
+                '単一点で全額承認を求めず、計測・pilot・guardrail・停止条件を承認する'
             ),
-            'lifetime_value_impact': self._calculate_ltv_impact(conversion_lift)
         }
-        
-        return conversion_model
-    
-    def _analyze_seo_impact(self, improvements):
-        """SEOへの影響分析"""
-        
-        # Core Web Vitals の改善
-        seo_impact = {
-            'core_web_vitals': {
-                'lcp': {  # Largest Contentful Paint
-                    'current': self.performance_baseline['lcp'],
-                    'target': max(self.performance_baseline['lcp'] - improvements['reduction_ms'], 1000),
-                    'score_improvement': self._calculate_cwv_score_improvement('lcp', improvements)
-                },
-                'fid': {  # First Input Delay
-                    'current': self.performance_baseline['fid'],
-                    'target': max(self.performance_baseline['fid'] * 0.5, 50),
-                    'score_improvement': self._calculate_cwv_score_improvement('fid', improvements)
-                },
-                'cls': {  # Cumulative Layout Shift
-                    'current': self.performance_baseline['cls'],
-                    'target': self.performance_baseline['cls'] * 0.8,
-                    'score_improvement': 'Stable'
-                }
-            },
-            'ranking_impact': self._estimate_ranking_improvement(improvements),
-            'traffic_impact': self._estimate_traffic_increase(improvements)
-        }
-        
-        # オーガニックトラフィックの価値計算
-        seo_impact['financial_value'] = {
-            'additional_organic_sessions': seo_impact['traffic_impact']['monthly_increase'],
-            'reduced_ppc_spend': seo_impact['traffic_impact']['monthly_increase'] * self.metrics['average_cpc'],
-            'annual_savings': seo_impact['traffic_impact']['monthly_increase'] * self.metrics['average_cpc'] * 12
-        }
-        
-        return seo_impact
-    
-    def _create_performance_investment_case(self, analysis):
-        """パフォーマンス投資ケースの作成"""
-        
-        total_value = sum([
-            analysis['conversion_impact']['financial_impact']['annual_revenue_increase'],
-            analysis['seo_impact']['financial_value']['annual_savings'],
-            analysis['operational_impact']['cost_savings']['annual_total'],
-            analysis['competitive_impact']['market_share_value']
-        ])
-        
-        return f"""
-# パフォーマンス最適化投資提案
 
-## エグゼクティブサマリー
 
-ウェブサイトのレスポンスタイムを{self.performance_baseline['page_load_time']}msから
-{self.performance_baseline['page_load_time'] - analysis['conversion_impact']['projected_metrics']['response_time']}msに
-改善することで、年間{total_value:,.0f}円の価値を創出します。
-
-## ビジネスインパクト詳細
-
-### 1. 売上への直接的影響
-
-#### コンバージョン率の改善
-- 現在のコンバージョン率: {analysis['conversion_impact']['current_metrics']['conversion_rate']:.2%}
-- 改善後のコンバージョン率: {analysis['conversion_impact']['projected_metrics']['conversion_rate']:.2%}
-- 向上率: +{analysis['conversion_impact']['projected_metrics']['conversion_lift_percentage']:.1f}%
-
-#### 財務インパクト
-- 月間追加収益: ¥{analysis['conversion_impact']['financial_impact']['monthly_revenue_increase']:,.0f}
-- 年間追加収益: ¥{analysis['conversion_impact']['financial_impact']['annual_revenue_increase']:,.0f}
-- 顧客生涯価値の向上: +{analysis['conversion_impact']['financial_impact']['lifetime_value_impact']:.1%}
-
-### 2. SEO効果
-
-#### Core Web Vitals改善
-{self._format_cwv_improvements(analysis['seo_impact']['core_web_vitals'])}
-
-#### トラフィック増加
-- オーガニック流入: +{analysis['seo_impact']['traffic_impact']['percentage_increase']:.0%}
-- 追加セッション数: {analysis['seo_impact']['traffic_impact']['monthly_increase']:,}/月
-- PPC費用削減: ¥{analysis['seo_impact']['financial_value']['annual_savings']:,.0f}/年
-
-### 3. 運用コスト削減
-
-{self._format_operational_savings(analysis['operational_impact'])}
-
-### 4. 競争優位性
-
-{self._format_competitive_advantages(analysis['competitive_impact'])}
-
-## 投資計画
-
-### Phase 1: Quick Wins（1ヶ月）
-投資額: 500万円
-- 画像最適化とCDN導入
-- クリティカルCSSのインライン化
-- JavaScriptの遅延読み込み
-期待効果: レスポンスタイム30%削減
-
-### Phase 2: アーキテクチャ改善（3ヶ月）
-投資額: 2,000万円
-- データベース最適化
-- キャッシュ戦略の実装
-- API応答速度の改善
-期待効果: レスポンスタイム追加40%削減
-
-### Phase 3: 次世代技術導入（2ヶ月）
-投資額: 1,000万円
-- エッジコンピューティング
-- 予測プリフェッチ
-- Progressive Web App化
-期待効果: 体感速度の劇的向上
-
-## ROI分析
-
-総投資額: 3,500万円
-年間期待リターン: {total_value:,.0f}円
-投資回収期間: {3500_0000 / total_value * 12:.1f}ヶ月
-5年間のNPV: ¥{self._calculate_npv(total_value, 3500_0000, 5, 0.05):,.0f}
-
-## リスクと対策
-
-{self._format_risks_and_mitigations()}
-
-## 結論
-
-パフォーマンス投資は、直接的な売上向上、コスト削減、競争優位性の確立を同時に実現します。
-特に、モバイルファーストの現代において、高速なユーザー体験は事業成功の必須要件です。
-
-今すぐ行動を起こすことで、競合に対して決定的な優位性を確立できます。
-        """
+analysis = PerformanceEconomicsAnalyzer(
+    monthly_sessions=1_000_000,
+    exposure_rate=0.8,
+    baseline_conversion=0.02,
+    gross_profit_per_conversion=3_000,
+    evaluation_months=12,
+    investment=12_000_000,
+).analyze(
+    current_ms=1_800,
+    target_ms=1_700,
+    relative_uplift_scenarios={
+        'pessimistic': 0.00,
+        'middle': 0.02,
+        'optimistic': 0.05,
+    },
+)
 ```
 
 ### インフラコスト最適化
 
-パフォーマンス改善は、しばしばインフラコストの削減も同時に実現する。この二重の利益を明確に示す。
+パフォーマンス改善がインフラコスト削減を伴う場合もある。実測した請求額と利用量で検証し、同じ効果を性能便益とコスト便益へ二重計上しない。
 
 ````python
 class InfrastructureOptimizationAnalyzer:
@@ -2253,9 +2151,9 @@ class TechnicalAdvantageValuation:
         """
 ```
 
-## 実例：技術的負債解消の投資提案
+## 架空ケース：技術的負債解消の投資提案
 
-理論を実践に結びつけるため、技術的負債解消プロジェクトの詳細な投資提案例を示す。
+理論を実践に結びつけるため、技術的負債解消プロジェクトの詳細な投資提案例を示す。これは計算方法を説明する**架空のモデルケース**であり、会社、system、benchmark、目標値は実在しない。実案件では一次データへ差し替える。
 
 ````python
 class TechnicalDebtInvestmentCase:
@@ -2298,27 +2196,16 @@ class TechnicalDebtInvestmentCase:
 
 ## ビジネスへの影響
 
-### 定量的影響
+### 定量的影響（架空の仮定値）
 
-#### 開発生産性の低下
-- 新機能開発: 想定の3倍の時間
-- 年間損失: 2.4億円
-  ```text
-  計算根拠:
-  - 開発者30名 × 生産性低下50% × 年収800万円 = 1.2億円
-  - 機会損失（遅延による収益逸失）= 1.2億円
-  ```
+| 項目 | 仮定 | 年間損失の式 | 年間損失pool |
+|---|---|---:|---:|
+| 開発生産性 | 対象40人、loaded cost 1,200万円/人年、負債起因の非価値作業50% | 40人 × 1,200万円 × 50% | 2.4億円 |
+| 品質問題 | 本番incident 5件/月、1件当たり対応・機会損失100万円 | 5件 × 12か月 × 100万円 | 0.6億円 |
+| 顧客離脱 | 対象年間粗利75億円、品質・性能に帰属すると仮定した離脱差2 percentage point | 75億円 × 2% | 1.5億円 |
+| **合計** | 各項目が重複しないことを要確認 | 2.4 + 0.6 + 1.5 | **4.5億円** |
 
-#### 品質問題によるコスト
-- 本番障害: 月平均5件
-- 緊急対応コスト: 年間6,000万円
-- 顧客離脱: 年間3%（業界平均1%）
-- 離脱による損失: 年間1.5億円
-
-#### 採用・定着への影響
-- エンジニア離職率: 25%（業界平均15%）
-- 採用コスト増: 年間3,000万円
-- 教育コスト: 年間2,000万円
+この表の帰属率はまだ事実ではない。生産性は作業分類、incidentはpostmortem、離脱はcohort分析によって検証する。顧客離脱を売上ではなく粗利で扱い、incidentの機会損失と二重計上していないか財務担当者が確認する。
 
 ### 定性的影響
 - 技術者のモチベーション低下
@@ -2398,29 +2285,37 @@ migration_plan = {
 
 ## 投資対効果分析
 
-### 総投資額
-- Phase 1: 5,000万円
-- Phase 2: 1.5億円
-- Phase 3: 5,000万円
-- **合計: 2.5億円**
+### 入力
 
-### 期待リターン
+- 総投資額: **2.5億円**（Phase 1〜3の開発、移行、検証、追加インフラ、教育、並行運用を含む架空値）
+- 評価期間: **3年**。単純化のため割引率、税、ramp-up、残存価値は含めない。
 
-#### 年間コスト削減
-- 開発生産性向上: 1.2億円
-- 障害対応削減: 4,000万円
-- 離職率改善: 3,000万円
-- **合計: 1.9億円/年**
+### 回収率の感度分析
 
-#### 収益向上
-- 新機能による収益: 2億円/年
-- 顧客維持による収益確保: 1.5億円/年
-- **合計: 3.5億円/年**
+| scenario | 生産性回収 | incident回収 | 離脱粗利回収 | 年間便益 |
+|---|---:|---:|---:|---:|
+| 悲観 | 2.4億円 × 20% = 0.48億円 | 0.6億円 × 25% = 0.15億円 | 1.5億円 × 10% = 0.15億円 | **0.78億円** |
+| 中位 | 2.4億円 × 40% = 0.96億円 | 0.6億円 × 50% = 0.30億円 | 1.5億円 × 25% = 0.375億円 | **1.635億円** |
+| 楽観 | 2.4億円 × 60% = 1.44億円 | 0.6億円 × 75% = 0.45億円 | 1.5億円 × 40% = 0.60億円 | **2.49億円** |
 
-### 投資回収
-- 年間効果: 5.4億円
-- 投資回収期間: 5.6ヶ月
-- 3年間ROI: 548%
+```text
+3年便益 = 年間便益 × 3年
+3年純便益 = 3年便益 - 総投資額
+3年単純ROI = 3年純便益 ÷ 総投資額
+単純回収期間（月） = 総投資額 ÷ 年間便益 × 12
+```
+
+| scenario | 3年便益 | 3年純便益 | 3年単純ROI | 単純回収期間 |
+|---|---:|---:|---:|---:|
+| 悲観 | 2.34億円 | -0.16億円 | -6.4% | 約38.5か月 |
+| 中位 | 4.905億円 | 2.405億円 | 96.2% | 約18.3か月 |
+| 楽観 | 7.47億円 | 4.97億円 | 198.8% | 約12.0か月 |
+
+### 承認gate
+
+2.5億円全額の承認は求めない。まず総投資額に含まれる計測・pilot枠を上限2,000万円として承認し、作業分類、incident、離脱cohortのbaselineと比較群を整備する。中位scenarioを維持できる効果とguardrail非悪化を確認したときだけ残額を判断し、効果が悲観scenarioを下回る、または帰属を説明できない場合は拡大を停止する。
+
+再計算用の入力表、式、Source Notesは[ROI計算付録](docs/appendices/analysis/roi-calculation.md#performance-roi-worksheet)を使う。
 
 ## リスクと対策
 
@@ -2457,23 +2352,13 @@ migration_plan = {
 
 ## 結論
 
-技術的負債の解消は、単なる技術的な改善ではありません。
-これは、ビジネスの成長基盤を再構築し、
-競争力を回復するための戦略的投資です。
-
-今行動を起こすことで、年間5.4億円の価値を創出し、
-持続可能な成長への道を開きます。
-
-逆に、現状を放置すれば、3年後には
-修復不可能なレベルまで状況は悪化します。
-
-今が、決断の時です。
+この架空ケースから承認するのは精密に見える単一点ではなく、前提を検証する段階的な投資である。悲観・中位・楽観のrange、guardrail、停止条件を示し、実測で更新できる状態を維持する。
 
 ---
 
 本章では、技術的な強みを交渉における武器に変える方法を学んだ。アーキテクチャの柔軟性、セキュリティの堅牢性、パフォーマンスの優秀性。これらはすべて、適切に表現すれば、強力な交渉材料となる。
 
-重要なのは、技術的な優位性を、ビジネス価値として定量化することである。ミリ秒の改善が売上に直結し、セキュリティ投資がリスク回避価値を生み、優れたアーキテクチャが将来の可能性を広げる。この関係性を明確に示すことで、技術投資への理解と支持を獲得できる。
+重要なのは、技術的な優位性を、検証可能なビジネス価値の仮説として定量化することである。性能、security、architectureと事業成果の間にある前提と因果境界を示し、幅を持つ試算を実測で更新することで、技術投資への理解と支持を獲得できる。
 
 技術者として、私たちは素晴らしい解決策を生み出す能力を持っている。その価値を適切に伝え、実現のための投資を獲得することは、技術者としての責務である。技術的レバレッジを最大化し、組織に真の価値をもたらす。それが、現代のエンジニアに求められる交渉力である。
 
