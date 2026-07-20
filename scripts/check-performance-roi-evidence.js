@@ -210,6 +210,18 @@ function validateContent(state) {
     );
     for (const marker of markers) check(text.includes(marker), `${label} is missing contract marker: ${marker}`);
   }
+  if (state.mode === 'source') {
+    for (const marker of [
+      'relative_uplift_scenarios',
+      'self.gross_profit_per_conversion = gross_profit_per_conversion',
+      '性能改善量からupliftを決めない。自組織の実験・段階導入で校正した値を受け取る。',
+      'additional_conversions = (',
+      "'pessimistic': 0.00",
+      "'middle': 0.02",
+      "'optimistic': 0.05",
+      '単一点で全額承認を求めず、計測・pilot・guardrail・停止条件を承認する',
+    ]) check(state.chapter4Draft.includes(marker), `detailed Chapter 4 performance model is missing: ${marker}`);
+  }
 
   const worksheetMarkers = [
     '月間対象session',
@@ -235,6 +247,13 @@ function validateContent(state) {
     'コンバージョン率が3%向上し、年間売上が1,000万円増加する',
     '3年間ROI: 548%',
     'ミリ秒の改善が売上に直結',
+    '# Amazon: 100ms遅延 = 1%売上減',
+    '# Google: 500ms遅延 = 20%トラフィック減',
+    '# Walmart: 1秒改善 = 2%コンバージョン増',
+    'conversion_lift = improvement_ms',
+    "self.metrics['average_order_value']",
+    "'annual_revenue_increase'",
+    "'monthly_revenue_increase'",
   ];
   const publicTexts = [state.introduction, state.chapter1, state.chapter4];
   if (state.mode === 'source') publicTexts.push(
@@ -312,6 +331,8 @@ function runSelfTest() {
     ['loss pool double-count gate removed', 'chapter4Mirror', '各項目が重複しないことを要確認', '合算値', '重複しない'],
     ['pessimistic ROI drift', 'chapter4', '| 悲観 | 2.34億円 | -0.16億円 | -6.4% | 約38.5か月 |', '| 悲観 | 2.34億円 | 5億円 | 200% | 2か月 |', '悲観'],
     ['detailed Chapter 4 drift', 'chapter4Draft', '| 中位 | 4.905億円 | 2.405億円 | 96.2% | 約18.3か月 |', '| 中位 | 4.905億円 | 10億円 | 500% | 2か月 |', 'detailed Chapter 4 draft'],
+    ['detailed fixed coefficient restored', 'chapter4Draft', '性能改善量からupliftを決めない。自組織の実験・段階導入で校正した値を受け取る。', '# Amazon: 100ms遅延 = 1%売上減', 'obsolete universal'],
+    ['detailed gross profit boundary removed', 'chapter4Draft', 'self.gross_profit_per_conversion = gross_profit_per_conversion', 'self.average_order_value = average_order_value', 'performance model is missing'],
     ['full approval gate restored', 'chapter4Mirror', 'まず総投資額に含まれる計測・pilot枠を上限2,000万円として承認', '総投資額2.5億円を承認', '上限2,000万円'],
     ['worksheet traffic missing', 'worksheet', '月間対象session', '月間利用者', '月間対象session'],
     ['worksheet gross profit missing', 'worksheet', '1 conversion当たり粗利', '1注文当たり売上', '1 conversion当たり粗利'],
