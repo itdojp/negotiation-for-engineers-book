@@ -34,6 +34,8 @@
 - `npm test`: メタデータ、PoC表示、静的図のaccessibility/再現性、Markdown lint、内部リンクをまとめて確認します。
 - `npm run build`: 4点の静的SVGを事前生成してから、`docs/` をJekyll sourceとして公開サイトをビルドします。
 
+Book QAの図生成だけは、GitHub-hosted Ubuntuのuser namespace制約に対応するため `diagrams/puppeteer-ci.json` を使います。workflowはread-only権限で、リポジトリにcommit済みの図sourceだけを処理します。ローカル生成ではこの設定を使いません。
+
 ## ライセンス
 
 本書は Creative Commons BY-NC-SA 4.0 で提供されています。詳細は `LICENSE.md` を参照してください。

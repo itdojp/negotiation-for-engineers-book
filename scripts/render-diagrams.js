@@ -38,13 +38,23 @@ function addAccessibleMetadata(outputPath, definition) {
   fs.writeFileSync(outputPath, svg, 'utf8');
 }
 
-function mmdcPath() {
-  const executable = process.platform === 'win32' ? 'mmdc.cmd' : 'mmdc';
-  const candidate = path.join(root, 'node_modules', '.bin', executable);
+function mmdcCliPath() {
+  const candidate = path.join(root, 'node_modules', '@mermaid-js', 'mermaid-cli', 'src', 'cli.js');
   if (!fs.existsSync(candidate)) {
     throw new Error(`Mermaid CLI is not installed: ${path.relative(root, candidate)} (run npm ci)`);
   }
   return candidate;
+}
+
+function ciPuppeteerConfigArgs() {
+  const configured = process.env.MERMAID_PUPPETEER_CONFIG;
+  if (!configured) return [];
+  const configPath = path.resolve(root, configured);
+  const relative = path.relative(root, configPath);
+  if (relative.startsWith('..') || path.isAbsolute(relative) || !fs.existsSync(configPath)) {
+    throw new Error(`Mermaid Puppeteer config must be an existing repository file: ${configured}`);
+  }
+  return ['--puppeteerConfigFile', configPath];
 }
 
 function render(definition, outputPath) {
@@ -53,11 +63,13 @@ function render(definition, outputPath) {
     throw new Error(`Diagram source is missing: ${definition.source}`);
   }
   fs.mkdirSync(path.dirname(outputPath), { recursive: true });
-  const result = spawnSync(mmdcPath(), [
+  const result = spawnSync(process.execPath, [
+    mmdcCliPath(),
     '--input', sourcePath,
     '--output', outputPath,
     '--backgroundColor', 'white',
     '--quiet',
+    ...ciPuppeteerConfigArgs(),
   ], {
     cwd: root,
     encoding: 'utf8',

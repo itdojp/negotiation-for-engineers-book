@@ -10,6 +10,7 @@ const figureIndexes = ['docs/appendices/figures/index.md', 'src/appendices/figur
 const cssPath = 'docs/assets/css/main.css';
 const packagePath = 'package.json';
 const workflowPath = '.github/workflows/book-qa.yml';
+const puppeteerConfigPath = 'diagrams/puppeteer-ci.json';
 const expectedIds = [
   'negotiation-architecture',
   'growth-roadmap',
@@ -40,7 +41,7 @@ function count(text, marker) {
 
 function loadState() {
   const manifest = JSON.parse(read(manifestPath));
-  const filePaths = new Set([cssPath, ...figureIndexes]);
+  const filePaths = new Set([cssPath, puppeteerConfigPath, ...figureIndexes]);
   for (const definition of manifest) {
     filePaths.add(definition.source);
     filePaths.add(definition.output);
@@ -124,6 +125,13 @@ function validate(state) {
   }
 
   const scripts = state.packageJson.scripts || {};
+  let puppeteerConfig = {};
+  try {
+    puppeteerConfig = JSON.parse(state.files[puppeteerConfigPath]);
+  } catch (error) {
+    failures.push(`CI Puppeteer config must be valid JSON: ${error.message}`);
+  }
+  check(JSON.stringify(puppeteerConfig.args) === JSON.stringify(['--no-sandbox', '--disable-setuid-sandbox']), 'CI Puppeteer config must contain only the audited sandbox flags');
   check(state.packageJson.devDependencies?.['@mermaid-js/mermaid-cli'] === '11.16.0', 'Mermaid CLI must remain pinned to exact version 11.16.0');
   check(state.packageJson.devDependencies?.puppeteer === '24.43.1', 'the Node 20-compatible Puppeteer renderer must remain pinned to exact version 24.43.1');
   check(state.packageJson.allowScripts?.['puppeteer@24.43.1'] === true, 'the audited Puppeteer 24.43.1 install script must be explicitly approved');
@@ -137,6 +145,7 @@ function validate(state) {
   }
   check(/- name: Local npm QA[\s\S]*?run:\s*npm test/.test(state.workflow), 'Book QA must execute the static-diagram contract through npm test');
   check(/- name: Local npm QA[\s\S]*?run:\s*npm test[\s\S]*?- name: Pre-render static diagrams[\s\S]*?run:\s*npm run render:diagrams/.test(state.workflow), 'Book QA must pre-render static diagrams after source validation');
+  check(state.workflow.includes('MERMAID_PUPPETEER_CONFIG: diagrams/puppeteer-ci.json'), 'Book QA must opt into the audited CI-only Puppeteer config');
   return failures;
 }
 
@@ -173,8 +182,13 @@ function validateBuilt(state) {
   return failures;
 }
 
-function clone(value) {
-  return JSON.parse(JSON.stringify(value));
+function cloneState(value) {
+  return {
+    manifest: JSON.parse(JSON.stringify(value.manifest)),
+    files: { ...value.files },
+    packageJson: JSON.parse(JSON.stringify(value.packageJson)),
+    workflow: value.workflow,
+  };
 }
 
 function runSelfTest() {
@@ -204,16 +218,18 @@ function runSelfTest() {
     ['missing npm test wiring', (s) => { s.packageJson.scripts.test = s.packageJson.scripts.test.replace('npm run check:diagrams && ', ''); }, 'npm run check:diagrams'],
     ['missing Book QA wiring', (s) => { s.workflow = s.workflow.replace('run: npm test', 'run: npm run lint'); }, 'Book QA'],
     ['missing Book QA pre-render', (s) => { s.workflow = s.workflow.replace('run: npm run render:diagrams', 'run: npm run check:diagrams'); }, 'pre-render static diagrams'],
+    ['unsafe CI Puppeteer config expansion', (s) => { s.files[puppeteerConfigPath] = '{"args":["--no-sandbox","--disable-web-security"]}'; }, 'audited sandbox flags'],
+    ['missing CI Puppeteer config wiring', (s) => { s.workflow = s.workflow.replace('MERMAID_PUPPETEER_CONFIG: diagrams/puppeteer-ci.json', 'MERMAID_PUPPETEER_CONFIG: missing.json'); }, 'CI-only Puppeteer config'],
   ];
   for (const [name, mutate, expected] of cases) {
-    const state = clone(baseline);
+    const state = cloneState(baseline);
     mutate(state);
     const failures = validate(state);
     if (!failures.some((failure) => failure.includes(expected))) {
       throw new Error(`self-test case did not fail as expected: ${name}\n${failures.join('\n')}`);
     }
   }
-  const shortManifest = clone(baseline);
+  const shortManifest = cloneState(baseline);
   shortManifest.manifest.pop();
   if (!validate(shortManifest).some((failure) => failure.includes('exactly 4'))) {
     throw new Error('self-test did not reject an incomplete diagram manifest');
