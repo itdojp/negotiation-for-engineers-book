@@ -424,6 +424,14 @@ COO: 😐 → 😊 中立から支持へ
 - [ ] 学習事項の蓄積
 ```
 
+## 主張別Source Notes
+
+推薦図書は理解を広げる資料であり、本文主張の根拠一覧ではない。定義、対象版、確認日、支持する範囲、適用限界は次のSource Notesから確認する。
+
+- BATNA / ZOPA / anchoring / psychological safety: [交渉の基礎語彙のSource Notes](../foundations/#source-notes-negotiation-foundations)
+- 呼吸pause / stress / self-help / 専門家接続: [第5章のSource Notes](../chapter-5/#source-notes-emotional-safety)
+- 性能 / conversion / ROI: [ROI計算付録のSource Notes](../appendices/analysis/roi-calculation/#source-notes-performance-roi)
+
 ## 推薦図書・リソース
 
 ### 交渉術関連書籍

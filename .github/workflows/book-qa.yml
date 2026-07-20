@@ -108,6 +108,9 @@ jobs:
       - name: Check built performance and ROI evidence
         run: node scripts/check-performance-roi-evidence.js --built-site _site
 
+      - name: Check built Source Notes and health boundaries
+        run: node scripts/check-source-notes-safety.js --built-site _site
+
       - name: Smoke check built site (top + navigation + assets)
         shell: bash
         run: |
