@@ -76,3 +76,84 @@ ROI が低く見える場合は、次の論点を**分解して説明**する。
 - 障害実績（件数、平均復旧時間、業務影響）
 - クラウド見積（構成、利用量、割引前提）
 - 運用設計（監視、当番、Runbook、自動化範囲）
+
+## 7. 性能改善を収益へ換算するworksheet {#performance-roi-worksheet}
+
+第1章の架空ケースを自組織へ置き換えるための入力表である。空欄を外部benchmarkだけで埋めず、根拠資料、owner、確認日を記録する。
+
+### 7.1 観測・因果境界
+
+| 項目 | 記入欄 | 根拠資料・owner・確認日 |
+|---|---|---|
+| 意思決定と承認上限 | 例: 計測整備、限定pilot、全体展開 |  |
+| 対象page / device / 地域 |  |  |
+| 性能指標とpercentile | 例: 同じ計測方法によるp75 |  |
+| baseline期間 / 比較期間 |  |  |
+| 比較設計 | A/B test、段階導入、比較群の定義 |  |
+| 主要KPI / guardrail | conversion、error率、取消率など |  |
+| 同時に変わる要因 | 価格、campaign、在庫、UI、流入元、季節性 |  |
+| 停止条件 / 再評価日 |  |  |
+
+### 7.2 計算入力
+
+| 変数 | 記号 | 悲観 | 中位 | 楽観 | 単位・注意点 |
+|---|---|---:|---:|---:|---|
+| 月間対象session | `T` |  |  |  | bot・重複を除く同じ母数 |
+| 変更版への曝露割合 | `E` |  |  |  | 0〜1 |
+| baseline conversion | `C` |  |  |  | 0〜1、分母とconversion定義を固定 |
+| 相対uplift | `U` |  |  |  | 0.02は相対2%。2 percentage pointではない |
+| 1 conversion当たり粗利 | `G` |  |  |  | 売上から取消・変動費を控除 |
+| 月間インフラ削減 | `S` |  |  |  | 請求実績で確認。収益便益と重複させない |
+| 月間追加運用費 | `O` |  |  |  | 監視・保守・licenseを含む |
+| 評価月数 | `M` |  |  |  | ramp-upを別途反映 |
+| 初期投資 | `I` |  |  |  | 開発・検証・移行・教育を含む |
+
+```text
+月間追加conversion = T × E × C × U
+月間粗利便益 = 月間追加conversion × G
+期間便益 =（月間粗利便益 + S - O）× M
+純便益 = 期間便益 - I
+単純ROI = 純便益 ÷ I
+回収期間 = I ÷（月間粗利便益 + S - O）
+```
+
+初期投資`I`が0、または月間便益が0以下の場合、ROI・回収期間を機械的に算出せず「定義不能」「回収不能」と示す。税、割引率、ramp-up、残存価値が意思決定に重要なら、単純ROIではなく月次cash flowとNPVを財務担当者と作成する。
+
+### 7.3 承認時チェックリスト
+
+- [ ] 悲観・中位・楽観の全入力と、値が異なる理由を説明できる。
+- [ ] 相対%とpercentage point、売上と粗利を混同していない。
+- [ ] 相関を因果係数として扱わず、交絡と適用外条件を記録した。
+- [ ] 単一点ではなくrange、guardrail、停止条件を提示した。
+- [ ] pilot後に実測値で再計算するownerと再評価日を決めた。
+
+## 8. Source Notes：性能・conversion・ROI {#source-notes-performance-roi}
+
+### S-122-01 外部一次資料
+
+- **資料**: Deloitte Digital, *Milliseconds Make Millions*（Google委託、Fifty-Fiveによるデータ収集・分析）
+- **URL**: [Milliseconds Make Millions report](https://www.thinkwithgoogle.com/_qs/documents/9757/Milliseconds_Make_Millions_report_hQYAbZJ.pdf)
+- **確認日**: 2026-07-20
+- **確認箇所**: Executive Summary、Study in Detail、AppendixのMethodology / Limitations（PDF pages 3、14–25、43–50）
+- **観測条件**: 37ブランド、約3,000万session、4週間、欧米のretail / travel / luxury / lead generation、mobile site。自然発生した速度変動をlogarithmic regressionで分析し、0.1秒は4つの速度指標の累積改善として扱う。
+- **資料が支持する範囲**: 特定の標本・期間・業種で、速度とfunnel progression、conversion、average order valueなどの統計的な相関が観測されたこと。
+- **支持しない範囲**: 全siteに共通する`100ms = conversion 1%低下`、速度だけを原因とする個別siteの売上予測、desktopへの一般化。報告書自身も、siteごとの差、未有意・逆方向の結果、標本・期間・mobile限定、季節性・個別設計への非一般化、提供データをDeloitteがauditしていないことを制約として示す。
+
+### S-122-02 本書の架空モデル
+
+第1章の3 scenarioと第4章の技術的負債ケースは、式と差し替え手順を説明するための架空値であり、S-122-01の観測値を予測係数として利用していない。実案件では次を一次資料とする。
+
+- analyticsの対象session、funnel、conversion、取消実績
+- 同じ計測条件による性能baselineと実験結果
+- 会計・請求に基づく粗利、投資額、インフラ・運用費
+- 作業分類、incident記録、cohort分析
+- 値のowner、確認日、適用期間、二重計上の確認記録
+
+### 本文主張との対応
+
+| 本文 | 主張 | Source Note |
+|---|---|---|
+| はじめに | 技術成果を検証可能な事業仮説へ変換し、rangeで示す | 計算方法の説明。外部の実証主張なし |
+| 第1章 | 速度と事業KPIの関係は条件依存で、固定係数ではない | S-122-01 |
+| 第1章 | 悲観0%・中位2%・楽観5%の相対uplift | S-122-02の架空仮定。自組織の実験で差し替える |
+| 第4章 | 損失pool、回収率、3年ROI | S-122-02の架空仮定。会計・作業・incident・cohortで差し替える |

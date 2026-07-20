@@ -225,12 +225,14 @@ class HybridSupport:
 
 **変換マッピングの例**
 
-| 技術指標 | ビジネスKPI | 変換ロジック |
+次の行は普遍則ではなく、意思決定前に自組織のデータで校正する**計算モデル**である。外部benchmarkは検証する仮説の幅を考える材料であり、その係数を自社の売上予測へ直接転記しない。
+
+| 技術指標 | ビジネス KPI | 検証する変換ロジック |
 |---------|------------|------------|
-| レスポンスタイム | コンバージョン率 | 100ms遅延 = 1%低下 |
-| システム稼働率 | 機会損失 | 1%ダウンタイム = 月100万円損失 |
-| コードカバレッジ | 品質コスト | 10%向上 = バグ修正コスト20%削減 |
-| デプロイ頻度 | 市場投入速度 | 週1→日1 = 新機能リリース5倍速 |
+| レスポンスタイム | コンバージョン率 | 対象session × baseline conversion × 相対uplift。upliftはA/B testまたは段階導入で推定する |
+| システム稼働率 | 機会損失 | 影響時間 × 時間当たり取引数 × 1件当たり粗利。代替channelへの移行分を控除する |
+| コードカバレッジ | 品質コスト | coverageそのものではなく、変更失敗率・欠陥流出率・復旧工数との自組織での関係を測る |
+| デプロイ頻度 | 市場投入速度 | lead time、投入量、採用率を別々に測り、頻度だけを収益と同一視しない |
 
 ## 図4：データドリブン説得の構造 {#figure-data-driven-persuasion}
 
@@ -240,60 +242,50 @@ class HybridSupport:
 
 **図の要約**: 技術指標をそのまま示すのではなく、定量化、価値変換、可視化を経て、収益、コスト、時間、リスクというビジネス価値へ変換し、ベンチマーク、予測、実証データで補強する。
 
-**実装例：パフォーマンス改善の価値計算**
+### 性能から粗利までの因果境界
 
-```python
-class PerformanceImpactCalculator:
-    def __init__(self, monthly_revenue, monthly_users):
-        self.monthly_revenue = monthly_revenue
-        self.monthly_users = monthly_users
-        self.revenue_per_user = monthly_revenue / monthly_users
-    
-    def calculate_latency_impact(self, current_ms, improved_ms):
-        # Googleの研究：100ms遅延で1%のコンバージョン率低下
-        latency_reduction = current_ms - improved_ms
-        conversion_improvement = latency_reduction / 100 * 0.01
-        
-        # 月間の追加収益
-        additional_users = self.monthly_users * conversion_improvement
-        additional_revenue = additional_users * self.revenue_per_user
-        
-        return {
-            'latency_reduction_ms': latency_reduction,
-            'conversion_improvement_%': conversion_improvement * 100,
-            'additional_monthly_revenue': additional_revenue,
-            'annual_impact': additional_revenue * 12
-        }
-    
-    def generate_executive_summary(self, current_ms, improved_ms):
-        impact = self.calculate_latency_impact(current_ms, improved_ms)
-        
-        return f"""
-        パフォーマンス改善による事業インパクト
-        
-        技術的改善：
-        - レスポンスタイム: {current_ms}ms → {improved_ms}ms
-        - 改善率: {((current_ms - improved_ms) / current_ms * 100):.1f}%
-        
-        ビジネスインパクト：
-        - コンバージョン率向上: +{impact['conversion_improvement_%']:.2f}%
-        - 月間追加収益: ¥{impact['additional_monthly_revenue']:,.0f}
-        - 年間効果: ¥{impact['annual_impact']:,.0f}
-        
-        投資回収期間: 3.2ヶ月
-        """
+性能改善と事業成果の間には複数の段階がある。少なくとも次を分離して記録する。
 
-# 使用例
-calculator = PerformanceImpactCalculator(
-    monthly_revenue=100_000_000,  # 月商1億円
-    monthly_users=1_000_000       # 月間100万ユーザー
-)
+1. **性能**: 対象page、device、地域、速度指標、現状値、改善後の目標値を固定する。
+2. **曝露**: 月間sessionのうち、対象pageと変更版を実際に利用する割合を測る。
+3. **行動**: baseline conversionと、変更による**相対uplift**を測る。たとえばbaseline 2.00%の相対2%向上は2.04%であり、2 percentage point向上ではない。
+4. **価値**: 注文額ではなく、取消・変動費を控除した1 conversion当たり粗利を使う。
+5. **投資**: 開発、検証、追加インフラ、監視、継続運用を同じ評価期間で含める。
 
-print(calculator.generate_executive_summary(
-    current_ms=3000,  # 現在：3秒
-    improved_ms=1000  # 改善後：1秒
-))
+速度とconversionが同時に変化しても、それだけで因果関係は確定しない。価格、campaign、在庫、流入元、UI変更、季節性を同時に記録し、可能なら事前に主要KPIと停止条件を決めたA/B testを行う。実験できない場合は段階導入、差分の差分、matchingなどを検討し、残る交絡を明記する。
+
+### 架空ケース：100ms改善を3 scenarioで評価する
+
+以下は計算方法を示す**架空の仮定値**であり、外部報告の係数を転記した予測ではない。改善対象はmobileの商品詳細page、評価期間は12か月とする。
+
+| 入力 | 仮定値 | 実案件での根拠 |
+|---|---:|---|
+| 月間対象session | 1,000,000 | analyticsでbot・重複を除外 |
+| 変更版への曝露割合 | 80% | 対象page・device・段階導入率 |
+| baseline conversion | 2.00% | 同じ定義・母数による直近実績 |
+| 1 conversion当たり粗利 | 3,000円 | 売上から取消・変動費を控除 |
+| 性能目標 | 1.8秒 → 1.7秒 | 同じ速度指標・percentileで比較 |
+| 評価期間 | 12か月 | ramp-up期間は別途控除 |
+| 総投資額 | 1,200万円 | 開発・検証・インフラ・運用 |
+
+相対upliftだけをscenario変数とし、次の式で再計算する。
+
+```text
+月間追加conversion = 月間対象session × 曝露割合 × baseline conversion × 相対uplift
+期間粗利便益 = 月間追加conversion × 1件当たり粗利 × 評価月数
+純便益 = 期間粗利便益 - 総投資額
+単純ROI = 純便益 ÷ 総投資額
 ```
+
+| scenario | 相対uplift（仮定） | 月間追加conversion | 12か月粗利便益 | 純便益 | 単純ROI | 回収期間 |
+|---|---:|---:|---:|---:|---:|---:|
+| 悲観 | 0% | 0件 | 0円 | -1,200万円 | -100% | 回収不能 |
+| 中位 | 2% | 320件 | 1,152万円 | -48万円 | -4% | 約12.5か月 |
+| 楽観 | 5% | 800件 | 2,880万円 | 1,680万円 | 140% | 約5.0か月 |
+
+この例で承認を求める対象は、楽観値を前提とした全投資ではない。意思決定者には単一点ではなくrange、guardrail、停止条件を示す。まず計測整備と限定的な段階導入を承認対象にし、事前に決めた標本数、観測期間、性能KPI、conversion、guardrailを満たしたときだけ拡大する。中位値が棄却された場合やguardrailが悪化した場合は停止し、価格・UI・流入元など別要因を再評価する。
+
+入力を自組織の値へ差し替える表と、一次資料が支持する範囲は[ROI計算付録の性能改善worksheetとSource Notes](../appendices/analysis/roi-calculation/#performance-roi-worksheet)にまとめた。Deloitte/Google/Fifty-Fiveの報告は、特定条件下で速度とKPIの相関を観測しているが、`100ms = conversion 1%低下`という普遍的な因果係数を示していない。
 
 ## 1.3 オープンソース活用戦略
 
