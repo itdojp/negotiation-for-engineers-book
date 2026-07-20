@@ -30,8 +30,9 @@
 - `npm ci`: `package-lock.json` に固定された依存関係をインストールします（Node.js 20 以上を前提）。
 - `npm run check:security`: npm 依存関係の既知脆弱性を確認します。
 - `npm run check:metadata`: `book-config.json` を基準に、package / Jekyll / トップページ / ナビゲーション / 公開ページ / 必須アセットの整合性を確認します。
-- `npm test`: メタデータ整合性、Markdown lint、内部リンク確認をまとめて実行します。
-- `npm run build`: `docs/` をJekyll sourceとして公開サイトをビルドします。
+- `npm run render:diagrams`: `diagrams/manifest.json` と固定したMermaid sourceから、公開用の静的SVGを再生成します。
+- `npm test`: メタデータ、PoC表示、静的図のaccessibility/再現性、Markdown lint、内部リンクをまとめて確認します。
+- `npm run build`: 4点の静的SVGを事前生成してから、`docs/` をJekyll sourceとして公開サイトをビルドします。
 
 ## ライセンス
 

@@ -234,6 +234,7 @@ const EXPECTED_PUBLIC_FIGURES = [
   {
     source: 'docs/introduction/index.md',
     occurrence: 1,
+    asset: 'negotiation-architecture.svg',
     label: 'エンジニア交渉力アーキテクチャ',
     route: '/introduction/#figure-negotiation-architecture',
     indexLink: '../../introduction/#figure-negotiation-architecture',
@@ -241,6 +242,7 @@ const EXPECTED_PUBLIC_FIGURES = [
   {
     source: 'docs/introduction/index.md',
     occurrence: 2,
+    asset: 'growth-roadmap.svg',
     label: 'エンジニア交渉力成長ロードマップ',
     route: '/introduction/#figure-growth-roadmap',
     indexLink: '../../introduction/#figure-growth-roadmap',
@@ -248,6 +250,7 @@ const EXPECTED_PUBLIC_FIGURES = [
   {
     source: 'docs/chapter-1/index.md',
     occurrence: 1,
+    asset: 'technical-evidence-framework.svg',
     label: '技術的根拠による説得術フレームワーク',
     route: '/chapter-1/#figure-technical-evidence-framework',
     indexLink: '../../chapter-1/#figure-technical-evidence-framework',
@@ -255,6 +258,7 @@ const EXPECTED_PUBLIC_FIGURES = [
   {
     source: 'docs/chapter-1/index.md',
     occurrence: 2,
+    asset: 'data-driven-persuasion.svg',
     label: 'データドリブン説得の構造',
     route: '/chapter-1/#figure-data-driven-persuasion',
     indexLink: '../../chapter-1/#figure-data-driven-persuasion',
@@ -285,6 +289,28 @@ function collectPublicMermaidInventory() {
       if (/^\s*```mermaid\s*$/.test(line)) {
         occurrence += 1;
         inventory.push({ source: relPath, occurrence, line: index + 1 });
+      }
+    });
+  }
+  const publicOrder = new Map([
+    ['docs/introduction/index.md', 0],
+    ['docs/chapter-1/index.md', 1],
+  ]);
+  inventory.sort((a, b) => (publicOrder.get(a.source) ?? Number.MAX_SAFE_INTEGER) - (publicOrder.get(b.source) ?? Number.MAX_SAFE_INTEGER) || a.occurrence - b.occurrence || a.source.localeCompare(b.source));
+  return inventory;
+}
+
+function collectPublicStaticFigureInventory() {
+  const inventory = [];
+  for (const absPath of collectMarkdownFiles(path.join(repoRoot, 'docs'))) {
+    const relPath = path.relative(repoRoot, absPath);
+    const lines = fs.readFileSync(absPath, 'utf8').split(/\r?\n/);
+    let occurrence = 0;
+    lines.forEach((line, index) => {
+      const match = line.match(/!\[[^\]]*\]\(\{\{ '\/assets\/diagrams\/([^']+\.svg)' \| relative_url \}\}\)/);
+      if (match) {
+        occurrence += 1;
+        inventory.push({ source: relPath, occurrence, asset: match[1], line: index + 1 });
       }
     });
   }
@@ -331,14 +357,17 @@ function validateUxModules(config, docsBookConfig) {
 
 function validateFigureInventory(config) {
   assertEqual(config.ux && config.ux.modules && config.ux.modules.figureIndex, true, 'book-config.json ux.modules.figureIndex inventory contract');
-  const actual = collectPublicMermaidInventory();
-  assertEqual(actual.length, EXPECTED_PUBLIC_FIGURES.length, `public Mermaid figure count (found ${actual.map((item) => `${item.source}:${item.occurrence}`).join(', ') || 'none'})`);
+  const rawMermaid = collectPublicMermaidInventory();
+  assertEqual(rawMermaid.length, 0, `public raw Mermaid figure count (found ${rawMermaid.map((item) => `${item.source}:${item.occurrence}`).join(', ') || 'none'})`);
+  const actual = collectPublicStaticFigureInventory();
+  assertEqual(actual.length, EXPECTED_PUBLIC_FIGURES.length, `public static SVG figure count (found ${actual.map((item) => `${item.source}:${item.asset}`).join(', ') || 'none'})`);
   for (let i = 0; i < EXPECTED_PUBLIC_FIGURES.length; i += 1) {
     const expected = EXPECTED_PUBLIC_FIGURES[i];
     const found = actual[i];
     if (!found) continue;
-    assertEqual(found.source, expected.source, `public Mermaid figure ${i + 1} source`);
-    assertEqual(found.occurrence, expected.occurrence, `public Mermaid figure ${i + 1} occurrence`);
+    assertEqual(found.source, expected.source, `public static SVG figure ${i + 1} source`);
+    assertEqual(found.occurrence, expected.occurrence, `public static SVG figure ${i + 1} occurrence`);
+    assertEqual(found.asset, expected.asset, `public static SVG figure ${i + 1} asset`);
   }
 
   const indexPath = path.join(repoRoot, 'docs/appendices/figures/index.md');

@@ -46,6 +46,9 @@ jobs:
       - name: Local npm QA
         run: npm test
 
+      - name: Pre-render static diagrams
+        run: npm run render:diagrams
+
       - name: Install dependencies (book-formatter)
         working-directory: book-formatter
         run: npm ci

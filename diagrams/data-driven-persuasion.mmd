@@ -1,0 +1,55 @@
+graph LR
+    subgraph "データドリブン説得の構造"
+        subgraph "技術指標 (What We Measure)"
+            Tech1[⚡ パフォーマンス<br/>・レスポンスタイム<br/>・スループット<br/>・リソース使用率<br/>・エラー率]
+            Tech2[🔧 品質指標<br/>・コードカバレッジ<br/>・バグ密度<br/>・技術的負債<br/>・保守性指標]
+            Tech3[🚀 開発効率<br/>・デプロイ頻度<br/>・リードタイム<br/>・変更失敗率<br/>・復旧時間]
+            Tech4[🛡️ 運用指標<br/>・システム稼働率<br/>・セキュリティ指標<br/>・監視カバレッジ<br/>・インシデント数]
+        end
+
+        subgraph "変換プロセス (How We Convert)"
+            Convert1[🔄 定量化<br/>・統計的分析<br/>・トレンド分析<br/>・相関分析<br/>・因果関係の特定]
+            Convert2[💰 価値変換<br/>・コスト計算<br/>・機会損失算出<br/>・ROI分析<br/>・リスク評価]
+            Convert3[📊 可視化<br/>・ダッシュボード<br/>・グラフ・チャート<br/>・比較表<br/>・シナリオ分析]
+        end
+
+        subgraph "ビジネス価値 (What Stakeholders Care About)"
+            Business1[💵 収益影響<br/>・売上向上<br/>・コンバージョン率<br/>・顧客生涯価値<br/>・市場シェア]
+            Business2[💳 コスト効果<br/>・運用コスト削減<br/>・人件費最適化<br/>・インフラ費削減<br/>・品質コスト改善]
+            Business3[⏰ 時間価値<br/>・市場投入速度<br/>・開発サイクル短縮<br/>・意思決定迅速化<br/>・競合優位性]
+            Business4[🎯 リスク軽減<br/>・セキュリティリスク<br/>・可用性リスク<br/>・コンプライアンス<br/>・事業継続性]
+        end
+
+        Tech1 --> Convert1 --> Business1
+        Tech2 --> Convert2 --> Business2
+        Tech3 --> Convert3 --> Business3
+        Tech4 --> Convert1 --> Business4
+
+        subgraph "説得力強化要素"
+            Power1[📈 ベンチマーク<br/>・業界標準との比較<br/>・競合他社データ<br/>・ベストプラクティス<br/>・改善余地の特定]
+            Power2[🔮 予測モデル<br/>・将来シナリオ<br/>・成長予測<br/>・リスクシナリオ<br/>・投資回収期間]
+            Power3[✅ 実証データ<br/>・A/Bテスト結果<br/>・パイロット成果<br/>・外部事例<br/>・学術研究]
+        end
+
+        Convert2 --> Power1
+        Convert3 --> Power2
+        Business1 --> Power3
+
+        subgraph "成功事例パターン"
+            Success1[📊 パフォーマンス改善<br/>例：レスポンス時間50%短縮<br/>→ コンバージョン率15%向上<br/>→ 年間売上2,000万円増<br/>→ 投資回収期間6ヶ月]
+
+            Success2[🔧 技術的負債解消<br/>例：レガシーコード改善<br/>→ バグ修正時間70%削減<br/>→ 開発生産性30%向上<br/>→ 年間人件費1,500万円節約]
+
+            Success3[🚀 CI/CD導入<br/>例：デプロイ頻度10倍向上<br/>→ 新機能リリース加速<br/>→ 市場投入速度3倍<br/>→ 競合優位性確保]
+        end
+
+        Power3 --> Success1
+        Power1 --> Success2
+        Power2 --> Success3
+    end
+
+    style Tech1 fill:#e8f5e8
+    style Business1 fill:#fff3e0
+    style Convert1 fill:#e3f2fd
+    style Power1 fill:#f3e5f5
+    style Success1 fill:#ffe0b2

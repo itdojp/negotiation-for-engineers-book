@@ -18,3 +18,4 @@ docs/.jekyll-cache/
 docs/.jekyll-metadata
 .bundle/
 vendor/bundle/
+.diagram-check/
