@@ -31,13 +31,13 @@
   "author": "ITDO Inc.",
   "license": "CC-BY-NC-SA-4.0",
   "engines": {
-    "node": ">=20.18.1"
+    "node": "^22.22.2 || ^24.15.0 || >=26.0.0"
   },
   "devDependencies": {
     "@mermaid-js/mermaid-cli": "11.16.0",
     "gh-pages": "^6.3.0",
     "markdown-link-check": "^3.14.2",
-    "markdownlint-cli": "^0.48.0",
+    "markdownlint-cli": "^0.49.1",
     "puppeteer": "24.43.1"
   },
   "repository": {
@@ -49,10 +49,10 @@
   },
   "homepage": "https://itdojp.github.io/negotiation-for-engineers-book/",
   "overrides": {
-    "js-yaml": "4.3.0",
-    "markdown-it": "14.2.0",
-    "linkify-it": "5.0.1",
-    "undici": "7.28.0"
+    "undici": "7.28.0",
+    "cheerio": {
+      "encoding-sniffer": "1.0.2"
+    }
   },
   "allowScripts": {
     "puppeteer@24.43.1": true
