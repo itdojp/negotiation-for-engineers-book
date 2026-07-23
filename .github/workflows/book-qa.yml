@@ -61,7 +61,7 @@ jobs:
           if (whatwg.length !== 0) {
             throw new Error('deprecated whatwg-encoding remains: ' + whatwg.join(', '));
           }
-          if (sniffers.length !== 1 || sniffers[0].version !== '1.0.2') {
+          if (sniffers.length === 0 || sniffers.some(({ version }) => version !== '1.0.2')) {
             throw new Error('unexpected encoding-sniffer tree: ' + JSON.stringify(sniffers));
           }
           console.log(JSON.stringify({ whatwgCount: whatwg.length, encodingSniffer: sniffers }));

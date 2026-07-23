@@ -27,7 +27,7 @@
 
 ## 品質ゲート
 
-- `npm ci`: `package-lock.json` に固定された依存関係をインストールします（Node.js 20 以上を前提）。
+- `npm ci`: `package-lock.json` に固定された依存関係をインストールします（Node.js 22.22.2以降の22系、24.15.0以降の24系、または26.0.0以降を前提）。
 - `npm run check:security`: npm 依存関係の既知脆弱性を確認します。
 - `npm run check:metadata`: `book-config.json` を基準に、package / Jekyll / トップページ / ナビゲーション / 公開ページ / 必須アセットの整合性を確認します。
 - `npm run check:performance-roi`: 性能から粗利・ROIへの換算について、架空値の明示、3 scenario、計算式、Source Notes、source mirrorの整合性を確認します。
