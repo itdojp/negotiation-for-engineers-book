@@ -11,6 +11,7 @@ const cssPath = 'docs/assets/css/main.css';
 const packagePath = 'package.json';
 const workflowPath = '.github/workflows/book-qa.yml';
 const puppeteerConfigPath = 'diagrams/puppeteer-ci.json';
+const auditedPuppeteerVersion = '25.8.0';
 const expectedIds = [
   'negotiation-architecture',
   'growth-roadmap',
@@ -133,8 +134,12 @@ function validate(state) {
   }
   check(JSON.stringify(puppeteerConfig.args) === JSON.stringify(['--no-sandbox', '--disable-setuid-sandbox']), 'CI Puppeteer config must contain only the audited sandbox flags');
   check(state.packageJson.devDependencies?.['@mermaid-js/mermaid-cli'] === '11.16.0', 'Mermaid CLI must remain pinned to exact version 11.16.0');
-  check(state.packageJson.devDependencies?.puppeteer === '24.43.1', 'the Node 20-compatible Puppeteer renderer must remain pinned to exact version 24.43.1');
-  check(state.packageJson.allowScripts?.['puppeteer@24.43.1'] === true, 'the audited Puppeteer 24.43.1 install script must be explicitly approved');
+  check(state.packageJson.devDependencies?.puppeteer === auditedPuppeteerVersion, `the audited Puppeteer renderer must remain pinned to exact version ${auditedPuppeteerVersion}`);
+  const allowedInstallScripts = Object.entries(state.packageJson.allowScripts ?? {})
+    .filter(([, allowed]) => allowed === true)
+    .map(([name]) => name)
+    .sort();
+  check(JSON.stringify(allowedInstallScripts) === JSON.stringify([`puppeteer@${auditedPuppeteerVersion}`]), `only the audited Puppeteer ${auditedPuppeteerVersion} install script may be approved`);
   check(scripts['render:diagrams'] === 'node scripts/render-diagrams.js', 'package must expose the diagram renderer');
   check(scripts['check:diagrams'] === 'node scripts/render-diagrams.js --check', 'package must expose deterministic diagram verification');
   check(scripts['test:static-diagrams'] === 'node scripts/check-static-diagrams.js --self-test', 'package must expose static-diagram negative tests');
@@ -212,8 +217,9 @@ function runSelfTest() {
     ['stale figure-index wording', (s) => { s.files[figureIndexes[0]] = s.files[figureIndexes[0]].replaceAll('静的SVG図', 'Mermaid 図'); }, 'static SVGs'],
     ['missing focus style', (s) => { s.files[cssPath] = s.files[cssPath].replace('*:focus-visible', '*:hover'); }, 'keyboard focus'],
     ['unpinned Mermaid CLI', (s) => { s.packageJson.devDependencies['@mermaid-js/mermaid-cli'] = '^11.16.0'; }, 'exact version'],
-    ['incompatible Puppeteer version', (s) => { s.packageJson.devDependencies.puppeteer = '25.3.0'; }, 'Node 20-compatible'],
-    ['unapproved Puppeteer script', (s) => { delete s.packageJson.allowScripts['puppeteer@24.43.1']; }, 'explicitly approved'],
+    ['incompatible Puppeteer version', (s) => { s.packageJson.devDependencies.puppeteer = '26.0.0'; }, 'audited Puppeteer'],
+    ['unapproved Puppeteer script', (s) => { delete s.packageJson.allowScripts[`puppeteer@${auditedPuppeteerVersion}`]; }, 'may be approved'],
+    ['additional install script approval', (s) => { s.packageJson.allowScripts['unexpected-package@1.0.0'] = true; }, 'may be approved'],
     ['missing build rendering', (s) => { s.packageJson.scripts.build = 'jekyll build --source docs --destination _site'; }, 'pre-render'],
     ['missing npm test wiring', (s) => { s.packageJson.scripts.test = s.packageJson.scripts.test.replace('npm run check:diagrams && ', ''); }, 'npm run check:diagrams'],
     ['missing Book QA wiring', (s) => { s.workflow = s.workflow.replace('run: npm test', 'run: npm run lint'); }, 'Book QA'],
